@@ -16,13 +16,13 @@ require __DIR__ . '/backend/SmsService.php';
 $smsService = new SmsService();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $registration_number = preg_replace('/\s+/', '', $_POST['registration_number'] ?? '');
+    $registration_number = strtoupper(preg_replace('/\s+/', '', $_POST['registration_number'] ?? ''));
     $vehicle_type = $_POST['vehicle_type'] ?? 'Motorcycle';
-    $driver_name = trim($_POST['driver_name'] ?? '');
+    $driver_name = strtoupper(trim($_POST['driver_name'] ?? ''));
     $phone_number = trim($_POST['phone_number'] ?? '');
 
     // Backend validation
-    if (!preg_match('/^[a-zA-Z0-9]+$/', $registration_number)) {
+    if (!preg_match('/^[A-Z0-9]+$/', $registration_number)) {
         $error = 'Vehicle Registration Number must be alphanumeric with no spaces.';
     } elseif (in_array($vehicle_type, ['Bajaj', 'Motorcycle', 'Car', 'Truck', 'Other']) && strlen($registration_number) !== 8) {
         $error = 'Vehicle Registration Number must be exactly 8 characters for the selected vehicle type.';
@@ -309,7 +309,7 @@ window.addEventListener('DOMContentLoaded', () => {
     <?php endif; ?>
     <form method="post" action="vehicle_entry.php" onsubmit="return validateForm();">
         <label for="registration_number">Vehicle Registration Number</label>
-        <input type="text" id="registration_number" name="registration_number" oninput="removeSpaces(this)" required autofocus />
+        <input type="text" id="registration_number" name="registration_number" oninput="removeSpaces(this); this.value = this.value.toUpperCase();" required autofocus />
 
         <label for="vehicle_type">Vehicle Type</label>
         <select id="vehicle_type" name="vehicle_type" required>
@@ -321,7 +321,7 @@ window.addEventListener('DOMContentLoaded', () => {
         </select>
 
         <label for="driver_name">Driver Name</label>
-        <input type="text" id="driver_name" name="driver_name" required />
+        <input type="text" id="driver_name" name="driver_name" oninput="this.value = this.value.toUpperCase();" required />
 
         <label for="phone_number">Phone Number</label>
         <input type="text" id="phone_number" name="phone_number" maxlength="10" required />
