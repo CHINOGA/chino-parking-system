@@ -5,7 +5,7 @@ Chino Parking System is a PHP-based web application designed to manage vehicle p
 
 ## Features
 - Vehicle entry and exit management
-- Real-time reporting dashboard with search functionality
+- Real-time reporting dashboard with search functionality and export options (CSV)
 - SMS notifications on vehicle entry
 - Validation rules for vehicle registration and driver details
 - Progressive Web App (PWA) support for offline usage and installation
@@ -37,7 +37,7 @@ Chino Parking System is a PHP-based web application designed to manage vehicle p
 
 - **Vehicle Entry:** Use `vehicle_entry.php` to register vehicles entering the parking lot. Vehicle registration numbers and driver names are automatically converted to uppercase. Validation enforces 8-character registration numbers for all vehicle types.
 
-- **Reporting:** Use `reporting.php` to view parked and exited vehicles. Real-time search inputs allow filtering of vehicles by registration number, type, driver name, and phone number.
+- **Reporting:** Use `reporting.php` to view parked and exited vehicles. Real-time search inputs allow filtering of vehicles by registration number, type, driver name, and phone number. Export options for parked and exited vehicles are available in CSV format.
 
 - **Vehicle Exit:** Use the exit functionality on the reporting dashboard to mark vehicles as exited.
 
@@ -54,6 +54,7 @@ Chino Parking System is a PHP-based web application designed to manage vehicle p
 - Ensure the SMS service is properly configured to send notifications.
 - The system uses server-side and client-side validation for data integrity.
 - The reporting dashboard supports infinite scroll for exited vehicles.
+- Export functionality for parked and exited vehicles added in reporting.php.
 
 ## License
 

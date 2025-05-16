@@ -11,9 +11,10 @@ require_once 'config.php';
 $start_date = '';
 $end_date = '';
 
-if (isset($_GET['action']) && $_GET['action'] === 'filter') {
+if (isset($_GET['action']) && ($_GET['action'] === 'filter' || $_GET['action'] === 'export')) {
     $start_date = $_GET['start_date'] ?? '';
     $end_date = $_GET['end_date'] ?? '';
+    $vehicle_type_filter = $_GET['vehicle_type'] ?? '';
 
     // Initialize start_date and end_date if empty or invalid
     if (empty($start_date) || strtotime($start_date) === false) {
@@ -31,6 +32,60 @@ if (isset($_GET['action']) && $_GET['action'] === 'filter') {
         $params = [$start_date . ' 00:00:00', $end_date . ' 23:59:59'];
     }
 
+    if ($vehicle_type_filter && $vehicle_type_filter !== 'All') {
+        $where .= ($where ? ' AND ' : '') . 'v.vehicle_type = ?';
+        $params[] = $vehicle_type_filter;
+    }
+
+    if ($_GET['action'] === 'export') {
+        // Export CSV for parked or exited vehicles
+        $export_type = $_GET['type'] ?? 'parked'; // 'parked' or 'exited'
+        if ($export_type === 'parked') {
+            $stmt = $pdo->prepare("
+                SELECT v.registration_number, v.vehicle_type, v.driver_name, v.phone_number, 
+                CONVERT_TZ(pe.entry_time, '+00:00', '+03:00') AS entry_time
+                FROM parking_entries pe
+                JOIN vehicles v ON pe.vehicle_id = v.id
+                WHERE pe.exit_time IS NULL
+                " . ($where ? "AND $where" : "") . "
+                ORDER BY pe.entry_time DESC
+            ");
+            $stmt->execute($params);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $stmt = $pdo->prepare("
+                SELECT v.registration_number, v.vehicle_type, v.driver_name, v.phone_number, 
+                CONVERT_TZ(pe.entry_time, '+00:00', '+03:00') AS entry_time, 
+                CONVERT_TZ(pe.exit_time, '+00:00', '+03:00') AS exit_time,
+                TIMESTAMPDIFF(MINUTE, pe.entry_time, pe.exit_time) AS stay_duration_minutes
+                FROM parking_entries pe
+                JOIN vehicles v ON pe.vehicle_id = v.id
+                WHERE pe.exit_time IS NOT NULL
+                " . ($where ? "AND $where" : "") . "
+                ORDER BY pe.exit_time DESC
+            ");
+            $stmt->execute($params);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        // Output CSV headers
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $export_type . '_vehicles_' . $start_date . '_to_' . $end_date . '.csv"');
+
+        $output = fopen('php://output', 'w');
+
+        if (!empty($data)) {
+            // Output header row
+            fputcsv($output, array_keys($data[0]));
+            // Output data rows
+            foreach ($data as $row) {
+                fputcsv($output, $row);
+            }
+        }
+        fclose($output);
+        exit;
+    }
+
     // Parked vehicles (no exit_time)
     $stmt = $pdo->prepare("
         SELECT v.registration_number, v.vehicle_type, v.driver_name, v.phone_number, 
@@ -44,31 +99,28 @@ if (isset($_GET['action']) && $_GET['action'] === 'filter') {
     $stmt->execute($params);
     $parked = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Exited vehicles with pagination support
+    // Exited vehicles with pagination support and stay duration calculation
     $limit = 10;
     $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
 
     $sqlExited = "
         SELECT v.registration_number, v.vehicle_type, v.driver_name, v.phone_number, 
         CONVERT_TZ(pe.entry_time, '+00:00', '+03:00') AS entry_time, 
-        CONVERT_TZ(pe.exit_time, '+00:00', '+03:00') AS exit_time
+        CONVERT_TZ(pe.exit_time, '+00:00', '+03:00') AS exit_time,
+        TIMESTAMPDIFF(MINUTE, pe.entry_time, pe.exit_time) AS stay_duration_minutes
         FROM parking_entries pe
         JOIN vehicles v ON pe.vehicle_id = v.id
         WHERE pe.exit_time IS NOT NULL
     ";
 
     if ($where) {
-        $sqlExited .= " AND pe.exit_time BETWEEN ? AND ? ";
+        $sqlExited .= " AND $where ";
     }
 
     $sqlExited .= " ORDER BY pe.exit_time DESC LIMIT $limit OFFSET $offset";
 
     $stmt = $pdo->prepare($sqlExited);
-    if ($where) {
-        $stmt->execute($params);
-    } else {
-        $stmt->execute();
-    }
+    $stmt->execute($params);
     $exited = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     header('Content-Type: application/json');
