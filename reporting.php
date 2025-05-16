@@ -226,6 +226,14 @@ th {
 
 /* Mobile styles */
 @media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+    .container {
+        margin: 5px;
+        padding: 10px;
+        max-width: 100%;
+    }
     table {
         display: block;
         overflow-x: auto;
@@ -267,17 +275,41 @@ th {
     button.exit-btn:hover {
         background-color: #0056b3;
     }
+    input[type="text"], input[type="date"], select, button {
+        font-size: 1em;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
 }
 </style>
 <script>
 async function fetchReport() {
     const startDate = document.getElementById('start_date').value;
     const endDate = document.getElementById('end_date').value;
+    const vehicleType = document.getElementById('vehicle_type').value;
 
-    const url = `reporting.php?action=filter&start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}`;
+    const url = `reporting.php?action=filter&start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}&vehicle_type=${encodeURIComponent(vehicleType)}`;
 
     const response = await fetch(url);
     const data = await response.json();
+
+    // Show alerts for vehicles parked longer than threshold (e.g., 120 minutes)
+    const alertsDiv = document.getElementById('alerts');
+    const longParkedVehicles = data.parked.filter(v => {
+        const entryDate = new Date(v.entry_time + 'Z');
+        const now = new Date();
+        const diffMinutes = (now - entryDate) / 60000;
+        return diffMinutes > 120; // threshold in minutes
+    });
+    if (longParkedVehicles.length > 0) {
+        alertsDiv.textContent = `Alert: ${longParkedVehicles.length} vehicle(s) have been parked for more than 2 hours.`;
+    } else {
+        alertsDiv.textContent = '';
+    }
 
     // Populate parked vehicles table
     const parkedCountElem = document.getElementById('parked_count');
@@ -483,7 +515,18 @@ window.addEventListener('DOMContentLoaded', () => {
         <input type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($start_date); ?>" />
         <label for="end_date">End Date:</label>
         <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars($end_date); ?>" />
+        <label for="vehicle_type">Vehicle Type:</label>
+        <select id="vehicle_type" name="vehicle_type">
+            <option value="All" <?php echo (!isset($_GET['vehicle_type']) || $_GET['vehicle_type'] === 'All') ? 'selected' : ''; ?>>All</option>
+            <option value="Motorcycle" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Motorcycle') ? 'selected' : ''; ?>>Motorcycle</option>
+            <option value="Bajaj" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Bajaj') ? 'selected' : ''; ?>>Bajaj</option>
+            <option value="Car" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Car') ? 'selected' : ''; ?>>Car</option>
+            <option value="Truck" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Truck') ? 'selected' : ''; ?>>Truck</option>
+            <option value="Other" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Other') ? 'selected' : ''; ?>>Other</option>
+        </select>
+        <button type="button" onclick="fetchReport()">Filter</button>
     </form>
+    <div id="alerts" style="margin-top: 15px; color: red; font-weight: bold;"></div>
 
     <h3>Parked Vehicles <span id="parked_count"></span></h3>
     <input type="text" id="search_parked" placeholder="Search parked vehicles..." style="margin-bottom: 10px; padding: 5px; width: 100%; max-width: 400px;" />

@@ -82,13 +82,14 @@
 </style>
 
 <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <div class="brand" tabindex="0">Chino Parking System</div>
+    <div class="brand" tabindex="0" onclick="window.location.href='vehicle_entry.php'" style="cursor:pointer;">Chino Parking System</div>
     <div class="nav-links" id="navLinks" role="menu">
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="vehicle_entry.php" role="menuitem" tabindex="0">Vehicle Entry</a>
             <!-- Removed Vehicle Exit link as requested -->
             <a href="reporting.php" role="menuitem" tabindex="0">Reporting</a>
             <a href="revenue_report.php" role="menuitem" tabindex="0">Revenue Report</a>
+            <a href="sms_send.php" role="menuitem" tabindex="0">Send SMS</a>
             <a href="logout.php" role="menuitem" tabindex="0">Logout</a>
         <?php endif; ?>
     </div>
