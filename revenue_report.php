@@ -78,17 +78,24 @@ foreach ($daily_revenue_data as $day) {
 }
 $total_transactions = array_sum(array_column($daily_revenue_data, 'transactions'));
 
-// Fetch peak days of week data
+// Fetch peak days of week data (Monday to Sunday order)
 $stmt = $pdo->prepare("
     SELECT DAYNAME(pe.entry_time) AS day_of_week, COUNT(*) AS vehicle_count
     FROM parking_entries pe
     JOIN vehicles v ON pe.vehicle_id = v.id
     WHERE pe.entry_time BETWEEN ? AND ?
     GROUP BY DAYOFWEEK(pe.entry_time)
-    ORDER BY DAYOFWEEK(pe.entry_time)
+    ORDER BY FIELD(DAYNAME(pe.entry_time), 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
 ");
 $stmt->execute([$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
 $peak_days_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Prepare chart data for embedding in HTML
+$chart_labels = array_map(fn($d) => $d['date'], $daily_revenue_data);
+$chart_data = array_map(fn($d) => (float)$d['daily_revenue'], $daily_revenue_data);
+
+$peak_labels = array_map(fn($d) => $d['day_of_week'], $peak_days_data);
+$peak_counts = array_map(fn($d) => (int)$d['vehicle_count'], $peak_days_data);
 ?>
 
 <!DOCTYPE html>
@@ -96,6 +103,7 @@ $peak_days_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Chino Parking System - Revenue report and analytics dashboard for vehicle parking management." />
 <title>Chino Parking System - Revenue Report</title>
 <link rel="manifest" href="manifest.json" />
 <script>
@@ -170,7 +178,7 @@ function validateForm() {
     const startDate = startDateInput.value.trim();
     const endDate = endDateInput.value.trim();
 
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    const dateRegex = /^\\d{4}-\\d{2}-\\d{2}$/;
 
     if (!dateRegex.test(startDate)) {
         errorDiv.textContent = 'Start Date must be in yyyy-mm-dd format.';
@@ -194,7 +202,7 @@ function exportTableToCSV(filename) {
         }
         csv.push(rowData.join(","));
     }
-    const csvString = csv.join("\n");
+    const csvString = csv.join("\\n");
     const blob = new Blob([csvString], { type: "text/csv" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -232,6 +240,7 @@ async function fetchRevenueReport() {
     document.getElementById('summary_stats').innerHTML = doc.getElementById('summary_stats').innerHTML;
 
     updateChart(doc.getElementById('chart_data').textContent);
+    updatePeakDaysChart(doc.getElementById('peak_days_chart_data').textContent);
 }
 
 function updateChart(chartDataJson) {
@@ -276,6 +285,38 @@ function updateChart(chartDataJson) {
         }
     });
 }
+
+function updatePeakDaysChart(chartDataJson) {
+    const chartData = JSON.parse(chartDataJson);
+    const ctx = document.getElementById('peakDaysChart').getContext('2d');
+
+    if (window.peakDaysChartInstance) {
+        window.peakDaysChartInstance.destroy();
+    }
+
+    window.peakDaysChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Vehicle Count',
+                data: chartData.data,
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0
+                }
+            }
+        }
+    });
+}
 </script>
 </head>
 <body>
@@ -296,8 +337,7 @@ function updateChart(chartDataJson) {
             <option value="Truck" <?= $vehicle_type_filter === 'Truck' ? 'selected' : '' ?>>Truck</option>
             <option value="Other" <?= $vehicle_type_filter === 'Other' ? 'selected' : '' ?>>Other</option>
         </select>
-        <button type="submit">Filter</button>
-        <button type="button" class="export-btn" onclick="exportTableToCSV('revenue_report.csv')">Export CSV</button>
+        <!-- Removed filter button for real-time filtering -->
     </form>
     <p>Total Revenue: <strong id="total_revenue">TZS <?php echo number_format($total_revenue, 2); ?></strong></p>
 
@@ -346,78 +386,14 @@ function updateChart(chartDataJson) {
         <p>Total Transactions: <?= htmlspecialchars($total_transactions) ?></p>
     </div>
 
-    <div id="chart_data" style="display:none;">
-        <?php
-        $chart_labels = array_map(fn($d) => $d['date'], $daily_revenue_data);
-        $chart_data = array_map(fn($d) => (float)$d['daily_revenue'], $daily_revenue_data);
-        echo json_encode(['labels' => $chart_labels, 'data' => $chart_data]);
-        ?>
-    </div>
-
     <h3>Peak Days of the Week (Vehicle Count)</h3>
     <canvas id="peakDaysChart" width="800" height="400"></canvas>
-    <table id="peak_days_table">
-        <thead>
-            <tr>
-                <th>Day of Week</th>
-                <th>Vehicle Count</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($peak_days_data as $day): ?>
-            <tr>
-                <td><?= htmlspecialchars($day['day_of_week']) ?></td>
-                <td><?= htmlspecialchars($day['vehicle_count']) ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-
     <div id="chart_data" style="display:none;">
-        <?php
-        $chart_labels = array_map(fn($d) => $d['date'], $daily_revenue_data);
-        $chart_data = array_map(fn($d) => (float)$d['daily_revenue'], $daily_revenue_data);
-        echo json_encode(['labels' => $chart_labels, 'data' => $chart_data]);
-        ?>
+        <?php echo json_encode(['labels' => $chart_labels, 'data' => $chart_data]); ?>
+    </div>
+    <div id="peak_days_chart_data" style="display:none;">
+        <?php echo json_encode(['labels' => $peak_labels, 'data' => $peak_counts]); ?>
     </div>
 </div>
-
-<script>
-function updatePeakDaysChart() {
-    const labels = <?php echo json_encode(array_column($peak_days_data, 'day_of_week')); ?>;
-    const data = <?php echo json_encode(array_map('intval', array_column($peak_days_data, 'vehicle_count'))); ?>;
-
-    const ctx = document.getElementById('peakDaysChart').getContext('2d');
-    if (window.peakDaysChartInstance) {
-        window.peakDaysChartInstance.destroy();
-    }
-    window.peakDaysChartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Vehicle Count',
-                data: data,
-                backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    precision: 0
-                }
-            }
-        }
-    });
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-    updatePeakDaysChart();
-});
-</script>
 </body>
 </html>

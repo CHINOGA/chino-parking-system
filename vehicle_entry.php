@@ -11,7 +11,7 @@ require_once __DIR__ . '/error_handling.php';
 $error = '';
 $success = '';
 
-require __DIR__ . '/backend/SmsService.php';
+require_once __DIR__ . '/SmsService.php';
 
 $smsService = new SmsService();
 

@@ -411,12 +411,16 @@ window.addEventListener('DOMContentLoaded', () => {
     // Fetch report initially
     fetchReport();
 
-    // Fetch report on date change
+    // Fetch report on date change or vehicle type change for real-time filtering
     document.getElementById('start_date').addEventListener('change', () => {
         exitedOffset = 10;
         fetchReport();
     });
     document.getElementById('end_date').addEventListener('change', () => {
+        exitedOffset = 10;
+        fetchReport();
+    });
+    document.getElementById('vehicle_type').addEventListener('change', () => {
         exitedOffset = 10;
         fetchReport();
     });
@@ -510,11 +514,11 @@ window.addEventListener('DOMContentLoaded', () => {
 <?php include __DIR__ . '/navbar.php'; ?>
 <div class="container">
     <h2>Reporting Dashboard</h2>
-    <form id="filter_form">
+<form id="filter_form">
         <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($start_date); ?>" />
+        <input type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($start_date ?: date('Y-m-d', strtotime('monday this week'))); ?>" />
         <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars($end_date); ?>" />
+        <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars($end_date ?: date('Y-m-d', strtotime('sunday this week'))); ?>" />
         <label for="vehicle_type">Vehicle Type:</label>
         <select id="vehicle_type" name="vehicle_type">
             <option value="All" <?php echo (!isset($_GET['vehicle_type']) || $_GET['vehicle_type'] === 'All') ? 'selected' : ''; ?>>All</option>
@@ -524,7 +528,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <option value="Truck" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Truck') ? 'selected' : ''; ?>>Truck</option>
             <option value="Other" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Other') ? 'selected' : ''; ?>>Other</option>
         </select>
-        <button type="button" onclick="fetchReport()">Filter</button>
+<!-- Removed filter button for real-time filtering -->
     </form>
     <div id="alerts" style="margin-top: 15px; color: red; font-weight: bold;"></div>
 

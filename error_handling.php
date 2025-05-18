@@ -8,7 +8,7 @@ ini_set('error_log', __DIR__ . '/error.log');
 error_reporting(E_ALL);
 
 // Optional debug mode
-define('DEBUG_MODE', false);
+define('DEBUG_MODE', true);
 
 // Custom error handler to log errors and optionally display them
 function customErrorHandler($errno, $errstr, $errfile, $errline) {

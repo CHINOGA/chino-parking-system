@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
@@ -7,13 +9,12 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/error_handling.php';
-require __DIR__ . '/backend/SmsService.php';
+require __DIR__ . '/SmsService.php';
 
 $smsService = new SmsService();
 
 $error = '';
 $success = '';
-session_start();
 
 // Fetch distinct phone numbers and driver names from vehicles table
 try {
@@ -27,6 +28,16 @@ $otp_phone = '+255785111722';
 $otp_sent = false;
 $otp_verified = false;
 $otp_error = '';
+
+function cleanPhoneNumber($number) {
+    // Remove all non-digit characters
+    $number = preg_replace('/\D/', '', $number);
+    // Ensure it starts with 0
+    if (substr($number, 0, 1) !== '0') {
+        $number = '0' . $number;
+    }
+    return $number;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['verify_otp'])) {
@@ -60,20 +71,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Prepare list of recipients
             $recipients = [];
 
-            // Validate and add selected numbers
+            // Clean, validate and add selected numbers
             if (is_array($selected_numbers)) {
                 foreach ($selected_numbers as $num) {
-                    $num = trim($num);
-                    if (preg_match('/^0\d{9}$/', $num)) {
-                        $recipients[] = $num;
+                    $clean_num = cleanPhoneNumber(trim($num));
+                    if (preg_match('/^0\d{9}$/', $clean_num)) {
+                        $recipients[] = $clean_num;
                     }
                 }
             }
 
-            // Validate and add new number if provided
+            // Clean, validate and add new number if provided
             if ($new_number !== '') {
-                if (preg_match('/^0\d{9}$/', $new_number)) {
-                    $recipients[] = $new_number;
+                $clean_new_number = cleanPhoneNumber($new_number);
+                if (preg_match('/^0\d{9}$/', $clean_new_number)) {
+                    $recipients[] = $clean_new_number;
                 } else {
                     $error = 'New phone number must be exactly 10 digits and start with 0.';
                 }
@@ -182,13 +194,45 @@ button:hover { background: #0056b3; }
         <label for="driver_search">Search Drivers:</label>
         <input type="text" id="driver_search" placeholder="Type to search driver names..." onkeyup="filterDrivers()" autocomplete="off" />
         <label for="selected_numbers">Select Driver Phone Numbers (multiple selection allowed):</label>
-        <select id="selected_numbers" name="selected_numbers[]" multiple size="8" style="height: 150px;">
+        <div>
+            <label><input type="checkbox" id="select_all_checkbox_mobile" /> Select All</label>
+        </div>
+        <div id="selected_count_display" style="margin-top: 5px; font-weight: bold;">Selected: 0</div>
+        <style>
+        /* Hide desktop multi-select and desktop select all checkbox */
+        #selected_numbers, #select_all_checkbox {
+            display: none;
+        }
+        /* Show mobile checkbox container always */
+        #mobile_checkbox_container {
+            display: block;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 3px;
+            max-height: 300px;
+            overflow-y: auto;
+            background: #fff;
+        }
+        /* Hide mobile select dropdown */
+        #selected_numbers_mobile {
+            display: none;
+        }
+        /* Ensure selected count display is visible */
+        #selected_count_display {
+            font-weight: bold;
+            margin-top: 5px;
+            color: #333;
+        }
+        </style>
+        <div id="mobile_checkbox_container">
+            <label><input type="checkbox" id="select_all_checkbox_mobile" /> Select All</label><br/>
             <?php foreach ($drivers as $driver): ?>
-                <option value="<?= htmlspecialchars($driver['phone_number']) ?>">
+                <label>
+                    <input type="checkbox" class="mobile_driver_checkbox" name="selected_numbers[]" value="<?= htmlspecialchars($driver['phone_number']) ?>" />
                     <?= htmlspecialchars($driver['driver_name']) ?> - <?= htmlspecialchars($driver['phone_number']) ?>
-                </option>
+                </label><br/>
             <?php endforeach; ?>
-        </select>
+        </div>
 
             <label for="new_number">Or enter a new phone number (10 digits, starts with 0):</label>
             <input type="text" id="new_number" name="new_number" maxlength="10" pattern="0\d{9}" placeholder="e.g. 0712345678" />
@@ -204,11 +248,47 @@ button:hover { background: #0056b3; }
 function filterDrivers() {
     const input = document.getElementById('driver_search');
     const filter = input.value.toUpperCase();
-    const select = document.getElementById('selected_numbers');
-    const options = select.options;
-    for (let i = 0; i < options.length; i++) {
-        const text = options[i].text.toUpperCase();
-        options[i].style.display = text.indexOf(filter) > -1 ? '' : 'none';
+    const checkboxes = document.querySelectorAll('.mobile_driver_checkbox');
+    checkboxes.forEach(cb => {
+        const label = cb.parentElement.textContent.toUpperCase();
+        cb.parentElement.style.display = label.indexOf(filter) > -1 ? '' : 'none';
+    });
+}
+window.addEventListener('DOMContentLoaded', function() {
+    const selectAllMobile = document.getElementById('select_all_checkbox_mobile');
+    if (selectAllMobile) {
+        selectAllMobile.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.mobile_driver_checkbox');
+            const checked = this.checked;
+            checkboxes.forEach(cb => cb.checked = checked);
+            updateSelectedCount();
+        });
+    }
+
+    const mobileCheckboxes = document.querySelectorAll('.mobile_driver_checkbox');
+    mobileCheckboxes.forEach(cb => {
+        cb.addEventListener('change', function() {
+            updateSelectedCount();
+        });
+    });
+
+    // Initial count update
+    updateSelectedCount();
+});
+
+function updateSelectedCount() {
+    let count = 0;
+    const mobileCheckboxes = document.querySelectorAll('.mobile_driver_checkbox');
+    if (mobileCheckboxes.length > 0) {
+        mobileCheckboxes.forEach(cb => {
+            if (cb.checked) {
+                count++;
+            }
+        });
+    }
+    const display = document.getElementById('selected_count_display');
+    if (display) {
+        display.textContent = 'Selected: ' + count;
     }
 }
 </script>
