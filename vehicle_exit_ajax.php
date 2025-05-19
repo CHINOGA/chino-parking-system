@@ -1,21 +1,33 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
 header('Content-Type: application/json');
 
+$response = [
+    'session_user_id' => $_SESSION['user_id'] ?? null,
+    'request_method' => $_SERVER['REQUEST_METHOD'],
+    'raw_input' => file_get_contents('php://input'),
+];
+
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+    $response['success'] = false;
+    $response['message'] = 'Unauthorized';
+    echo json_encode($response);
     exit;
 }
 
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/error_handling.php';
-require './backend/SmsService.php';
+require_once __DIR__ . '/SmsService.php';
 
-$data = json_decode(file_get_contents('php://input'), true);
+$data = json_decode($response['raw_input'], true);
 $registration_number = $data['registration_number'] ?? '';
 
 if (!preg_match('/^[a-zA-Z0-9]+$/', $registration_number)) {
-    echo json_encode(['success' => false, 'message' => 'Invalid vehicle registration number.']);
+    $response['success'] = false;
+    $response['message'] = 'Invalid vehicle registration number.';
+    echo json_encode($response);
     exit;
 }
 
@@ -35,7 +47,9 @@ try {
     $entry = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$entry) {
-        echo json_encode(['success' => false, 'message' => 'No active parking entry found for this vehicle.']);
+        $response['success'] = false;
+        $response['message'] = 'No active parking entry found for this vehicle.';
+        echo json_encode($response);
         exit;
     }
 
@@ -70,12 +84,18 @@ try {
     $sms_sent = $smsService->sendSms($phone_number, $message);
 
     if (!$sms_sent) {
-        echo json_encode(['success' => false, 'message' => 'Failed to send exit SMS notification.']);
+        $response['success'] = false;
+        $response['message'] = 'Failed to send exit SMS notification.';
+        echo json_encode($response);
         exit;
     }
 
-    echo json_encode(['success' => true, 'message' => "Vehicle exit recorded successfully. Parking fee: TZS $total_fee. SMS notification sent."]);
+    $response['success'] = true;
+    $response['message'] = "Vehicle exit recorded successfully. Parking fee: TZS $total_fee. SMS notification sent.";
+    echo json_encode($response);
 } catch (PDOException $e) {
-    echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
+    $response['success'] = false;
+    $response['message'] = 'Database error: ' . $e->getMessage();
+    echo json_encode($response);
 }
 ?>
