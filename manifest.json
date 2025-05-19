@@ -1,0 +1,16 @@
+{
+  "name": "Chino Parking System",
+  "short_name": "ChinoParking",
+  "start_url": "./reporting.php",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "description": "Parking management system for Chino",
+  "icons": [
+    {
+      "src": "icons/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

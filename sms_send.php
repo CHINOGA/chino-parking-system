@@ -225,7 +225,7 @@ button:hover { background: #0056b3; }
         }
         </style>
         <div id="mobile_checkbox_container">
-            <label><input type="checkbox" id="select_all_checkbox_mobile" /> Select All</label><br/>
+
             <?php foreach ($drivers as $driver): ?>
                 <label>
                     <input type="checkbox" class="mobile_driver_checkbox" name="selected_numbers[]" value="<?= htmlspecialchars($driver['phone_number']) ?>" />

@@ -305,8 +305,8 @@ async function fetchReport() {
         const diffMinutes = (now - entryDate) / 60000;
         return diffMinutes > 120; // threshold in minutes
     });
-    if (longParkedVehicles.length > 0) {
-        alertsDiv.textContent = `Alert: ${longParkedVehicles.length} vehicle(s) have been parked for more than 2 hours.`;
+    if (longParkedVehicles.length > 18) {
+        alertsDiv.textContent = `Alert: ${longParkedVehicles.length} vehicle(s) have been parked for more than 18 hours.`;
     } else {
         alertsDiv.textContent = '';
     }
@@ -431,11 +431,12 @@ window.addEventListener('DOMContentLoaded', () => {
             const regNum = e.target.getAttribute('data-reg');
             if (confirm(`Confirm exit for vehicle ${regNum}?`)) {
                 try {
-                    const response = await fetch('vehicle_exit_ajax.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ registration_number: regNum })
-                    });
+const response = await fetch('vehicle_exit_ajax.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'same-origin',
+    body: JSON.stringify({ registration_number: regNum })
+});
                     const result = await response.json();
                     showNotification(result.message);
                     exitedOffset = 10; // Reset offset after exit
