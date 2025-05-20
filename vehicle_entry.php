@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $entry_time = new DateTime();
                     $formatted_entry_time = $entry_time->format('Y-m-d H:i:s');
 
-                    $message = "CHINO RECEIPT\n" .
+                    $message = "CHINO PARK RECEIPT\n" .
                                "Reg#: $registration_number\n" .
                                "Type: $vehicle_type\n" .
                                "In: $formatted_entry_time\n" .

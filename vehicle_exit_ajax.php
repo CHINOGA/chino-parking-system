@@ -74,11 +74,9 @@ try {
 
     // Prepare detailed exit SMS message
     $message = "CHINO PARK RECEIPT\n" .
-               "Reg#: $registration_number\n" .
+               "Reg: $registration_number\n" .
                "Type: " . ($entry['vehicle_type'] ?? 'N/A') . "\n" .
-               "In: " . $entry_time->format('Y-m-d H:i:s') . "\n" .
                "Out: " . $exit_time->format('Y-m-d H:i:s') . "\n" .
-               "Fee: TZS $total_fee\n" .
                "Call 0787753325 for help.";
 
     $sms_sent = $smsService->sendSms($phone_number, $message);
