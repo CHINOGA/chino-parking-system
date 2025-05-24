@@ -90,6 +90,34 @@ $stmt = $pdo->prepare("
 $stmt->execute([$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
 $peak_days_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Fetch first-time parked vehicles count by date
+$first_time_where = 'pe.entry_time BETWEEN ? AND ?';
+$first_time_params = [$start_date . ' 00:00:00', $end_date . ' 23:59:59'];
+
+if ($vehicle_type_filter && $vehicle_type_filter !== 'All') {
+    $first_time_where .= ' AND v.vehicle_type = ?';
+    $first_time_params[] = $vehicle_type_filter;
+}
+
+$stmt = $pdo->prepare("
+    SELECT DATE(pe.entry_time) AS date, COUNT(DISTINCT v.id) AS first_time_count
+    FROM parking_entries pe
+    JOIN vehicles v ON pe.vehicle_id = v.id
+    WHERE $first_time_where
+    AND v.id NOT IN (
+        SELECT vehicle_id FROM parking_entries
+        WHERE entry_time < ?
+    )
+    GROUP BY DATE(pe.entry_time)
+    ORDER BY DATE(pe.entry_time) ASC
+");
+$stmt->execute(array_merge($first_time_params, [$start_date . ' 00:00:00']));
+$first_time_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Prepare first-time vehicles chart data
+$first_time_labels = array_map(fn($d) => $d['date'], $first_time_data);
+$first_time_counts = array_map(fn($d) => (int)$d['first_time_count'], $first_time_data);
+
 // Prepare chart data for embedding in HTML
 $chart_labels = array_map(fn($d) => $d['date'], $daily_revenue_data);
 $chart_data = array_map(fn($d) => (float)$d['daily_revenue'], $daily_revenue_data);
@@ -317,6 +345,7 @@ function updatePeakDaysChart(chartDataJson) {
         }
     });
 }
+
 </script>
 </head>
 <body>
@@ -394,6 +423,53 @@ function updatePeakDaysChart(chartDataJson) {
     <div id="peak_days_chart_data" style="display:none;">
         <?php echo json_encode(['labels' => $peak_labels, 'data' => $peak_counts]); ?>
     </div>
+
+    <h3>First-Time Parked Vehicles</h3>
+    <canvas id="firstTimeVehiclesChart" width="800" height="400"></canvas>
+    <div id="first_time_chart_data" style="display:none;">
+        <?php echo json_encode(['labels' => $first_time_labels, 'data' => $first_time_counts]); ?>
+    </div>
 </div>
+<script>
+function updateFirstTimeVehiclesChart(chartDataJson) {
+    const chartData = JSON.parse(chartDataJson);
+    const ctx = document.getElementById('firstTimeVehiclesChart').getContext('2d');
+
+    if (window.firstTimeVehiclesChartInstance) {
+        window.firstTimeVehiclesChartInstance.destroy();
+    }
+
+    window.firstTimeVehiclesChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'First-Time Parked Vehicles',
+                data: chartData.data,
+                backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                borderColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0
+                }
+            }
+        }
+    });
+}
+
+const originalFetchRevenueReport = fetchRevenueReport;
+fetchRevenueReport = async function() {
+    await originalFetchRevenueReport();
+
+    const firstTimeChartData = document.getElementById('first_time_chart_data').textContent;
+    updateFirstTimeVehiclesChart(firstTimeChartData);
+};
+</script>
 </body>
 </html>
