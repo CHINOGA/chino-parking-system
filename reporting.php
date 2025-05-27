@@ -392,12 +392,12 @@ window.addEventListener('DOMContentLoaded', () => {
             const regNum = e.target.getAttribute('data-reg');
             if (confirm(`Confirm exit for vehicle ${regNum}?`)) {
                 try {
-const response = await fetch('vehicle_exit_ajax.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'same-origin',
-    body: JSON.stringify({ registration_number: regNum })
-});
+                    const response = await fetch('vehicle_exit_ajax.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'same-origin',
+                        body: JSON.stringify({ registration_number: regNum })
+                    });
                     const result = await response.json();
                     showNotification(result.message);
                     exitedOffset = 10; // Reset offset after exit
@@ -405,6 +405,25 @@ const response = await fetch('vehicle_exit_ajax.php', {
                 } catch (error) {
                     showNotification('Error processing exit: ' + error.message);
                 }
+            }
+        }
+    });
+
+    // Add event listener for Exit All button
+    document.getElementById('exit_all_btn').addEventListener('click', async () => {
+        if (confirm('Are you sure you want to exit all parked vehicles without sending SMS?')) {
+            try {
+                const response = await fetch('vehicle_exit_all_ajax.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'same-origin',
+                });
+                const result = await response.json();
+                showNotification(result.message);
+                // Refresh the report after exiting all
+                fetchReport();
+            } catch (error) {
+                showNotification('Error processing exit all: ' + error.message);
             }
         }
     });
@@ -495,6 +514,7 @@ const response = await fetch('vehicle_exit_ajax.php', {
     <div id="alerts" style="margin-top: 15px; color: red; font-weight: bold;"></div>
 
     <h3>Parked Vehicles <span id="parked_count"></span></h3>
+    <button id="exit_all_btn" class="exit-btn" style="margin-bottom: 10px;">Exit All</button>
     <input type="text" id="search_parked" placeholder="Search parked vehicles..." style="margin-bottom: 10px; padding: 5px; width: 100%; max-width: 400px;" />
     <table>
         <thead>
