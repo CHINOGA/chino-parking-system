@@ -147,8 +147,10 @@ if (isset($_GET['action']) && ($_GET['action'] === 'filter' || $_GET['action'] =
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chino Parking System - Reporting Dashboard</title>
 <link rel="manifest" href="manifest.json" />
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Custom CSS -->
+<link href="custom.css" rel="stylesheet" />
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -163,85 +165,147 @@ if (isset($_GET['action']) && ($_GET['action'] === 'filter' || $_GET['action'] =
   }
 </script>
 <style>
-/* Revised styles for reporting page */
 body {
-  @apply bg-gray-50 font-sans text-gray-900 m-0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+  margin: 0;
+  padding: 0;
 }
 .container {
-  @apply max-w-5xl mx-auto mt-10 bg-white rounded-lg p-8 shadow-md;
+  max-width: 960px;
+  margin: 3rem auto;
+  background: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 h2 {
-  @apply text-center text-3xl font-extrabold mb-6 text-gray-800;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #212529;
 }
 form label {
-  @apply mr-4 font-semibold text-gray-700;
+  margin-right: 1rem;
+  font-weight: 600;
+  color: #495057;
 }
 input[type="text"],
 input[type="date"],
 select {
-  @apply p-2 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  margin-bottom: 1rem;
+  width: auto;
+  min-width: 150px;
 }
 button {
-  @apply px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300;
+  padding: 0.5rem 1rem;
+  background-color: #0d6efd;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #0b5ed7;
 }
 table {
-  @apply w-full border-collapse mt-6 table-fixed;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
 }
 th,
 td {
-  @apply border border-gray-300 px-4 py-2 text-left break-words;
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: middle;
+  word-wrap: break-word;
 }
 th {
-  @apply bg-gray-100 text-gray-700;
+  background-color: #e9ecef;
+  color: #495057;
 }
 .exit-btn {
-  @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded-md cursor-pointer transition duration-300;
+  background-color: #0d6efd;
+  color: white;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.exit-btn:hover {
+  background-color: #0b5ed7;
 }
 
 /* Responsive styles */
 @media (max-width: 900px) {
   .container {
-    @apply mx-4 p-4;
+    margin: 1rem;
+    padding: 1rem;
   }
   input[type="text"],
   input[type="date"],
   select,
   button {
-    @apply w-full mb-4;
+    width: 100%;
+    margin-bottom: 1rem;
   }
   label {
-    @apply block mb-1;
+    display: block;
+    margin-bottom: 0.5rem;
   }
   table {
-    @apply block overflow-x-auto whitespace-nowrap border-separate border-spacing-0;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  thead, tbody, tr, th, td {
+    display: block;
   }
   thead tr {
-    @apply table-row;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
   }
   tbody tr {
-    @apply table-row border-none mb-0 p-0;
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
   }
   tbody td {
-    @apply border border-gray-300 px-2 py-1 text-left relative text-base;
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
   }
   tbody td::before {
-    content: none;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.75rem;
+    width: 45%;
+    white-space: nowrap;
+    font-weight: 600;
+    content: attr(data-label);
   }
 }
 
 /* Mobile styles */
 @media (max-width: 600px) {
   body {
-    @apply text-sm;
-  }
-  .container {
-    @apply mx-2 p-3;
-  }
-  tbody td {
-    @apply text-base;
+    font-size: 0.875rem;
   }
   .exit-btn {
-    @apply py-1 px-2 text-sm;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
   }
 }
 </style>
@@ -287,12 +351,12 @@ async function fetchReport() {
             const entryDateStr = entryDateEAT.toLocaleString('en-GB', { hour12: false });
 
             const row = `<tr>
-                <td>${v.registration_number}</td>
-                <td>${v.vehicle_type}</td>
-                <td>${v.driver_name}</td>
-                <td>${v.phone_number}</td>
-                <td>${entryDateStr}</td>
-                <td><button class="exit-btn" data-reg="${v.registration_number}">Exit</button></td>
+                <td data-label="Registration Number">${v.registration_number}</td>
+                <td data-label="Vehicle Type">${v.vehicle_type}</td>
+                <td data-label="Driver Name">${v.driver_name}</td>
+                <td data-label="Phone Number">${v.phone_number}</td>
+                <td data-label="Entry Time">${entryDateStr}</td>
+                <td data-label="Action"><button class="exit-btn" data-reg="${v.registration_number}">Exit</button></td>
             </tr>`;
             parkedTableBody.insertAdjacentHTML('beforeend', row);
         });
@@ -311,12 +375,12 @@ async function fetchReport() {
             const exitDateStr = exitDateEAT.toLocaleString('en-GB', { hour12: false });
 
             const row = `<tr>
-                <td>${v.registration_number}</td>
-                <td>${v.vehicle_type}</td>
-                <td>${v.driver_name}</td>
-                <td>${v.phone_number}</td>
-                <td>${entryDateStr}</td>
-                <td>${exitDateStr}</td>
+                <td data-label="Registration Number">${v.registration_number}</td>
+                <td data-label="Vehicle Type">${v.vehicle_type}</td>
+                <td data-label="Driver Name">${v.driver_name}</td>
+                <td data-label="Phone Number">${v.phone_number}</td>
+                <td data-label="Entry Time">${entryDateStr}</td>
+                <td data-label="Exit Time">${exitDateStr}</td>
             </tr>`;
             exitedTableBody.insertAdjacentHTML('beforeend', row);
         });
@@ -348,12 +412,12 @@ async function loadMoreExited() {
 
     data.exited.forEach(v => {
         const row = `<tr>
-            <td>${v.registration_number}</td>
-            <td>${v.vehicle_type}</td>
-            <td>${v.driver_name}</td>
-            <td>${v.phone_number}</td>
-            <td>${v.entry_time}</td>
-            <td>${v.exit_time}</td>
+            <td data-label="Registration Number">${v.registration_number}</td>
+            <td data-label="Vehicle Type">${v.vehicle_type}</td>
+            <td data-label="Driver Name">${v.driver_name}</td>
+            <td data-label="Phone Number">${v.phone_number}</td>
+            <td data-label="Entry Time">${v.entry_time}</td>
+            <td data-label="Exit Time">${v.exit_time}</td>
         </tr>`;
         exitedTableBody.insertAdjacentHTML('beforeend', row);
     });
@@ -497,29 +561,34 @@ window.addEventListener('DOMContentLoaded', () => {
 <?php include __DIR__ . '/navbar.php'; ?>
 <div class="container">
     <h2>Reporting Dashboard</h2>
-<form id="filter_form">
-        <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($start_date ?: date('Y-m-d', strtotime('monday this week'))); ?>" />
-        <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars($end_date ?: date('Y-m-d', strtotime('sunday this week'))); ?>" />
-        <label for="vehicle_type">Vehicle Type:</label>
-        <select id="vehicle_type" name="vehicle_type">
-            <option value="All" <?php echo (!isset($_GET['vehicle_type']) || $_GET['vehicle_type'] === 'All') ? 'selected' : ''; ?>>All</option>
-            <option value="Motorcycle" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Motorcycle') ? 'selected' : ''; ?>>Motorcycle</option>
-            <option value="Bajaj" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Bajaj') ? 'selected' : ''; ?>>Bajaj</option>
-            <option value="Car" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Car') ? 'selected' : ''; ?>>Car</option>
-            <option value="Truck" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Truck') ? 'selected' : ''; ?>>Truck</option>
-            <option value="Other" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Other') ? 'selected' : ''; ?>>Other</option>
-        </select>
-<!-- Removed filter button for real-time filtering -->
+<form id="filter_form" class="d-flex flex-wrap align-items-center gap-3 mb-3">
+        <div class="form-group">
+            <label for="start_date" class="form-label">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" class="form-control" value="<?php echo htmlspecialchars($start_date ?: date('Y-m-d', strtotime('monday this week'))); ?>" />
+        </div>
+        <div class="form-group">
+            <label for="end_date" class="form-label">End Date:</label>
+            <input type="date" id="end_date" name="end_date" class="form-control" value="<?php echo htmlspecialchars($end_date ?: date('Y-m-d', strtotime('sunday this week'))); ?>" />
+        </div>
+        <div class="form-group">
+            <label for="vehicle_type" class="form-label">Vehicle Type:</label>
+            <select id="vehicle_type" name="vehicle_type" class="form-select">
+                <option value="All" <?php echo (!isset($_GET['vehicle_type']) || $_GET['vehicle_type'] === 'All') ? 'selected' : ''; ?>>All</option>
+                <option value="Motorcycle" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Motorcycle') ? 'selected' : ''; ?>>Motorcycle</option>
+                <option value="Bajaj" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Bajaj') ? 'selected' : ''; ?>>Bajaj</option>
+                <option value="Car" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Car') ? 'selected' : ''; ?>>Car</option>
+                <option value="Truck" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Truck') ? 'selected' : ''; ?>>Truck</option>
+                <option value="Other" <?php echo (isset($_GET['vehicle_type']) && $_GET['vehicle_type'] === 'Other') ? 'selected' : ''; ?>>Other</option>
+            </select>
+        </div>
     </form>
-    <div id="alerts" style="margin-top: 15px; color: red; font-weight: bold;"></div>
+    <div id="alerts" class="text-danger fw-bold mb-3"></div>
 
     <h3>Parked Vehicles <span id="parked_count"></span></h3>
-    <button id="exit_all_btn" class="exit-btn" style="margin-bottom: 10px;">Exit All</button>
-    <input type="text" id="search_parked" placeholder="Search parked vehicles..." style="margin-bottom: 10px; padding: 5px; width: 100%; max-width: 400px;" />
-    <table>
-        <thead>
+    <button id="exit_all_btn" class="btn btn-primary mb-3">Exit All</button>
+    <input type="text" id="search_parked" placeholder="Search parked vehicles..." class="form-control mb-3" style="max-width: 400px;" />
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
                 <th>Registration Number</th>
                 <th>Vehicle Type</th>
@@ -533,9 +602,9 @@ window.addEventListener('DOMContentLoaded', () => {
     </table>
 
     <h3>Exited Vehicles</h3>
-    <input type="text" id="search_exited" placeholder="Search exited vehicles..." style="margin-bottom: 10px; padding: 5px; width: 100%; max-width: 400px;" />
-    <table>
-        <thead>
+    <input type="text" id="search_exited" placeholder="Search exited vehicles..." class="form-control mb-3" style="max-width: 400px;" />
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
                 <th>Registration Number</th>
                 <th>Vehicle Type</th>

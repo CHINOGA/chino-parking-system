@@ -108,8 +108,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chino Parking System - Vehicle Entry</title>
 <link rel="manifest" href="manifest.json" />
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Custom CSS -->
+<link href="custom.css" rel="stylesheet" />
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -165,34 +167,89 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   });
 </script>
 <style>
-/* Custom styles for form container and elements */
 body {
-  @apply bg-gradient-to-r from-blue-600 to-indigo-700 font-sans text-white m-0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #2563eb, #4f46e5);
+  color: white;
+  margin: 0;
+  padding: 0;
 }
 .container {
-  @apply max-w-md mx-auto mt-10 bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 shadow-lg;
+  max-width: 480px;
+  margin: 3rem auto;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
 }
 h2 {
-  @apply text-center text-2xl font-bold mb-6;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
 form label {
-  @apply block mt-4 mb-1 font-semibold;
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
 }
 input[type="text"],
 select {
-  @apply w-full p-3 rounded-md border border-gray-300 bg-white bg-opacity-90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+input[type="text"]:focus,
+select:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  border-color: #3b82f6;
 }
 button {
-  @apply mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md transition duration-300;
+  margin-top: 1.5rem;
+  width: 100%;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #2563eb;
 }
 .error {
-  @apply text-red-400 mt-4;
+  color: #f87171;
+  margin-top: 1rem;
 }
 .success {
-  @apply text-green-400 mt-4;
+  color: #4ade80;
+  margin-top: 1rem;
 }
 .install-btn {
-  @apply hidden fixed bottom-5 right-5 bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 py-3 text-lg shadow-lg z-50;
+  display: none;
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.5);
+  cursor: pointer;
+  z-index: 50;
+}
+.install-btn:hover {
+  background-color: #1e40af;
 }
 </style>
 <script>
