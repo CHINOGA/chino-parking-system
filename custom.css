@@ -19,6 +19,15 @@ body {
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
+/* Make container fluid on small screens */
+@media (max-width: 768px) {
+  .container {
+    max-width: 100% !important;
+    margin: 1rem !important;
+    padding: 1rem !important;
+  }
+}
+
 h2, h3 {
   color: #212529;
 }
@@ -106,6 +115,7 @@ button {
   }
 }
 
+/* Mobile styles */
 @media (max-width: 600px) {
   body {
     font-size: 0.875rem;
@@ -113,5 +123,15 @@ button {
   .exit-btn {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
+  }
+  /* Make buttons full width on mobile */
+  button {
+    width: 100% !important;
+  }
+  /* Make inputs full width on mobile */
+  input[type="text"],
+  input[type="date"],
+  select {
+    width: 100% !important;
   }
 }
