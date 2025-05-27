@@ -91,7 +91,7 @@ button {
   table {
     overflow-x: auto;
     width: 100%;
-    white-space: normal; /* allow wrapping */
+    white-space: nowrap; /* prevent wrapping */
   }
   /* Use default table display */
   thead, tbody, tr, th, td {
@@ -113,9 +113,9 @@ button {
     position: static;
     padding: 0.5rem;
     text-align: left;
-    word-break: break-word;
-    min-width: 50px; /* reduce min-width */
-    white-space: normal; /* allow wrapping */
+    word-break: normal; /* prevent breaking */
+    min-width: 80px;
+    white-space: nowrap; /* prevent wrapping */
   }
   tbody td::before {
     content: none;
