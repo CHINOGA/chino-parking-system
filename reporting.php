@@ -263,38 +263,8 @@ th {
     margin-bottom: 0.5rem;
   }
   table {
-    display: block;
     overflow-x: auto;
     white-space: nowrap;
-  }
-  thead, tbody, tr, th, td {
-    display: block;
-  }
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-  tbody tr {
-    margin-bottom: 1rem;
-    border: 1px solid #dee2e6;
-    border-radius: 0.375rem;
-    padding: 0.5rem;
-  }
-  tbody td {
-    border: none;
-    position: relative;
-    padding-left: 50%;
-    text-align: left;
-  }
-  tbody td::before {
-    position: absolute;
-    top: 0.5rem;
-    left: 0.75rem;
-    width: 45%;
-    white-space: nowrap;
-    font-weight: 600;
-    content: attr(data-label);
   }
 }
 

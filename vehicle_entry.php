@@ -175,7 +175,7 @@ body {
   padding: 0;
 }
 .container {
-  max-width: 480px;
+  max-width: 960px;
   margin: 3rem auto;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
