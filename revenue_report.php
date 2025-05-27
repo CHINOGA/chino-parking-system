@@ -134,6 +134,8 @@ $peak_counts = array_map(fn($d) => (int)$d['vehicle_count'], $peak_days_data);
 <meta name="description" content="Chino Parking System - Revenue report and analytics dashboard for vehicle parking management." />
 <title>Chino Parking System - Revenue Report</title>
 <link rel="manifest" href="manifest.json" />
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -146,53 +148,58 @@ $peak_counts = array_map(fn($d) => (int)$d['vehicle_count'], $peak_days_data);
   }
 </script>
 <style>
-body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; }
-.container { max-width: 900px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 5px; }
-h2 { text-align: center; }
-label { margin-right: 10px; }
-input[type="text"], input[type="date"], select {
-    padding: 5px; margin-right: 10px; border: 1px solid #ccc; border-radius: 3px;
+/* Custom styles for revenue report page */
+body {
+  @apply bg-gradient-to-r from-blue-600 to-indigo-700 font-sans text-white m-0;
+}
+.container {
+  @apply max-w-5xl mx-auto mt-10 bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 shadow-lg;
+}
+h2 {
+  @apply text-center text-3xl font-extrabold mb-6;
+}
+form label {
+  @apply mr-4 font-semibold;
+}
+input[type="text"],
+input[type="date"],
+select {
+  @apply p-2 rounded-md border border-gray-300 bg-white bg-opacity-90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4;
 }
 button {
-    padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px;
-    cursor: pointer;
+  @apply px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-300;
 }
-button:hover { background: #0056b3; }
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+  @apply w-full border-collapse mt-6;
 }
-th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
+th,
+td {
+  @apply border border-gray-300 px-4 py-2 text-left;
 }
 th {
-    background-color: #f2f2f2;
+  @apply bg-gray-100 text-gray-700;
 }
 .summary {
-    margin-top: 20px;
-    font-weight: bold;
+  @apply mt-5 font-bold;
 }
 .export-btn {
-    margin-top: 10px;
+  @apply mt-2;
 }
+
+/* Responsive styles */
 @media (max-width: 600px) {
-    .container {
-        margin: 10px;
-        padding: 15px;
-        max-width: 100%;
-    }
-    input[type="text"], input[type="date"], button, select {
-        font-size: 1em;
-        margin-bottom: 10px;
-        width: 100%;
-    }
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
+  .container {
+    @apply mx-4 p-4;
+  }
+  input[type="text"],
+  input[type="date"],
+  button,
+  select {
+    @apply w-full mb-4;
+  }
+  label {
+    @apply block mb-1;
+  }
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

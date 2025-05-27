@@ -140,6 +140,8 @@ if (isset($_GET['action']) && ($_GET['action'] === 'filter' || $_GET['action'] =
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chino Parking System - Reporting Dashboard</title>
 <link rel="manifest" href="manifest.json" />
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -154,136 +156,86 @@ if (isset($_GET['action']) && ($_GET['action'] === 'filter' || $_GET['action'] =
   }
 </script>
 <style>
-body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; }
-.container { max-width: 900px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 5px; }
-h2 { text-align: center; }
-label { margin-right: 10px; }
-input[type="text"], input[type="date"] {
-    padding: 5px; margin-right: 10px; border: 1px solid #ccc; border-radius: 3px;
+/* Custom styles for reporting page */
+body {
+  @apply bg-gradient-to-r from-blue-600 to-indigo-700 font-sans text-white m-0;
+}
+.container {
+  @apply max-w-5xl mx-auto mt-10 bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 shadow-lg;
+}
+h2 {
+  @apply text-center text-3xl font-extrabold mb-6;
+}
+form label {
+  @apply mr-4 font-semibold;
+}
+input[type="text"],
+input[type="date"],
+select {
+  @apply p-2 rounded-md border border-gray-300 bg-white bg-opacity-90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4;
 }
 button {
-    padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px;
-    cursor: pointer;
+  @apply px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-300;
 }
-button:hover { background: #0056b3; }
 table {
-    width: 100%; border-collapse: collapse; margin-top: 20px;
-    word-wrap: break-word;
-    table-layout: fixed;
+  @apply w-full border-collapse mt-6 table-fixed;
 }
-th, td {
-    border: 1px solid #ccc; padding: 8px; text-align: left;
-    word-wrap: break-word;
+th,
+td {
+  @apply border border-gray-300 px-4 py-2 text-left break-words;
 }
 th {
-    background: #f2f2f2;
+  @apply bg-gray-100 text-gray-700;
+}
+.exit-btn {
+  @apply bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-3 rounded-md cursor-pointer transition duration-300;
 }
 
 /* Responsive styles */
 @media (max-width: 900px) {
-    .container {
-        margin: 10px;
-        padding: 15px;
-        max-width: 100%;
-    }
-    input[type="text"], input[type="date"], button {
-        font-size: 1em;
-        margin-bottom: 10px;
-        width: 100%;
-    }
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-    /* Add horizontal scroll for tables on medium and small screens */
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        border-collapse: separate;
-        border-spacing: 0;
-    }
-    thead tr {
-        display: table-row;
-    }
-    tbody tr {
-        display: table-row;
-        border: none;
-        margin-bottom: 0;
-        padding: 0;
-    }
-    tbody td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-        position: static;
-        padding-left: 8px;
-    }
-    tbody td::before {
-        content: none;
-    }
+  .container {
+    @apply mx-4 p-4;
+  }
+  input[type="text"],
+  input[type="date"],
+  select,
+  button {
+    @apply w-full mb-4;
+  }
+  label {
+    @apply block mb-1;
+  }
+  table {
+    @apply block overflow-x-auto whitespace-nowrap border-separate border-spacing-0;
+  }
+  thead tr {
+    @apply table-row;
+  }
+  tbody tr {
+    @apply table-row border-none mb-0 p-0;
+  }
+  tbody td {
+    @apply border border-gray-300 px-2 py-1 text-left relative text-base;
+  }
+  tbody td::before {
+    content: none;
+  }
 }
 
 /* Mobile styles */
 @media (max-width: 600px) {
-    body {
-        font-size: 14px;
-    }
-    .container {
-        margin: 5px;
-        padding: 10px;
-        max-width: 100%;
-    }
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        border-collapse: separate;
-        border-spacing: 0;
-    }
-    thead tr {
-        display: table-row;
-    }
-    tbody tr {
-        display: table-row;
-        border: none;
-        margin-bottom: 0;
-        padding: 0;
-    }
-    tbody td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-        position: static;
-        padding-left: 8px;
-        font-size: 1em;
-    }
-    tbody td::before {
-        content: none;
-    }
-    button.exit-btn {
-        display: inline-block;
-        margin-top: 0;
-        padding: 5px 10px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 3px;
-        font-size: 0.9em;
-        cursor: pointer;
-    }
-    button.exit-btn:hover {
-        background-color: #0056b3;
-    }
-    input[type="text"], input[type="date"], select, button {
-        font-size: 1em;
-        margin-bottom: 10px;
-        width: 100%;
-    }
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
+  body {
+    @apply text-sm;
+  }
+  .container {
+    @apply mx-2 p-3;
+  }
+  tbody td {
+    @apply text-base;
+  }
+  .exit-btn {
+    @apply py-1 px-2 text-sm;
+  }
 }
 </style>
 <script>
@@ -306,7 +258,7 @@ async function fetchReport() {
         return diffMinutes > 120; // threshold in minutes
     });
     if (longParkedVehicles.length > 18) {
-        alertsDiv.textContent = `Alert: ${longParkedVehicles.length} vehicle(s) have been parked for more than 18 hours.`;
+        alertsDiv.textContent = `Alert: ${longParkedVehicles.length} vehicle(s) have been parked for more than 18 hours.`; 
     } else {
         alertsDiv.textContent = '';
     }

@@ -152,22 +152,42 @@ if ($otp_verified) {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Send SMS to Drivers - Chino Parking System</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; }
-.container { max-width: 600px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 5px; }
-h2 { text-align: center; }
-label { display: block; margin-top: 15px; }
-select, input[type="text"], textarea {
-    width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 3px;
-    box-sizing: border-box;
+/* Custom styles for SMS send page */
+body {
+  @apply bg-gradient-to-r from-blue-600 to-indigo-700 font-sans text-white m-0;
+}
+.container {
+  @apply max-w-lg mx-auto mt-10 bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 shadow-lg;
+}
+h2 {
+  @apply text-center text-3xl font-extrabold mb-6;
+}
+label {
+  @apply block mt-4 font-semibold;
+}
+input[type="text"],
+textarea {
+  @apply w-full p-2 mt-1 rounded-md border border-gray-300 bg-white bg-opacity-90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400;
+  box-sizing: border-box;
 }
 button {
-    margin-top: 20px; padding: 10px; width: 100%; background: #007bff; color: white; border: none; border-radius: 3px;
-    cursor: pointer;
+  @apply mt-6 w-full py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-300;
 }
-button:hover { background: #0056b3; }
-.error { color: red; margin-top: 10px; }
-.success { color: green; margin-top: 10px; }
+.error {
+  @apply text-red-600 mt-3;
+}
+.success {
+  @apply text-green-600 mt-3;
+}
+#mobile_checkbox_container {
+  @apply border border-gray-300 rounded-md p-4 max-h-72 overflow-y-auto bg-white bg-opacity-90 text-gray-900;
+}
+#selected_count_display {
+  @apply font-bold mt-2 text-gray-900;
+}
 </style>
 </head>
 <body>
@@ -197,40 +217,14 @@ button:hover { background: #0056b3; }
         <div>
             <label><input type="checkbox" id="select_all_checkbox_mobile" /> Select All</label>
         </div>
-        <div id="selected_count_display" style="margin-top: 5px; font-weight: bold;">Selected: 0</div>
-        <style>
-        /* Hide desktop multi-select and desktop select all checkbox */
-        #selected_numbers, #select_all_checkbox {
-            display: none;
-        }
-        /* Show mobile checkbox container always */
-        #mobile_checkbox_container {
-            display: block;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 3px;
-            max-height: 300px;
-            overflow-y: auto;
-            background: #fff;
-        }
-        /* Hide mobile select dropdown */
-        #selected_numbers_mobile {
-            display: none;
-        }
-        /* Ensure selected count display is visible */
-        #selected_count_display {
-            font-weight: bold;
-            margin-top: 5px;
-            color: #333;
-        }
-        </style>
+        <div id="selected_count_display">Selected: 0</div>
         <div id="mobile_checkbox_container">
 
             <?php foreach ($drivers as $driver): ?>
-                <label>
+                <label class="block">
                     <input type="checkbox" class="mobile_driver_checkbox" name="selected_numbers[]" value="<?= htmlspecialchars($driver['phone_number']) ?>" />
                     <?= htmlspecialchars($driver['driver_name']) ?> - <?= htmlspecialchars($driver['phone_number']) ?>
-                </label><br/>
+                </label>
             <?php endforeach; ?>
         </div>
 
