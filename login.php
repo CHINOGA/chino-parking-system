@@ -33,8 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chino Parking System - Login</title>
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Custom CSS -->
+<link href="custom.css" rel="stylesheet" />
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -92,29 +94,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <style>
 /* Custom styles for login page */
 body {
-  @apply bg-gradient-to-r from-blue-600 to-indigo-700 font-sans text-white m-0;
+  background: linear-gradient(to right, #2563eb, #4f46e5);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 .topbar {
-  @apply bg-blue-800 text-white font-bold text-xl text-center py-4 shadow-md sticky top-0 z-50;
+  background-color: #1e40af;
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1050;
 }
 .container {
-  @apply max-w-sm mx-auto mt-20 bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 shadow-lg;
+  max-width: 400px;
+  margin: 4rem auto 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 h2 {
-  @apply text-center text-3xl font-extrabold mb-6;
+  text-align: center;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
 }
 .error {
-  @apply text-red-400 mb-4;
+  color: #f87171;
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 form label {
-  @apply block mb-1 font-semibold;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
 }
 input[type="text"],
 input[type="password"] {
-  @apply w-full p-3 rounded-md border border-gray-300 bg-white bg-opacity-90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #111827;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
 }
 button {
-  @apply w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md transition duration-300;
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 1.125rem;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #1e40af;
 }
 </style>
 </head>
