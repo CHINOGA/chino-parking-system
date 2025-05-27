@@ -420,6 +420,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 });
                 const result = await response.json();
                 showNotification(result.message);
+                // Reset exitedOffset to 0 to reload exited vehicles from start
+                exitedOffset = 0;
                 // Refresh the report after exiting all
                 fetchReport();
             } catch (error) {
