@@ -558,15 +558,15 @@ window.addEventListener('DOMContentLoaded', () => {
     <button id="exit_all_btn" class="btn btn-primary mb-3">Exit All</button>
     <input type="text" id="search_parked" placeholder="Search parked vehicles..." class="form-control mb-3" style="max-width: 400px;" />
     <div class="table-responsive">
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered fixed-header">
         <thead class="table-dark">
             <tr>
-                <th>Registration Number</th>
-                <th>Vehicle Type</th>
-                <th>Driver Name</th>
-                <th>Phone Number</th>
-                <th>Entry Time</th>
-                <th>Action</th>
+                <th scope="col">Registration Number</th>
+                <th scope="col">Vehicle Type</th>
+                <th scope="col">Driver Name</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Entry Time</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody id="parked_tbody"></tbody>
@@ -576,15 +576,15 @@ window.addEventListener('DOMContentLoaded', () => {
     <h3>Exited Vehicles</h3>
     <input type="text" id="search_exited" placeholder="Search exited vehicles..." class="form-control mb-3" style="max-width: 400px;" />
     <div class="table-responsive">
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered fixed-header">
         <thead class="table-dark">
             <tr>
-                <th>Registration Number</th>
-                <th>Vehicle Type</th>
-                <th>Driver Name</th>
-                <th>Phone Number</th>
-                <th>Entry Time</th>
-                <th>Exit Time</th>
+                <th scope="col">Registration Number</th>
+                <th scope="col">Vehicle Type</th>
+                <th scope="col">Driver Name</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Entry Time</th>
+                <th scope="col">Exit Time</th>
             </tr>
         </thead>
         <tbody id="exited_tbody"></tbody>
