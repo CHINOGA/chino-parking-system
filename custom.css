@@ -82,8 +82,8 @@ button {
   table {
     overflow-x: auto;
     width: 100%;
+    white-space: nowrap;
   }
-  /* Remove block display and card-like styles */
   thead, tbody, tr, th, td {
     display: table-row-group;
   }
