@@ -152,48 +152,92 @@ if ($otp_verified) {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Send SMS to Drivers - Chino Parking System</title>
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Custom CSS -->
+<link href="custom.css" rel="stylesheet" />
 <style>
 /* Revised styles for SMS send page */
 body {
-  @apply bg-gray-50 font-sans text-gray-900 m-0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+  margin: 0;
+  padding: 0;
 }
 .container {
-  @apply max-w-lg mx-auto mt-10 bg-white rounded-lg p-10 shadow-md;
+  max-width: 600px;
+  margin: 3rem auto;
+  background: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 h2 {
-  @apply text-center text-3xl font-extrabold mb-8 text-gray-800;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #212529;
 }
 label {
-  @apply block mt-6 font-semibold text-gray-700;
+  display: block;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: #495057;
 }
 input[type="text"],
 textarea {
-  @apply w-full p-3 mt-2 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400;
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
   box-sizing: border-box;
   outline: none;
+  color: #212529;
+  font-size: 1rem;
 }
 input[type="text"]:focus,
 textarea:focus {
-  @apply border-blue-400 ring-2;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
 }
 button {
-  @apply mt-8 w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300;
+  margin-top: 2rem;
+  width: 100%;
+  background-color: #0d6efd;
+  color: white;
+  font-weight: 600;
+  padding: 1rem;
   border: none;
+  border-radius: 0.375rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #0b5ed7;
 }
 .error {
-  @apply text-red-600 mt-4;
+  color: #dc3545;
+  margin-top: 1rem;
 }
 .success {
-  @apply text-green-600 mt-4;
+  color: #198754;
+  margin-top: 1rem;
 }
 #mobile_checkbox_container {
-  @apply border border-gray-300 rounded-md p-6 max-h-72 overflow-y-auto bg-white text-gray-900;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  max-height: 18rem;
+  overflow-y: auto;
+  background: white;
+  color: #212529;
 }
 #selected_count_display {
-  @apply font-bold mt-4 text-gray-900;
+  font-weight: 700;
+  margin-top: 1rem;
+  color: #212529;
 }
 </style>
 </head>

@@ -133,8 +133,10 @@ $peak_counts = array_map(fn($d) => (int)$d['vehicle_count'], $peak_days_data);
 <meta name="description" content="Chino Parking System - Revenue report and analytics dashboard for vehicle parking management." />
 <title>Chino Parking System - Revenue Report</title>
 <link rel="manifest" href="manifest.json" />
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Custom CSS -->
+<link href="custom.css" rel="stylesheet" />
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -358,28 +360,34 @@ function updatePeakDaysChart(chartDataJson) {
 <?php include __DIR__ . '/navbar.php'; ?>
 <div class="container">
     <h2>Revenue Report</h2>
-    <form method="get" action="revenue_report.php" onsubmit="return validateForm()">
-        <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars(date('Y-m-d', strtotime($start_date))); ?>" required />
-        <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars(date('Y-m-d', strtotime($end_date))); ?>" required />
-        <label for="vehicle_type">Vehicle Type:</label>
-        <select id="vehicle_type" name="vehicle_type">
-            <option value="All" <?= $vehicle_type_filter === 'All' ? 'selected' : '' ?>>All</option>
-            <option value="Motorcycle" <?= $vehicle_type_filter === 'Motorcycle' ? 'selected' : '' ?>>Motorcycle</option>
-            <option value="Bajaj" <?= $vehicle_type_filter === 'Bajaj' ? 'selected' : '' ?>>Bajaj</option>
-            <option value="Car" <?= $vehicle_type_filter === 'Car' ? 'selected' : '' ?>>Car</option>
-            <option value="Truck" <?= $vehicle_type_filter === 'Truck' ? 'selected' : '' ?>>Truck</option>
-            <option value="Other" <?= $vehicle_type_filter === 'Other' ? 'selected' : '' ?>>Other</option>
-        </select>
+    <form method="get" action="revenue_report.php" onsubmit="return validateForm()" class="d-flex flex-wrap align-items-center gap-3 mb-3">
+        <div class="form-group">
+            <label for="start_date" class="form-label">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" class="form-control" value="<?php echo htmlspecialchars(date('Y-m-d', strtotime($start_date))); ?>" required />
+        </div>
+        <div class="form-group">
+            <label for="end_date" class="form-label">End Date:</label>
+            <input type="date" id="end_date" name="end_date" class="form-control" value="<?php echo htmlspecialchars(date('Y-m-d', strtotime($end_date))); ?>" required />
+        </div>
+        <div class="form-group">
+            <label for="vehicle_type" class="form-label">Vehicle Type:</label>
+            <select id="vehicle_type" name="vehicle_type" class="form-select">
+                <option value="All" <?= $vehicle_type_filter === 'All' ? 'selected' : '' ?>>All</option>
+                <option value="Motorcycle" <?= $vehicle_type_filter === 'Motorcycle' ? 'selected' : '' ?>>Motorcycle</option>
+                <option value="Bajaj" <?= $vehicle_type_filter === 'Bajaj' ? 'selected' : '' ?>>Bajaj</option>
+                <option value="Car" <?= $vehicle_type_filter === 'Car' ? 'selected' : '' ?>>Car</option>
+                <option value="Truck" <?= $vehicle_type_filter === 'Truck' ? 'selected' : '' ?>>Truck</option>
+                <option value="Other" <?= $vehicle_type_filter === 'Other' ? 'selected' : '' ?>>Other</option>
+            </select>
+        </div>
         <!-- Removed filter button for real-time filtering -->
     </form>
     <p>Total Revenue: <strong id="total_revenue">TZS <?php echo number_format($total_revenue, 2); ?></strong></p>
 
     <h3>Daily Revenue Breakdown</h3>
     <canvas id="revenueChart" width="800" height="400"></canvas>
-    <table id="daily_revenue_table">
-        <thead>
+    <table id="daily_revenue_table" class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
                 <th>Date</th>
                 <th>Revenue (TZS)</th>
@@ -398,8 +406,8 @@ function updatePeakDaysChart(chartDataJson) {
     </table>
 
     <h3>Revenue by Vehicle Type</h3>
-    <table id="revenue_by_type_table">
-        <thead>
+    <table id="revenue_by_type_table" class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
                 <th>Vehicle Type</th>
                 <th>Revenue (TZS)</th>
