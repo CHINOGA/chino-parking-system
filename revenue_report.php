@@ -19,12 +19,12 @@ if (!$start_date || !$end_date) {
     $end_date = $sunday;
 }
 
+// Temporarily remove date filtering to show all data
 $params = [];
-$where = 'pe.entry_time BETWEEN ? AND ?';
-$params = [$start_date . ' 00:00:00', $end_date . ' 23:59:59'];
+$where = '';
 
 if ($vehicle_type_filter && $vehicle_type_filter !== 'All') {
-    $where .= ' AND v.vehicle_type = ?';
+    $where .= ($where ? ' AND ' : '') . 'v.vehicle_type = ?';
     $params[] = $vehicle_type_filter;
 }
 
