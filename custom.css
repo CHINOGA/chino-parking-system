@@ -88,40 +88,6 @@ button {
     display: block;
     margin-bottom: 0.5rem;
   }
-  /* Ensure table container scrolls horizontally */
-  .table-responsive {
-    overflow-x: auto;
-  }
-  table {
-    width: 100%;
-    white-space: nowrap; /* prevent wrapping */
-    border-collapse: collapse;
-  }
-  thead, tbody, tr, th, td {
-    display: table-row;
-  }
-  thead tr {
-    position: sticky;
-    top: 0;
-    background-color: #343a40;
-    color: white;
-  }
-  tbody tr {
-    margin-bottom: 0;
-    border: 1px solid transparent;
-    border-radius: 0;
-    padding: 0;
-  }
-  tbody td {
-    border: 1px solid #dee2e6;
-    padding: 0.5rem;
-    text-align: left;
-    white-space: nowrap; /* prevent wrapping */
-    min-width: 80px;
-  }
-  tbody td::before {
-    content: none;
-  }
 }
 
 /* Mobile styles */
