@@ -73,6 +73,10 @@ button {
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
+  .container {
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
   input[type="text"],
   input[type="date"],
   select,
@@ -89,14 +93,15 @@ button {
     width: 100%;
     white-space: nowrap; /* prevent wrapping */
   }
-  /* Use default table display */
+  /* Ensure table elements keep table layout */
   thead, tbody, tr, th, td {
-    display: table-row;
+    display: table-row !important;
   }
   thead tr {
-    position: static;
-    top: auto;
-    left: auto;
+    position: sticky;
+    top: 0;
+    background-color: #343a40;
+    color: white;
   }
   tbody tr {
     margin-bottom: 0;
