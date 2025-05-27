@@ -33,34 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chino Parking System - Login</title>
-<style>
-body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; }
-.container { max-width: 400px; margin: 50px auto; background: #fff; padding: 20px; border-radius: 5px; }
-h2 { text-align: center; }
-.error { color: red; margin-bottom: 10px; }
-input[type="text"], input[type="password"] {
-    width: 100%; padding: 10px; margin: 5px 0 15px 0; border: 1px solid #ccc; border-radius: 3px;
-}
-button {
-    width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 3px;
-    cursor: pointer;
-}
-button:hover { background: #0056b3; }
-
-/* Responsive styles */
-@media (max-width: 600px) {
-    .container {
-        margin: 10px;
-        padding: 15px;
-        max-width: 100%;
-    }
-    input[type="text"], input[type="password"], button {
-        font-size: 1em;
-        margin-bottom: 10px;
-        width: 100%;
-    }
-}
-</style>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -115,34 +89,36 @@ button:hover { background: #0056b3; }
     }
   });
 </script>
+<style>
+/* Custom styles for login page */
+body {
+  @apply bg-gradient-to-r from-blue-600 to-indigo-700 font-sans text-white m-0;
+}
+.topbar {
+  @apply bg-blue-800 text-white font-bold text-xl text-center py-4 shadow-md sticky top-0 z-50;
+}
+.container {
+  @apply max-w-sm mx-auto mt-20 bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 shadow-lg;
+}
+h2 {
+  @apply text-center text-3xl font-extrabold mb-6;
+}
+.error {
+  @apply text-red-400 mb-4;
+}
+form label {
+  @apply block mb-1 font-semibold;
+}
+input[type="text"],
+input[type="password"] {
+  @apply w-full p-3 rounded-md border border-gray-300 bg-white bg-opacity-90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4;
+}
+button {
+  @apply w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md transition duration-300;
+}
+</style>
 </head>
 <body>
-<style>
-/* Hide logout link on login page */
-.logout-link {
-    display: none !important;
-}
-</style>
-<?php
-// Removed navbar include to remove hamburger menu on login page
-// Instead, add a simple top bar with title without hamburger menu
-?>
-<style>
-.topbar {
-    background-color: #0056b3;
-    color: white;
-    padding: 12px 24px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 700;
-    font-size: 1.4em;
-    letter-spacing: 1px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-</style>
 <div class="topbar">Chino Parking System</div>
 <div class="container">
     <h2>Login</h2>

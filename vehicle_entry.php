@@ -108,6 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chino Parking System - Vehicle Entry</title>
 <link rel="manifest" href="manifest.json" />
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -163,50 +165,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   });
 </script>
 <style>
-body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; }
-.container { max-width: 500px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 5px; }
-h2 { text-align: center; }
-form label { display: block; margin-top: 15px; }
-input[type="text"], select {
-    width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 3px;
+/* Custom styles for form container and elements */
+body {
+  @apply bg-gradient-to-r from-blue-600 to-indigo-700 font-sans text-white m-0;
+}
+.container {
+  @apply max-w-md mx-auto mt-10 bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 shadow-lg;
+}
+h2 {
+  @apply text-center text-2xl font-bold mb-6;
+}
+form label {
+  @apply block mt-4 mb-1 font-semibold;
+}
+input[type="text"],
+select {
+  @apply w-full p-3 rounded-md border border-gray-300 bg-white bg-opacity-90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400;
 }
 button {
-    margin-top: 20px; padding: 10px; width: 100%; background: #28a745; color: white; border: none; border-radius: 3px;
-    cursor: pointer;
+  @apply mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md transition duration-300;
 }
-button:hover { background: #218838; }
-.error { color: red; margin-top: 10px; }
-.success { color: green; margin-top: 10px; }
-.logout-link { text-align: right; margin-bottom: 10px; }
-
-/* Responsive styles */
-@media (max-width: 600px) {
-    .container {
-        margin: 10px;
-        padding: 15px;
-        max-width: 100%;
-    }
-    input[type="text"], select, button {
-        font-size: 1em;
-    }
+.error {
+  @apply text-red-400 mt-4;
+}
+.success {
+  @apply text-green-400 mt-4;
 }
 .install-btn {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    z-index: 10000;
-}
-.install-btn:hover {
-    background-color: #0056b3;
+  @apply hidden fixed bottom-5 right-5 bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 py-3 text-lg shadow-lg z-50;
 }
 </style>
 <script>
