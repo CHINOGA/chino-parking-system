@@ -253,6 +253,8 @@ async function fetchReport() {
     const response = await fetch(url);
     const data = await response.json();
 
+    console.log('API response data:', data); // Debug log for API response
+
     // Show alerts for vehicles parked longer than threshold (e.g., 120 minutes)
     const alertsDiv = document.getElementById('alerts');
     const longParkedVehicles = data.parked.filter(v => {
