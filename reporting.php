@@ -156,26 +156,26 @@ if (isset($_GET['action']) && ($_GET['action'] === 'filter' || $_GET['action'] =
   }
 </script>
 <style>
-/* Custom styles for reporting page */
+/* Revised styles for reporting page */
 body {
-  @apply bg-gradient-to-r from-blue-600 to-indigo-700 font-sans text-white m-0;
+  @apply bg-gray-50 font-sans text-gray-900 m-0;
 }
 .container {
-  @apply max-w-5xl mx-auto mt-10 bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 shadow-lg;
+  @apply max-w-5xl mx-auto mt-10 bg-white rounded-lg p-8 shadow-md;
 }
 h2 {
-  @apply text-center text-3xl font-extrabold mb-6;
+  @apply text-center text-3xl font-extrabold mb-6 text-gray-800;
 }
 form label {
-  @apply mr-4 font-semibold;
+  @apply mr-4 font-semibold text-gray-700;
 }
 input[type="text"],
 input[type="date"],
 select {
-  @apply p-2 rounded-md border border-gray-300 bg-white bg-opacity-90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4;
+  @apply p-2 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4;
 }
 button {
-  @apply px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-300;
+  @apply px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300;
 }
 table {
   @apply w-full border-collapse mt-6 table-fixed;
@@ -188,7 +188,7 @@ th {
   @apply bg-gray-100 text-gray-700;
 }
 .exit-btn {
-  @apply bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-3 rounded-md cursor-pointer transition duration-300;
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded-md cursor-pointer transition duration-300;
 }
 
 /* Responsive styles */
