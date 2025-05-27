@@ -147,8 +147,8 @@ if (isset($_GET['action']) && ($_GET['action'] === 'filter' || $_GET['action'] =
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chino Parking System - Reporting Dashboard</title>
 <link rel="manifest" href="manifest.json" />
-<!-- Bootstrap 5 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Tailwind CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
 <!-- Custom CSS -->
 <link href="custom.css" rel="stylesheet" />
 <script>
