@@ -88,14 +88,17 @@ button {
     display: block;
     margin-bottom: 0.5rem;
   }
-  table {
+  /* Ensure table container scrolls horizontally */
+  .table-responsive {
     overflow-x: auto;
+  }
+  table {
     width: 100%;
     white-space: nowrap; /* prevent wrapping */
+    border-collapse: collapse;
   }
-  /* Ensure table elements keep table layout */
   thead, tbody, tr, th, td {
-    display: table-row !important;
+    display: table-row;
   }
   thead tr {
     position: sticky;
@@ -111,12 +114,10 @@ button {
   }
   tbody td {
     border: 1px solid #dee2e6;
-    position: static;
     padding: 0.5rem;
     text-align: left;
-    word-break: normal; /* prevent breaking */
-    min-width: 80px;
     white-space: nowrap; /* prevent wrapping */
+    min-width: 80px;
   }
   tbody td::before {
     content: none;
