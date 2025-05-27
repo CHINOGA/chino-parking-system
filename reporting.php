@@ -31,10 +31,13 @@ if (isset($_GET['action']) && ($_GET['action'] === 'filter' || $_GET['action'] =
     $params = [];
     $where = '';
 
-    if ($start_date && $end_date) {
-        $where = 'pe.entry_time BETWEEN ? AND ?';
-        $params = [$start_date . ' 00:00:00', $end_date . ' 23:59:59'];
-    }
+    // Temporarily remove date filtering to show all data
+    // if ($start_date && $end_date) {
+    //     $where = 'pe.entry_time BETWEEN ? AND ?';
+    //     $params = [$start_date . ' 00:00:00', $end_date . ' 23:59:59'];
+    // }
+    $where = '';
+    $params = [];
 
     if ($vehicle_type_filter && $vehicle_type_filter !== 'All') {
         $where .= ($where ? ' AND ' : '') . 'v.vehicle_type = ?';
