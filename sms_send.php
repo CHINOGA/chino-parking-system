@@ -160,17 +160,17 @@ body {
   @apply bg-gray-50 font-sans text-gray-900 m-0;
 }
 .container {
-  @apply max-w-lg mx-auto mt-10 bg-white rounded-lg p-8 shadow-md;
+  @apply max-w-lg mx-auto mt-10 bg-white rounded-lg p-10 shadow-md;
 }
 h2 {
-  @apply text-center text-3xl font-extrabold mb-6 text-gray-800;
+  @apply text-center text-3xl font-extrabold mb-8 text-gray-800;
 }
 label {
-  @apply block mt-4 font-semibold text-gray-700;
+  @apply block mt-6 font-semibold text-gray-700;
 }
 input[type="text"],
 textarea {
-  @apply w-full p-2 mt-1 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400;
+  @apply w-full p-3 mt-2 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400;
   box-sizing: border-box;
   outline: none;
 }
@@ -179,21 +179,21 @@ textarea:focus {
   @apply border-blue-400 ring-2;
 }
 button {
-  @apply mt-6 w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300;
+  @apply mt-8 w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300;
   border: none;
   cursor: pointer;
 }
 .error {
-  @apply text-red-600 mt-3;
+  @apply text-red-600 mt-4;
 }
 .success {
-  @apply text-green-600 mt-3;
+  @apply text-green-600 mt-4;
 }
 #mobile_checkbox_container {
-  @apply border border-gray-300 rounded-md p-4 max-h-72 overflow-y-auto bg-white text-gray-900;
+  @apply border border-gray-300 rounded-md p-6 max-h-72 overflow-y-auto bg-white text-gray-900;
 }
 #selected_count_display {
-  @apply font-bold mt-2 text-gray-900;
+  @apply font-bold mt-4 text-gray-900;
 }
 </style>
 </head>

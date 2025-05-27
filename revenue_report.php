@@ -153,21 +153,21 @@ body {
   @apply bg-gray-50 font-sans text-gray-900 m-0;
 }
 .container {
-  @apply max-w-5xl mx-auto mt-10 bg-white rounded-lg p-8 shadow-md;
+  @apply max-w-5xl mx-auto mt-10 bg-white rounded-lg p-10 shadow-md;
 }
 h2 {
-  @apply text-center text-3xl font-extrabold mb-6 text-gray-800;
+  @apply text-center text-3xl font-extrabold mb-8 text-gray-800;
 }
 form label {
-  @apply mr-4 font-semibold text-gray-700;
+  @apply mr-6 font-semibold text-gray-700;
 }
 input[type="text"],
 input[type="date"],
 select {
-  @apply p-2 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4;
+  @apply p-3 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-6;
 }
 button {
-  @apply px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300;
+  @apply px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300;
 }
 table {
   @apply w-full border-collapse mt-6;
