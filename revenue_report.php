@@ -28,38 +28,37 @@ if ($vehicle_type_filter && $vehicle_type_filter !== 'All') {
     $params[] = $vehicle_type_filter;
 }
 
-// Fetch total revenue
+$whereClause = $where ? "WHERE $where" : "";
+
 $stmt = $pdo->prepare("
     SELECT SUM(r.amount) AS total_revenue
     FROM revenue r
     JOIN parking_entries pe ON r.parking_entry_id = pe.id
     JOIN vehicles v ON pe.vehicle_id = v.id
-    WHERE $where
+    $whereClause
 ");
 $stmt->execute($params);
 $revenue = $stmt->fetch(PDO::FETCH_ASSOC);
 $total_revenue = $revenue['total_revenue'] ?? 0;
 
-// Fetch daily revenue breakdown
 $stmt = $pdo->prepare("
     SELECT DATE(pe.entry_time) AS date, SUM(r.amount) AS daily_revenue, COUNT(*) AS transactions
     FROM revenue r
     JOIN parking_entries pe ON r.parking_entry_id = pe.id
     JOIN vehicles v ON pe.vehicle_id = v.id
-    WHERE $where
+    $whereClause
     GROUP BY DATE(pe.entry_time)
     ORDER BY DATE(pe.entry_time) ASC
 ");
 $stmt->execute($params);
 $daily_revenue_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch revenue by vehicle type
 $stmt = $pdo->prepare("
     SELECT v.vehicle_type, SUM(r.amount) AS revenue
     FROM revenue r
     JOIN parking_entries pe ON r.parking_entry_id = pe.id
     JOIN vehicles v ON pe.vehicle_id = v.id
-    WHERE $where
+    $whereClause
     GROUP BY v.vehicle_type
 ");
 $stmt->execute($params);
