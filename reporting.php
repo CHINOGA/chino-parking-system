@@ -587,6 +587,7 @@ window.addEventListener('DOMContentLoaded', () => {
     <h3>Parked Vehicles <span id="parked_count"></span></h3>
     <button id="exit_all_btn" class="btn btn-primary mb-3">Exit All</button>
     <input type="text" id="search_parked" placeholder="Search parked vehicles..." class="form-control mb-3" style="max-width: 400px;" />
+    <div class="table-responsive">
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
@@ -600,9 +601,11 @@ window.addEventListener('DOMContentLoaded', () => {
         </thead>
         <tbody id="parked_tbody"></tbody>
     </table>
+    </div>
 
     <h3>Exited Vehicles</h3>
     <input type="text" id="search_exited" placeholder="Search exited vehicles..." class="form-control mb-3" style="max-width: 400px;" />
+    <div class="table-responsive">
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
@@ -616,6 +619,7 @@ window.addEventListener('DOMContentLoaded', () => {
         </thead>
         <tbody id="exited_tbody"></tbody>
     </table>
+    </div>
 </div>
 </body>
 </html>
