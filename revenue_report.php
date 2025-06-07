@@ -179,6 +179,80 @@ $chart_data = array_map(fn($d) => (float)$d['daily_revenue'], $daily_revenue_dat
 
 $peak_labels = array_map(fn($d) => $d['day_of_week'], $peak_days_data);
 $peak_counts = array_map(fn($d) => (int)$d['vehicle_count'], $peak_days_data);
+
+// Fetch weekly revenue and transactions grouped by year and week number
+$weeklyStmt = $pdo->prepare("
+    SELECT YEAR(pe.entry_time) AS year, WEEK(pe.entry_time, 1) AS week, 
+           SUM(r.amount) AS weekly_revenue, COUNT(*) AS transactions
+    FROM revenue r
+    JOIN parking_entries pe ON r.parking_entry_id = pe.id
+    JOIN vehicles v ON pe.vehicle_id = v.id
+    $whereClause
+    GROUP BY year, week
+    ORDER BY year DESC, week DESC
+    LIMIT 12
+");
+$weeklyStmt->execute($params);
+$weekly_data_raw = $weeklyStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Prepare weekly data for chart and table
+$weekly_labels = [];
+$weekly_revenue = [];
+$weekly_transactions = [];
+foreach (array_reverse($weekly_data_raw) as $week) {
+    $weekly_labels[] = "Week {$week['week']}, {$week['year']}";
+    $weekly_revenue[] = (float)$week['weekly_revenue'];
+    $weekly_transactions[] = (int)$week['transactions'];
+}
+
+// Fetch monthly revenue and transactions grouped by year and month
+// For monthly report, show months January to December for the year of start_date or current year
+$report_year = $start_date ? (int)date('Y', strtotime($start_date)) : (int)date('Y');
+
+$monthlyStmt = $pdo->prepare("
+    SELECT MONTH(pe.entry_time) AS month, 
+           SUM(r.amount) AS monthly_revenue, COUNT(*) AS transactions
+    FROM revenue r
+    JOIN parking_entries pe ON r.parking_entry_id = pe.id
+    JOIN vehicles v ON pe.vehicle_id = v.id
+    WHERE YEAR(pe.entry_time) = ?
+    " . ($vehicle_type_filter && $vehicle_type_filter !== 'All' ? "AND v.vehicle_type = ?" : "") . "
+    GROUP BY month
+    ORDER BY month ASC
+");
+$monthlyParams = [$report_year];
+if ($vehicle_type_filter && $vehicle_type_filter !== 'All') {
+    $monthlyParams[] = $vehicle_type_filter;
+}
+$monthlyStmt->execute($monthlyParams);
+$monthly_data_raw = $monthlyStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Prepare monthly data for chart and table
+$month_names = [
+    1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April',
+    5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August',
+    9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'
+];
+$monthly_labels = [];
+$monthly_revenue = [];
+$monthly_transactions = [];
+// Initialize all months with zero
+for ($m = 1; $m <= 12; $m++) {
+    $monthly_labels[$m] = $month_names[$m];
+    $monthly_revenue[$m] = 0;
+    $monthly_transactions[$m] = 0;
+}
+// Fill in actual data
+foreach ($monthly_data_raw as $monthData) {
+    $m = (int)$monthData['month'];
+    $monthly_revenue[$m] = (float)$monthData['monthly_revenue'];
+    $monthly_transactions[$m] = (int)$monthData['transactions'];
+}
+// Re-index arrays to zero-based for charts
+$monthly_labels = array_values($monthly_labels);
+$monthly_revenue = array_values($monthly_revenue);
+$monthly_transactions = array_values($monthly_transactions);
+
 ?>
 
 <!DOCTYPE html>
@@ -563,6 +637,50 @@ function updatePeakDaysChart(chartDataJson) {
     <div id="first_time_chart_data" style="display:none;">
         <?php echo json_encode(['labels' => $first_time_labels, 'data' => $first_time_counts]); ?>
     </div>
+
+    <!-- Weekly Revenue Report Section -->
+    <h3>Weekly Revenue Report (Last 12 Weeks)</h3>
+    <canvas id="weeklyRevenueChart" width="800" height="400"></canvas>
+    <table id="weekly_revenue_table" class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Week</th>
+                <th>Revenue (TZS)</th>
+                <th>Transactions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($weekly_labels as $index => $label): ?>
+            <tr>
+                <td><?= htmlspecialchars($label) ?></td>
+                <td><?= number_format($weekly_revenue[$index], 2) ?></td>
+                <td><?= htmlspecialchars($weekly_transactions[$index]) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <!-- Monthly Revenue Report Section -->
+    <h3>Monthly Revenue Report (Year <?= htmlspecialchars($report_year) ?>)</h3>
+    <canvas id="monthlyRevenueChart" width="800" height="400"></canvas>
+    <table id="monthly_revenue_table" class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Month</th>
+                <th>Revenue (TZS)</th>
+                <th>Transactions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($monthly_labels as $index => $month): ?>
+            <tr>
+                <td><?= htmlspecialchars($month) ?></td>
+                <td><?= number_format($monthly_revenue[$index], 2) ?></td>
+                <td><?= htmlspecialchars($monthly_transactions[$index]) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 <script>
 function updateFirstTimeVehiclesChart(chartDataJson) {
@@ -597,14 +715,100 @@ function updateFirstTimeVehiclesChart(chartDataJson) {
     });
 }
 
+function updateWeeklyRevenueChart(chartDataJson) {
+    const chartData = JSON.parse(chartDataJson);
+    const ctx = document.getElementById('weeklyRevenueChart').getContext('2d');
+
+    if (window.weeklyRevenueChartInstance) {
+        window.weeklyRevenueChartInstance.destroy();
+    }
+
+    window.weeklyRevenueChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Weekly Revenue (TZS)',
+                data: chartData.data,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                fill: false,
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Week'
+                    }
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Revenue (TZS)'
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function updateMonthlyRevenueChart(chartDataJson) {
+    const chartData = JSON.parse(chartDataJson);
+    const ctx = document.getElementById('monthlyRevenueChart').getContext('2d');
+
+    if (window.monthlyRevenueChartInstance) {
+        window.monthlyRevenueChartInstance.destroy();
+    }
+
+    window.monthlyRevenueChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Monthly Revenue (TZS)',
+                data: chartData.data,
+                backgroundColor: 'rgba(255, 206, 86, 0.7)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0
+                }
+            }
+        }
+    });
+}
+
 const originalFetchRevenueReport = fetchRevenueReport;
 fetchRevenueReport = async function() {
     await originalFetchRevenueReport();
 
     const firstTimeChartData = document.getElementById('first_time_chart_data').textContent;
     updateFirstTimeVehiclesChart(firstTimeChartData);
+
+    const weeklyChartData = JSON.stringify({
+        labels: <?php echo json_encode($weekly_labels); ?>,
+        data: <?php echo json_encode($weekly_revenue); ?>
+    });
+    updateWeeklyRevenueChart(weeklyChartData);
+
+    const monthlyChartData = JSON.stringify({
+        labels: <?php echo json_encode($monthly_labels); ?>,
+        data: <?php echo json_encode($monthly_revenue); ?>
+    });
+    updateMonthlyRevenueChart(monthlyChartData);
 };
-</script>
 </script>
 </body>
 </html>
