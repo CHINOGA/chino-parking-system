@@ -16,9 +16,9 @@ $smsService = new SmsService();
 $error = '';
 $success = '';
 
-// Fetch distinct phone numbers and driver names from vehicles table
 try {
-    $stmt = $pdo->query("SELECT DISTINCT phone_number, driver_name FROM vehicles WHERE phone_number IS NOT NULL AND phone_number != '' ORDER BY driver_name ASC");
+    // Fetch unique phone numbers with one driver name per phone number
+    $stmt = $pdo->query("SELECT phone_number, MIN(driver_name) AS driver_name FROM vehicles WHERE phone_number IS NOT NULL AND phone_number != '' GROUP BY phone_number ORDER BY driver_name ASC");
     $drivers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $error = 'Database error: ' . $e->getMessage();
