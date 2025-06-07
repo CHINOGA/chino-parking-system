@@ -489,9 +489,9 @@ function updatePeakDaysChart(chartDataJson) {
         </tbody>
     </table>
 +    <div class="d-flex justify-content-between align-items-center mt-3">
-+        <button class="btn btn-primary" id="prevPageBtn" <?= $page <= 1 ? 'disabled' : '' ?>>Previous</button>
++        <button class="btn btn-primary" id="prevPageBtn">Previous</button>
 +        <span>Page <?= $page ?> of <?= $total_pages ?></span>
-+        <button class="btn btn-primary" id="nextPageBtn" <?= $page >= $total_pages ? 'disabled' : '' ?>>Next</button>
++        <button class="btn btn-primary" id="nextPageBtn">Next</button>
 +    </div>
 
     <h3>Revenue by Vehicle Type</h3>
