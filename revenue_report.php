@@ -17,8 +17,10 @@ $page_size = 7; // Show 7 days per page (a week)
 if (!$start_date || !$end_date) {
     $monday = date('Y-m-d', strtotime('monday this week'));
     $sunday = date('Y-m-d', strtotime('sunday this week'));
+    $today = date('Y-m-d');
     $start_date = $monday;
-    $end_date = $sunday;
+    // Set end_date to min(sunday this week, today)
+    $end_date = ($sunday > $today) ? $today : $sunday;
 }
 
 // Temporarily remove date filtering to show all data
@@ -31,6 +33,17 @@ if ($vehicle_type_filter && $vehicle_type_filter !== 'All') {
 }
 
 $whereClause = $where ? "WHERE $where" : "";
+
+// Add date range filter to WHERE clause
+$dateFilter = "pe.entry_time BETWEEN ? AND ?";
+$params[] = $start_date . ' 00:00:00';
+$params[] = $end_date . ' 23:59:59';
+
+if ($whereClause) {
+    $whereClause .= " AND $dateFilter";
+} else {
+    $whereClause = "WHERE $dateFilter";
+}
 
 // Get total count of distinct dates for pagination
 $countStmt = $pdo->prepare("
@@ -158,55 +171,102 @@ $peak_counts = array_map(fn($d) => (int)$d['vehicle_count'], $peak_days_data);
 <style>
 /* Revised styles for revenue report page */
 body {
-  @apply bg-gray-50 font-sans text-gray-900 m-0;
+  background-color: #f9fafb; /* bg-gray-50 */
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; /* font-sans */
+  color: #111827; /* text-gray-900 */
+  margin: 0; /* m-0 */
 }
 .container {
-  @apply max-w-5xl mx-auto mt-10 bg-white rounded-lg p-10 shadow-md;
+  max-width: 64rem; /* max-w-5xl */
+  margin-left: auto;
+  margin-right: auto; /* mx-auto */
+  margin-top: 2.5rem; /* mt-10 */
+  background: #fff; /* bg-white */
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 2.5rem; /* p-10 */
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08); /* shadow-md */
 }
 h2 {
-  @apply text-center text-3xl font-extrabold mb-8 text-gray-800;
+  text-align: center;
+  font-size: 1.875rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: #1f2937;
 }
 form label {
-  @apply mr-6 font-semibold text-gray-700;
+  margin-right: 1.5rem;
+  font-weight: 600;
+  color: #374151;
 }
 input[type="text"],
 input[type="date"],
 select {
-  @apply p-3 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-6;
+  padding: 0.75rem; /* p-3 */
+  border-radius: 0.375rem; /* rounded-md */
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  background: #fff; /* bg-white */
+  color: #111827; /* text-gray-900 */
+  margin-bottom: 1.5rem; /* mb-6 */
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+  box-shadow: 0 0 0 2px #60a5fa; /* focus:ring-2 focus:ring-blue-400 */
 }
 button {
-  @apply px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300;
+  padding: 0.75rem 1.5rem; /* px-6 py-3 */
+  background: #2563eb; /* bg-blue-600 */
+  color: #fff; /* text-white */
+  font-weight: 600; /* font-semibold */
+  border-radius: 0.375rem; /* rounded-md */
+  border: none;
+  transition: background 0.3s;
+}
+button:hover {
+  background: #1d4ed8; /* hover:bg-blue-700 */
 }
 table {
-  @apply w-full border-collapse mt-6;
+  width: 100%; /* w-full */
+  border-collapse: collapse;
+  margin-top: 1.5rem; /* mt-6 */
 }
 th,
 td {
-  @apply border border-gray-300 px-4 py-2 text-left;
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  padding: 1rem; /* px-4 py-2 */
+  text-align: left;
 }
 th {
-  @apply bg-gray-100 text-gray-700;
+  background: #f3f4f6; /* bg-gray-100 */
+  color: #374151; /* text-gray-700 */
 }
 .summary {
-  @apply mt-5 font-bold;
+  margin-top: 1.25rem; /* mt-5 */
+  font-weight: bold;
 }
 .export-btn {
-  @apply mt-2;
+  margin-top: 0.5rem; /* mt-2 */
 }
 
 /* Responsive styles */
 @media (max-width: 600px) {
   .container {
-    @apply mx-4 p-4;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1rem;
   }
   input[type="text"],
   input[type="date"],
   button,
   select {
-    @apply w-full mb-4;
+    width: 100%;
+    margin-bottom: 1rem;
   }
   label {
-    @apply block mb-1;
+    display: block;
+    margin-bottom: 0.25rem;
   }
 }
 </style>
