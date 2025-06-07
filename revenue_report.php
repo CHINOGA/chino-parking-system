@@ -575,22 +575,31 @@ fetchRevenueReport = async function() {
 };
 </script>
 <script>
-document.getElementById('prevPageBtn').addEventListener('click', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    let currentPage = parseInt(urlParams.get('page') || '1');
-    if (currentPage > 1) {
-        urlParams.set('page', currentPage - 1);
-        window.location.search = urlParams.toString();
-    }
-});
+window.addEventListener('DOMContentLoaded', () => {
+    const prevBtn = document.getElementById('prevPageBtn');
+    const nextBtn = document.getElementById('nextPageBtn');
 
-document.getElementById('nextPageBtn').addEventListener('click', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    let currentPage = parseInt(urlParams.get('page') || '1');
-    const totalPages = <?= $total_pages ?>;
-    if (currentPage < totalPages) {
-        urlParams.set('page', currentPage + 1);
-        window.location.search = urlParams.toString();
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let currentPage = parseInt(urlParams.get('page') || '1');
+            if (currentPage > 1) {
+                urlParams.set('page', currentPage - 1);
+                window.location.search = urlParams.toString();
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let currentPage = parseInt(urlParams.get('page') || '1');
+            const totalPages = <?= $total_pages ?>;
+            if (currentPage < totalPages) {
+                urlParams.set('page', currentPage + 1);
+                window.location.search = urlParams.toString();
+            }
+        });
     }
 });
 </script>
