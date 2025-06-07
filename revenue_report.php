@@ -78,7 +78,32 @@ $stmt = $pdo->prepare("
     LIMIT $page_size OFFSET $offset
 ");
 $stmt->execute($params);
-$daily_revenue_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$raw_daily_revenue_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Generate full 7-day date range array
+$period = new DatePeriod(
+    new DateTime($start_date),
+    new DateInterval('P1D'),
+    (new DateTime($end_date))->modify('+1 day')
+);
+
+$daily_revenue_data = [];
+foreach ($period as $date) {
+    $date_str = $date->format('Y-m-d');
+    $daily_revenue_data[$date_str] = [
+        'date' => $date_str,
+        'daily_revenue' => 0,
+        'transactions' => 0,
+    ];
+}
+
+// Fill in actual data from query results
+foreach ($raw_daily_revenue_data as $row) {
+    $daily_revenue_data[$row['date']] = $row;
+}
+
+// Re-index array to be zero-based and ordered by date ascending
+$daily_revenue_data = array_values($daily_revenue_data);
 
 
 
