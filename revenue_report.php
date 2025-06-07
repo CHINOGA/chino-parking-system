@@ -319,8 +319,25 @@ function exportTableToCSV(filename) {
 window.addEventListener('DOMContentLoaded', () => {
     fetchRevenueReport();
 
-    document.getElementById('start_date').addEventListener('change', fetchRevenueReport);
-    document.getElementById('end_date').addEventListener('change', fetchRevenueReport);
+    const startDateInput = document.getElementById('start_date');
+    const endDateInput = document.getElementById('end_date');
+
+    // When start date changes, update end date to start_date + 6 days
+    startDateInput.addEventListener('change', () => {
+        const startDate = new Date(startDateInput.value);
+        if (!isNaN(startDate)) {
+            const endDate = new Date(startDate);
+            endDate.setDate(endDate.getDate() + 6);
+            const yyyy = endDate.getFullYear();
+            const mm = String(endDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(endDate.getDate()).padStart(2, '0');
+            endDateInput.value = `${yyyy}-${mm}-${dd}`;
+            fetchRevenueReport();
+        }
+    });
+
+    // Since end date is readonly, no need to add event listener for it
+
     document.getElementById('vehicle_type').addEventListener('change', fetchRevenueReport);
 });
 
@@ -434,7 +451,7 @@ function updatePeakDaysChart(chartDataJson) {
         </div>
         <div class="form-group">
             <label for="end_date" class="form-label">End Date:</label>
-            <input type="date" id="end_date" name="end_date" class="form-control" value="<?php echo htmlspecialchars(date('Y-m-d', strtotime($end_date))); ?>" required />
+            <input type="date" id="end_date" name="end_date" class="form-control" value="<?php echo htmlspecialchars(date('Y-m-d', strtotime($end_date))); ?>" required readonly />
         </div>
         <div class="form-group">
             <label for="vehicle_type" class="form-label">Vehicle Type:</label>
