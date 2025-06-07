@@ -45,7 +45,8 @@ $whereClause = $where ? "WHERE $where" : "";
 // Add date range filter to WHERE clause
 $dateFilter = "pe.entry_time BETWEEN ? AND ?";
 $params[] = $start_date . ' 00:00:00';
-$params[] = $end_date . ' 23:59:59';
+$adjusted_end_date = date('Y-m-d', strtotime($end_date . ' -1 day'));
+$params[] = $adjusted_end_date . ' 23:59:59';
 
 if ($whereClause) {
     $whereClause .= " AND $dateFilter";
@@ -84,7 +85,7 @@ $raw_daily_revenue_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $period = new DatePeriod(
     new DateTime($start_date),
     new DateInterval('P1D'),
-    (new DateTime($end_date))->modify('+1 day')
+    (new DateTime($adjusted_end_date))->modify('+1 day')
 );
 
 $daily_revenue_data = [];
