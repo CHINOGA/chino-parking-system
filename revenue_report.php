@@ -130,7 +130,10 @@ foreach ($daily_revenue_data as $day) {
 }
 $total_transactions = array_sum(array_column($daily_revenue_data, 'transactions'));
 
-// Fetch peak days of week data (Monday to Sunday order)
+$week_start = date('Y-m-d', strtotime('monday this week'));
+$week_end = date('Y-m-d', strtotime('sunday this week'));
+
+// Fetch peak days of week data for current week (Monday to Sunday order)
 $stmt = $pdo->prepare("
     SELECT DAYNAME(pe.entry_time) AS day_of_week, COUNT(*) AS vehicle_count
     FROM parking_entries pe
@@ -139,7 +142,7 @@ $stmt = $pdo->prepare("
     GROUP BY DAYOFWEEK(pe.entry_time)
     ORDER BY FIELD(DAYNAME(pe.entry_time), 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
 ");
-$stmt->execute([$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
+$stmt->execute([$week_start . ' 00:00:00', $week_end . ' 23:59:59']);
 $peak_days_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch first-time parked vehicles count by date
