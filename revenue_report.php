@@ -488,11 +488,6 @@ function updatePeakDaysChart(chartDataJson) {
             <?php endforeach; ?>
         </tbody>
     </table>
-+    <div class="d-flex justify-content-between align-items-center mt-3">
-+        <button class="btn btn-primary" id="prevPageBtn">Previous</button>
-+        <span>Page <?= $page ?> of <?= $total_pages ?></span>
-+        <button class="btn btn-primary" id="nextPageBtn">Next</button>
-+    </div>
 
     <h3>Revenue by Vehicle Type</h3>
     <table id="revenue_by_type_table" class="table table-striped table-bordered">
@@ -574,34 +569,6 @@ fetchRevenueReport = async function() {
     updateFirstTimeVehiclesChart(firstTimeChartData);
 };
 </script>
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-    const prevBtn = document.getElementById('prevPageBtn');
-    const nextBtn = document.getElementById('nextPageBtn');
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            let currentPage = parseInt(urlParams.get('page') || '1');
-            if (currentPage > 1) {
-                urlParams.set('page', currentPage - 1);
-                window.location.search = urlParams.toString();
-            }
-        });
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            let currentPage = parseInt(urlParams.get('page') || '1');
-            const totalPages = <?= $total_pages ?>;
-            if (currentPage < totalPages) {
-                urlParams.set('page', currentPage + 1);
-                window.location.search = urlParams.toString();
-            }
-        });
-    }
-});
 </script>
 </body>
 </html>
