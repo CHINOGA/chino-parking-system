@@ -14,9 +14,9 @@ $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $page_size = 7; // Show 7 days per page (a week)
 
 if (!$start_date && !$end_date) {
-    // If no dates provided, set start_date to today and end_date to 6 days after start_date (7 days total)
-    $start_date = date('Y-m-d');
-    $end_date = date('Y-m-d', strtotime($start_date . ' +6 days'));
+    // If no dates provided, set end_date to tomorrow and start_date to 6 days before end_date (7 days total)
+    $end_date = date('Y-m-d', strtotime('tomorrow'));
+    $start_date = date('Y-m-d', strtotime($end_date . ' -6 days'));
 } elseif ($start_date && !$end_date) {
     // If start_date provided but no end_date, set end_date to 6 days after start_date
     $end_date = date('Y-m-d', strtotime($start_date . ' +6 days'));
