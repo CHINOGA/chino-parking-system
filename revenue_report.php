@@ -10,6 +10,8 @@ require_once 'config.php';
 $start_date = $_GET['start_date'] ?? '';
 $end_date = $_GET['end_date'] ?? '';
 $vehicle_type_filter = $_GET['vehicle_type'] ?? '';
+$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+$page_size = 7; // Show 7 days per page (a week)
 
 // Set default date range to current week (Monday to Sunday) if not provided
 if (!$start_date || !$end_date) {
@@ -30,16 +32,19 @@ if ($vehicle_type_filter && $vehicle_type_filter !== 'All') {
 
 $whereClause = $where ? "WHERE $where" : "";
 
-$stmt = $pdo->prepare("
-    SELECT SUM(r.amount) AS total_revenue
+// Get total count of distinct dates for pagination
+$countStmt = $pdo->prepare("
+    SELECT COUNT(DISTINCT DATE(pe.entry_time)) AS total_days
     FROM revenue r
     JOIN parking_entries pe ON r.parking_entry_id = pe.id
     JOIN vehicles v ON pe.vehicle_id = v.id
     $whereClause
 ");
-$stmt->execute($params);
-$revenue = $stmt->fetch(PDO::FETCH_ASSOC);
-$total_revenue = $revenue['total_revenue'] ?? 0;
+$countStmt->execute($params);
+$total_days = (int)$countStmt->fetchColumn();
+$total_pages = (int)ceil($total_days / $page_size);
+
+$offset = ($page - 1) * $page_size;
 
 $stmt = $pdo->prepare("
     SELECT DATE(pe.entry_time) AS date, SUM(r.amount) AS daily_revenue, COUNT(*) AS transactions
@@ -49,9 +54,12 @@ $stmt = $pdo->prepare("
     $whereClause
     GROUP BY DATE(pe.entry_time)
     ORDER BY DATE(pe.entry_time) ASC
+    LIMIT $page_size OFFSET $offset
 ");
 $stmt->execute($params);
 $daily_revenue_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 $stmt = $pdo->prepare("
     SELECT v.vehicle_type, SUM(r.amount) AS revenue
@@ -65,7 +73,6 @@ $stmt->execute($params);
 $revenue_by_type = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Calculate summary statistics
-$total_days = count($daily_revenue_data);
 $average_daily_revenue = $total_days > 0 ? array_sum(array_column($daily_revenue_data, 'daily_revenue')) / $total_days : 0;
 $highest_revenue_day = null;
 $highest_revenue_amount = 0;
@@ -109,11 +116,11 @@ $stmt = $pdo->prepare("
     )
     GROUP BY DATE(pe.entry_time)
     ORDER BY DATE(pe.entry_time) ASC
+    LIMIT $page_size OFFSET $offset
 ");
 $stmt->execute(array_merge($first_time_params, [$start_date . ' 00:00:00']));
 $first_time_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Prepare first-time vehicles chart data
 $first_time_labels = array_map(fn($d) => $d['date'], $first_time_data);
 $first_time_counts = array_map(fn($d) => (int)$d['first_time_count'], $first_time_data);
 
@@ -404,6 +411,11 @@ function updatePeakDaysChart(chartDataJson) {
             <?php endforeach; ?>
         </tbody>
     </table>
++    <div class="d-flex justify-content-between align-items-center mt-3">
++        <button class="btn btn-primary" id="prevPageBtn" <?= $page <= 1 ? 'disabled' : '' ?>>Previous</button>
++        <span>Page <?= $page ?> of <?= $total_pages ?></span>
++        <button class="btn btn-primary" id="nextPageBtn" <?= $page >= $total_pages ? 'disabled' : '' ?>>Next</button>
++    </div>
 
     <h3>Revenue by Vehicle Type</h3>
     <table id="revenue_by_type_table" class="table table-striped table-bordered">
@@ -484,6 +496,26 @@ fetchRevenueReport = async function() {
     const firstTimeChartData = document.getElementById('first_time_chart_data').textContent;
     updateFirstTimeVehiclesChart(firstTimeChartData);
 };
+</script>
+<script>
+document.getElementById('prevPageBtn').addEventListener('click', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentPage = parseInt(urlParams.get('page') || '1');
+    if (currentPage > 1) {
+        urlParams.set('page', currentPage - 1);
+        window.location.search = urlParams.toString();
+    }
+});
+
+document.getElementById('nextPageBtn').addEventListener('click', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentPage = parseInt(urlParams.get('page') || '1');
+    const totalPages = <?= $total_pages ?>;
+    if (currentPage < totalPages) {
+        urlParams.set('page', currentPage + 1);
+        window.location.search = urlParams.toString();
+    }
+});
 </script>
 </body>
 </html>
