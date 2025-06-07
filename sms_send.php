@@ -39,6 +39,19 @@ function cleanPhoneNumber($number) {
     return $number;
 }
 
+// Normalize phone number to standard 0XXXXXXXXX format for duplicate removal
+function normalizePhoneNumber($number) {
+    $number = preg_replace('/\D/', '', $number);
+    if (strpos($number, '255') === 0) {
+        // Convert from international format to local format
+        $number = '0' . substr($number, 3);
+    }
+    if (substr($number, 0, 1) !== '0') {
+        $number = '0' . $number;
+    }
+    return $number;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['verify_otp'])) {
         // Verify OTP
@@ -75,8 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (is_array($selected_numbers)) {
                 foreach ($selected_numbers as $num) {
                     $clean_num = cleanPhoneNumber(trim($num));
-                    if (preg_match('/^0\d{9}$/', $clean_num)) {
-                        $recipients[] = $clean_num;
+                    $normalized_num = normalizePhoneNumber($clean_num);
+                    if (preg_match('/^0\d{9}$/', $normalized_num)) {
+                        $recipients[] = $normalized_num;
                     }
                 }
             }
@@ -84,8 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Clean, validate and add new number if provided
             if ($new_number !== '') {
                 $clean_new_number = cleanPhoneNumber($new_number);
-                if (preg_match('/^0\d{9}$/', $clean_new_number)) {
-                    $recipients[] = $clean_new_number;
+                $normalized_new_number = normalizePhoneNumber($clean_new_number);
+                if (preg_match('/^0\d{9}$/', $normalized_new_number)) {
+                    $recipients[] = $normalized_new_number;
                 } else {
                     $error = 'New phone number must be exactly 10 digits and start with 0.';
                 }
