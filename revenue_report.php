@@ -14,8 +14,8 @@ $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $page_size = 7; // Show 7 days per page (a week)
 
 if (!$start_date && !$end_date) {
-    // If no dates provided, set end_date to tomorrow and start_date to 6 days before end_date (7 days total)
-    $end_date = date('Y-m-d', strtotime('tomorrow'));
+    // If no dates provided, set end_date to yesterday and start_date to 6 days before end_date (7 days total)
+    $end_date = date('Y-m-d', strtotime('yesterday'));
     $start_date = date('Y-m-d', strtotime($end_date . ' -6 days'));
 } elseif ($start_date && !$end_date) {
     // If start_date provided but no end_date, set end_date to 6 days after start_date
@@ -45,8 +45,7 @@ $whereClause = $where ? "WHERE $where" : "";
 // Add date range filter to WHERE clause
 $dateFilter = "pe.entry_time BETWEEN ? AND ?";
 $params[] = $start_date . ' 00:00:00';
-$adjusted_end_date = date('Y-m-d', strtotime($end_date . ' -1 day'));
-$params[] = $adjusted_end_date . ' 23:59:59';
+$params[] = $end_date . ' 23:59:59';
 
 if ($whereClause) {
     $whereClause .= " AND $dateFilter";
@@ -85,7 +84,7 @@ $raw_daily_revenue_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $period = new DatePeriod(
     new DateTime($start_date),
     new DateInterval('P1D'),
-    (new DateTime($adjusted_end_date))->modify('+1 day')
+    (new DateTime($end_date))->modify('+1 day')
 );
 
 $daily_revenue_data = [];
