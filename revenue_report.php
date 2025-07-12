@@ -445,7 +445,7 @@ function validateForm() {
     const startDate = startDateInput.value.trim();
     const endDate = endDateInput.value.trim();
 
-    const dateRegex = /^\\d{4}-\\d{2}-\\d{2}$/;
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
     if (!dateRegex.test(startDate)) {
         errorDiv.textContent = 'Start Date must be in yyyy-mm-dd format.';
