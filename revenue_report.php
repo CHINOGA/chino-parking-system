@@ -549,6 +549,7 @@ function updateChart(chartDataJson) {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 x: {
                     display: true,
