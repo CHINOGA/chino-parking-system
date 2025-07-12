@@ -501,7 +501,7 @@ function exportTableToCSV(filename) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    fetchRevenueReport();
+    fetchReport();
 
     const startDateInput = document.getElementById('start_date');
     const endDateInput = document.getElementById('end_date');
@@ -516,66 +516,91 @@ window.addEventListener('DOMContentLoaded', () => {
             const mm = String(endDate.getMonth() + 1).padStart(2, '0');
             const dd = String(endDate.getDate()).padStart(2, '0');
             endDateInput.value = `${yyyy}-${mm}-${dd}`;
-            fetchRevenueReport();
+            fetchReport();
         }
     });
 
     // Since end date is readonly, no need to add event listener for it
 
-    document.getElementById('vehicle_type').addEventListener('change', fetchRevenueReport);
+    document.getElementById('vehicle_type').addEventListener('change', fetchReport);
 });
 
-async function fetchRevenueReport() {
+async function fetchReport() {
     const startDate = document.getElementById('start_date').value;
     const endDate = document.getElementById('end_date').value;
     const vehicleType = document.getElementById('vehicle_type').value;
 
-    const url = `revenue_report_data.php?start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}&vehicle_type=${encodeURIComponent(vehicleType)}`;
+    const url = `reporting.php?action=filter&start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}&vehicle_type=${encodeURIComponent(vehicleType)}`;
 
     const response = await fetch(url);
     if (!response.ok) {
-        console.error('Failed to fetch revenue report data');
+        console.error('Failed to fetch report data');
         return;
     }
     const data = await response.json();
 
-    document.getElementById('total_revenue').textContent = 'TZS ' + data.total_revenue;
+    // Show alerts for vehicles parked longer than threshold (e.g., 120 minutes)
+    const alertsDiv = document.getElementById('alerts');
+    const longParkedVehicles = data.parked.filter(v => {
+        const entryDate = new Date(v.entry_time + 'Z');
+        const now = new Date();
+        const diffMinutes = (now - entryDate) / 60000;
+        return diffMinutes > 120; // threshold in minutes
+    });
+    if (longParkedVehicles.length > 18) {
+        alertsDiv.textContent = `Alert: ${longParkedVehicles.length} vehicle(s) have been parked for more than 18 hours.`; 
+    } else {
+        alertsDiv.textContent = '';
+    }
 
-    // Update daily revenue table
-    const dailyRevenueTableBody = document.querySelector('#daily_revenue_table tbody');
-    dailyRevenueTableBody.innerHTML = '';
-    data.daily_revenue_data.forEach(day => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${day.date}</td>
-            <td>${Number(day.daily_revenue).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td>${day.transactions}</td>
-        `;
-        dailyRevenueTableBody.appendChild(row);
+    // Populate parked vehicles table
+    const parkedCountElem = document.getElementById('parked_count');
+    if (parkedCountElem) {
+        parkedCountElem.textContent = `(${data.parked_count})`;
+    }
+    const parkedTableBody = document.getElementById('parked_tbody');
+    parkedTableBody.innerHTML = '';
+    data.parked.forEach(v => {
+        // Convert entry_time string to Date object in UTC
+        const entryDateUTC = new Date(v.entry_time + 'Z');
+        // Add 3 hours to convert to East Africa Time (UTC+3)
+        const entryDateEAT = new Date(entryDateUTC.getTime() + 3 * 60 * 60 * 1000);
+        const entryDateStr = entryDateEAT.toLocaleString('en-GB', { hour12: false });
+
+        const row = `<tr>
+            <td data-label="Registration Number">${v.registration_number}</td>
+            <td data-label="Vehicle Type">${v.vehicle_type}</td>
+            <td data-label="Driver Name">${v.driver_name}</td>
+            <td data-label="Phone Number">${v.phone_number}</td>
+            <td data-label="Entry Time">${entryDateStr}</td>
+            <td data-label="Action"><button class="exit-btn" data-reg="${v.registration_number}">Exit</button></td>
+        </tr>`;
+        parkedTableBody.insertAdjacentHTML('beforeend', row);
     });
 
-    // Update revenue by type table
-    const revenueByTypeTableBody = document.querySelector('#revenue_by_type_table tbody');
-    revenueByTypeTableBody.innerHTML = '';
-    data.revenue_by_type.forEach(type => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${type.vehicle_type}</td>
-            <td>${Number(type.revenue).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-        `;
-        revenueByTypeTableBody.appendChild(row);
+    // Populate exited vehicles table
+    const exitedTableBody = document.getElementById('exited_tbody');
+    exitedTableBody.innerHTML = '';
+    data.exited.forEach(v => {
+        // Convert entry_time and exit_time strings to Date objects in UTC
+        const entryDateUTC = new Date(v.entry_time + 'Z');
+        const exitDateUTC = new Date(v.exit_time + 'Z');
+        // Add 3 hours to convert to East Africa Time (UTC+3)
+        const entryDateEAT = new Date(entryDateUTC.getTime() + 3 * 60 * 60 * 1000);
+        const exitDateEAT = new Date(exitDateUTC.getTime() + 3 * 60 * 60 * 1000);
+        const entryDateStr = entryDateEAT.toLocaleString('en-GB', { hour12: false });
+        const exitDateStr = exitDateEAT.toLocaleString('en-GB', { hour12: false });
+
+        const row = `<tr>
+            <td data-label="Registration Number">${v.registration_number}</td>
+            <td data-label="Vehicle Type">${v.vehicle_type}</td>
+            <td data-label="Driver Name">${v.driver_name}</td>
+            <td data-label="Phone Number">${v.phone_number}</td>
+            <td data-label="Entry Time">${entryDateStr}</td>
+            <td data-label="Exit Time">${exitDateStr}</td>
+        </tr>`;
+        exitedTableBody.insertAdjacentHTML('beforeend', row);
     });
-
-    // Update summary stats
-    const summaryStatsDiv = document.getElementById('summary_stats');
-    summaryStatsDiv.innerHTML = `
-        <p>Average Daily Revenue: TZS ${data.average_daily_revenue}</p>
-        <p>Highest Revenue Day: ${data.highest_revenue_day} (TZS ${data.highest_revenue_amount})</p>
-        <p>Total Transactions: ${data.total_transactions}</p>
-    `;
-
-    updateChart(JSON.stringify({labels: data.daily_revenue_data.map(d => d.date), data: data.daily_revenue_data.map(d => d.daily_revenue)}));
-    updatePeakDaysChart(JSON.stringify({labels: data.revenue_by_type.map(t => t.vehicle_type), data: data.revenue_by_type.map(t => t.revenue)}));
 }
 
 function updateChart(chartDataJson) {
