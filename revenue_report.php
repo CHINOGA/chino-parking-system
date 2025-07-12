@@ -379,32 +379,6 @@ th {
     margin-bottom: 0.25rem;
   }
 }
-
-/* Remove horizontal scroll on tables for small screens */
-@media (max-width: 600px) {
-  table {
-    width: 100%;
-  }
-  thead, tbody, th, td, tr {
-    display: table-row-group;
-  }
-  thead tr {
-    position: static;
-    top: auto;
-    left: auto;
-  }
-  tr {
-    margin-bottom: 0;
-  }
-  td {
-    border: 1px solid #d1d5db;
-    position: static;
-    padding-left: 1rem;
-  }
-  td:before {
-    display: none;
-  }
-}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -605,47 +579,43 @@ function updatePeakDaysChart(chartDataJson) {
     <p>Total Revenue: <strong id="total_revenue">TZS <?php echo number_format($total_revenue, 2); ?></strong></p>
 
     <h3>Daily Revenue Breakdown</h3>
-    <div style="overflow-x:auto;">
-      <canvas id="revenueChart"></canvas>
-      <table id="daily_revenue_table" class="table table-striped table-bordered">
-          <thead class="table-dark">
-              <tr>
-                  <th>Date</th>
-                  <th>Revenue (TZS)</th>
-                  <th>Transactions</th>
-              </tr>
-          </thead>
-          <tbody>
-              <?php foreach ($daily_revenue_data as $day): ?>
-              <tr>
-                  <td><?= htmlspecialchars($day['date']) ?></td>
-                  <td><?= number_format($day['daily_revenue'], 2) ?></td>
-                  <td><?= htmlspecialchars($day['transactions']) ?></td>
-              </tr>
-              <?php endforeach; ?>
-          </tbody>
-      </table>
-    </div>
+    <canvas id="revenueChart" width="800" height="400"></canvas>
+    <table id="daily_revenue_table" class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Date</th>
+                <th>Revenue (TZS)</th>
+                <th>Transactions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($daily_revenue_data as $day): ?>
+            <tr>
+                <td><?= htmlspecialchars($day['date']) ?></td>
+                <td><?= number_format($day['daily_revenue'], 2) ?></td>
+                <td><?= htmlspecialchars($day['transactions']) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
     <h3>Revenue by Vehicle Type</h3>
-    <div style="overflow-x:auto;">
-      <table id="revenue_by_type_table" class="table table-striped table-bordered">
-          <thead class="table-dark">
-              <tr>
-                  <th>Vehicle Type</th>
-                  <th>Revenue (TZS)</th>
-              </tr>
-          </thead>
-          <tbody>
-              <?php foreach ($revenue_by_type as $type): ?>
-              <tr>
-                  <td><?= htmlspecialchars($type['vehicle_type']) ?></td>
-                  <td><?= number_format($type['revenue'], 2) ?></td>
-              </tr>
-              <?php endforeach; ?>
-          </tbody>
-      </table>
-    </div>
+    <table id="revenue_by_type_table" class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Vehicle Type</th>
+                <th>Revenue (TZS)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($revenue_by_type as $type): ?>
+            <tr>
+                <td><?= htmlspecialchars($type['vehicle_type']) ?></td>
+                <td><?= number_format($type['revenue'], 2) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
     <div id="summary_stats" class="summary">
         <p>Average Daily Revenue: TZS <?= number_format($average_daily_revenue, 2) ?></p>
