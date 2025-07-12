@@ -285,6 +285,15 @@ body {
   font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; /* font-sans */
   color: #111827; /* text-gray-900 */
   margin: 0; /* m-0 */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+html {
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 .container {
   max-width: 64rem; /* max-w-5xl */
