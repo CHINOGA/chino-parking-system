@@ -261,80 +261,84 @@ button:hover {
 </div>
 
 <script>
-const searchInput = document.getElementById('search_input');
-const searchResults = document.getElementById('search_results');
-const deleteForm = document.getElementById('delete_form');
-const otpForm = document.getElementById('otp_form');
-const driverIdInput = document.getElementById('driver_id');
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search_input');
+    const searchResults = document.getElementById('search_results');
+    const deleteForm = document.getElementById('delete_form');
+    const otpForm = document.getElementById('otp_form');
+    const driverIdInput = document.getElementById('driver_id');
 
-let selectedDriverId = null;
+    let selectedDriverId = null;
 
-searchInput.addEventListener('input', function() {
-    const query = this.value.trim();
-    if (query.length === 0) {
-        searchResults.innerHTML = '';
-        deleteForm.style.display = 'none';
-        otpForm.style.display = 'none';
-        selectedDriverId = null;
-        driverIdInput.value = '';
-        return;
-    }
-    fetch(`driver-phone-delete.php?search=${encodeURIComponent(query)}`)
-        .then(response => response.json())
-        .then(data => {
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        if (query.length === 0) {
             searchResults.innerHTML = '';
-            if (data.length === 0) {
-                searchResults.innerHTML = '<div>No matching drivers found.</div>';
-                deleteForm.style.display = 'none';
-                otpForm.style.display = 'none';
-                selectedDriverId = null;
-                driverIdInput.value = '';
-                return;
-            }
-            data.forEach(driver => {
-                const div = document.createElement('div');
-                div.textContent = `${driver.driver_name} - ${driver.phone_number}`;
-                div.dataset.driverId = driver.id;
-                div.classList.remove('selected-driver');
-                div.addEventListener('click', () => {
-                    // Remove selection from other divs
-                    Array.from(searchResults.children).forEach(child => child.classList.remove('selected-driver'));
-                    div.classList.add('selected-driver');
-                    selectedDriverId = driver.id;
-                    driverIdInput.value = driver.id;
-                    deleteForm.style.display = 'block';
-                    otpForm.style.display = 'none';
-                });
-                searchResults.appendChild(div);
-            });
-        })
-        .catch(() => {
-            searchResults.innerHTML = '<div>Error fetching search results.</div>';
             deleteForm.style.display = 'none';
             otpForm.style.display = 'none';
             selectedDriverId = null;
             driverIdInput.value = '';
+            return;
+        }
+        fetch(`driver-phone-delete.php?search=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                searchResults.innerHTML = '';
+                if (data.length === 0) {
+                    searchResults.innerHTML = '<div>No matching drivers found.</div>';
+                    deleteForm.style.display = 'none';
+                    otpForm.style.display = 'none';
+                    selectedDriverId = null;
+                    driverIdInput.value = '';
+                    return;
+                }
+                data.forEach(driver => {
+                    const div = document.createElement('div');
+                    div.textContent = `${driver.driver_name} - ${driver.phone_number}`;
+                    div.dataset.driverId = driver.id;
+                    div.classList.remove('selected-driver');
+                    div.addEventListener('click', () => {
+                        // Remove selection from other divs
+                        Array.from(searchResults.children).forEach(child => child.classList.remove('selected-driver'));
+                        div.classList.add('selected-driver');
+                        selectedDriverId = driver.id;
+                        driverIdInput.value = driver.id;
+                        deleteForm.style.display = 'block';
+                        otpForm.style.display = 'none';
+                    });
+                    searchResults.appendChild(div);
+                });
+            })
+            .catch(() => {
+                searchResults.innerHTML = '<div>Error fetching search results.</div>';
+                deleteForm.style.display = 'none';
+                otpForm.style.display = 'none';
+                selectedDriverId = null;
+                driverIdInput.value = '';
+            });
+    });
+
+    if (deleteForm) {
+        deleteForm.addEventListener('submit', function(e) {
+            if (!selectedDriverId) {
+                e.preventDefault();
+                alert('Please select a driver first.');
+                return;
+            }
+            // Show OTP form after sending OTP
+            setTimeout(() => {
+                deleteForm.style.display = 'none';
+                otpForm.style.display = 'block';
+            }, 100);
         });
-});
-
-deleteForm.addEventListener('submit', function(e) {
-    if (!selectedDriverId) {
-        e.preventDefault();
-        alert('Please select a driver first.');
-        return;
     }
-    // Show OTP form after sending OTP
-    setTimeout(() => {
-        deleteForm.style.display = 'none';
-        otpForm.style.display = 'block';
-    }, 100);
-});
 
-// Keep OTP form visible if OTP was sent but not yet verified
-<?php if ($otp_sent && !$otp_verified): ?>
-otpForm.style.display = 'block';
-deleteForm.style.display = 'none';
-<?php endif; ?>
+    // Keep OTP form visible if OTP was sent but not yet verified
+    <?php if ($otp_sent && !$otp_verified): ?>
+    otpForm.style.display = 'block';
+    deleteForm.style.display = 'none';
+    <?php endif; ?>
+});
 </script>
 </body>
 </html>
