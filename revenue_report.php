@@ -390,12 +390,13 @@ th {
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-/* Responsive canvas styles */
+<style>
 canvas {
   max-width: 100% !important;
   height: auto !important;
 }
+</style>
+<style>
 
 /* Make tables horizontally scrollable on small screens */
 @media (max-width: 600px) {
@@ -436,11 +437,15 @@ canvas {
   td:nth-of-type(3):before { content: "Transactions"; }
   /* Add labels for other tables similarly if needed */
 }
+</style>
+<script>
 function validateForm() {
     const startDateInput = document.getElementById('start_date');
     const endDateInput = document.getElementById('end_date');
     const errorDiv = document.getElementById('error');
-    errorDiv.textContent = '';
+    if (errorDiv) {
+        errorDiv.textContent = '';
+    }
 
     const startDate = startDateInput.value.trim();
     const endDate = endDateInput.value.trim();
@@ -448,11 +453,15 @@ function validateForm() {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
     if (!dateRegex.test(startDate)) {
-        errorDiv.textContent = 'Start Date must be in yyyy-mm-dd format.';
+        if (errorDiv) {
+            errorDiv.textContent = 'Start Date must be in yyyy-mm-dd format.';
+        }
         return false;
     }
     if (!dateRegex.test(endDate)) {
-        errorDiv.textContent = 'End Date must be in yyyy-mm-dd format.';
+        if (errorDiv) {
+            errorDiv.textContent = 'End Date must be in yyyy-mm-dd format.';
+        }
         return false;
     }
     return true;
