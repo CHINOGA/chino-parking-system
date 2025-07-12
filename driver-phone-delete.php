@@ -214,9 +214,12 @@ button:hover {
 #search_results div {
   padding: 0.5rem;
   cursor: pointer;
+  background-color: #ffffff;
+  color: #000000;
 }
 #search_results div:hover {
-  background-color: #e9ecef;
+  background-color: #f0f0f0;
+  color: #000000;
 }
 .selected-driver {
   background-color: #0d6efd;
@@ -326,6 +329,12 @@ deleteForm.addEventListener('submit', function(e) {
         otpForm.style.display = 'block';
     }, 100);
 });
+
+// Keep OTP form visible if OTP was sent but not yet verified
+<?php if ($otp_sent && !$otp_verified): ?>
+otpForm.style.display = 'block';
+deleteForm.style.display = 'none';
+<?php endif; ?>
 </script>
 </body>
 </html>
