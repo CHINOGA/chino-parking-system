@@ -283,8 +283,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = this.value.trim();
         if (query.length === 0) {
             searchResults.innerHTML = '';
-            deleteForm.style.display = 'none';
-            otpForm.style.display = 'none';
+            if (deleteForm) deleteForm.style.display = 'none';
+            if (otpForm) otpForm.style.display = 'none';
             selectedDriverId = null;
             driverIdInput.value = '';
             return;
@@ -295,8 +295,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 searchResults.innerHTML = '';
                 if (data.length === 0) {
                     searchResults.innerHTML = '<div>No matching drivers found.</div>';
-                    deleteForm.style.display = 'none';
-                    otpForm.style.display = 'none';
+                    if (deleteForm) deleteForm.style.display = 'none';
+                    if (otpForm) otpForm.style.display = 'none';
                     selectedDriverId = null;
                     driverIdInput.value = '';
                     return;
@@ -312,16 +312,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         div.classList.add('selected-driver');
                         selectedDriverId = driver.id;
                         driverIdInput.value = driver.id;
-                        deleteForm.style.display = 'block';
-                        otpForm.style.display = 'none';
+                        if (deleteForm) deleteForm.style.display = 'block';
+                        if (otpForm) otpForm.style.display = 'none';
                     });
                     searchResults.appendChild(div);
                 });
             })
             .catch(() => {
                 searchResults.innerHTML = '<div>Error fetching search results.</div>';
-                deleteForm.style.display = 'none';
-                otpForm.style.display = 'none';
+                if (deleteForm) deleteForm.style.display = 'none';
+                if (otpForm) otpForm.style.display = 'none';
                 selectedDriverId = null;
                 driverIdInput.value = '';
             });
