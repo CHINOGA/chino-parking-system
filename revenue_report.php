@@ -130,17 +130,6 @@ foreach ($daily_revenue_data as $day) {
 }
 $total_transactions = array_sum(array_column($daily_revenue_data, 'transactions'));
 
-// Calculate total revenue for the selected filters
-$totalRevenueStmt = $pdo->prepare("
-    SELECT SUM(r.amount) AS total_revenue
-    FROM revenue r
-    JOIN parking_entries pe ON r.parking_entry_id = pe.id
-    JOIN vehicles v ON pe.vehicle_id = v.id
-    $whereClause
-");
-$totalRevenueStmt->execute($params);
-$total_revenue = (float)$totalRevenueStmt->fetchColumn();
-
 $week_start = date('Y-m-d', strtotime('monday this week'));
 $week_end = date('Y-m-d', strtotime('sunday this week'));
 
@@ -296,15 +285,6 @@ body {
   font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; /* font-sans */
   color: #111827; /* text-gray-900 */
   margin: 0; /* m-0 */
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-html {
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
 }
 .container {
   max-width: 64rem; /* max-w-5xl */
@@ -401,78 +381,24 @@ th {
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-canvas {
-  max-width: 100% !important;
-  height: auto !important;
-}
-</style>
-<style>
-
-/* Make tables horizontally scrollable on small screens */
-@media (max-width: 600px) {
-  table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  thead, tbody, th, td, tr {
-    display: block;
-  }
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-  tr {
-    margin-bottom: 1rem;
-  }
-  td {
-    border: none;
-    position: relative;
-    padding-left: 50%;
-  }
-  td:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 45%;
-    padding-left: 0.5rem;
-    white-space: nowrap;
-    font-weight: bold;
-  }
-  /* Add labels for each cell */
-  td:nth-of-type(1):before { content: "Date"; }
-  td:nth-of-type(2):before { content: "Revenue (TZS)"; }
-  td:nth-of-type(3):before { content: "Transactions"; }
-  /* Add labels for other tables similarly if needed */
-}
-</style>
 <script>
 function validateForm() {
     const startDateInput = document.getElementById('start_date');
     const endDateInput = document.getElementById('end_date');
     const errorDiv = document.getElementById('error');
-    if (errorDiv) {
-        errorDiv.textContent = '';
-    }
+    errorDiv.textContent = '';
 
     const startDate = startDateInput.value.trim();
     const endDate = endDateInput.value.trim();
 
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    const dateRegex = /^\\d{4}-\\d{2}-\\d{2}$/;
 
     if (!dateRegex.test(startDate)) {
-        if (errorDiv) {
-            errorDiv.textContent = 'Start Date must be in yyyy-mm-dd format.';
-        }
+        errorDiv.textContent = 'Start Date must be in yyyy-mm-dd format.';
         return false;
     }
     if (!dateRegex.test(endDate)) {
-        if (errorDiv) {
-            errorDiv.textContent = 'End Date must be in yyyy-mm-dd format.';
-        }
+        errorDiv.textContent = 'End Date must be in yyyy-mm-dd format.';
         return false;
     }
     return true;
@@ -501,7 +427,7 @@ function exportTableToCSV(filename) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    fetchReport();
+    fetchRevenueReport();
 
     const startDateInput = document.getElementById('start_date');
     const endDateInput = document.getElementById('end_date');
@@ -516,91 +442,35 @@ window.addEventListener('DOMContentLoaded', () => {
             const mm = String(endDate.getMonth() + 1).padStart(2, '0');
             const dd = String(endDate.getDate()).padStart(2, '0');
             endDateInput.value = `${yyyy}-${mm}-${dd}`;
-            fetchReport();
+            fetchRevenueReport();
         }
     });
 
     // Since end date is readonly, no need to add event listener for it
 
-    document.getElementById('vehicle_type').addEventListener('change', fetchReport);
+    document.getElementById('vehicle_type').addEventListener('change', fetchRevenueReport);
 });
 
-async function fetchReport() {
+async function fetchRevenueReport() {
     const startDate = document.getElementById('start_date').value;
     const endDate = document.getElementById('end_date').value;
     const vehicleType = document.getElementById('vehicle_type').value;
 
-    const url = `reporting.php?action=filter&start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}&vehicle_type=${encodeURIComponent(vehicleType)}`;
+    const url = `revenue_report.php?start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}&vehicle_type=${encodeURIComponent(vehicleType)}`;
 
     const response = await fetch(url);
-    if (!response.ok) {
-        console.error('Failed to fetch report data');
-        return;
-    }
-    const data = await response.json();
+    const text = await response.text();
 
-    // Show alerts for vehicles parked longer than threshold (e.g., 120 minutes)
-    const alertsDiv = document.getElementById('alerts');
-    const longParkedVehicles = data.parked.filter(v => {
-        const entryDate = new Date(v.entry_time + 'Z');
-        const now = new Date();
-        const diffMinutes = (now - entryDate) / 60000;
-        return diffMinutes > 120; // threshold in minutes
-    });
-    if (longParkedVehicles.length > 18) {
-        alertsDiv.textContent = `Alert: ${longParkedVehicles.length} vehicle(s) have been parked for more than 18 hours.`; 
-    } else {
-        alertsDiv.textContent = '';
-    }
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
 
-    // Populate parked vehicles table
-    const parkedCountElem = document.getElementById('parked_count');
-    if (parkedCountElem) {
-        parkedCountElem.textContent = `(${data.parked_count})`;
-    }
-    const parkedTableBody = document.getElementById('parked_tbody');
-    parkedTableBody.innerHTML = '';
-    data.parked.forEach(v => {
-        // Convert entry_time string to Date object in UTC
-        const entryDateUTC = new Date(v.entry_time + 'Z');
-        // Add 3 hours to convert to East Africa Time (UTC+3)
-        const entryDateEAT = new Date(entryDateUTC.getTime() + 3 * 60 * 60 * 1000);
-        const entryDateStr = entryDateEAT.toLocaleString('en-GB', { hour12: false });
+    document.getElementById('total_revenue').textContent = doc.getElementById('total_revenue').textContent;
+    document.getElementById('daily_revenue_table').innerHTML = doc.getElementById('daily_revenue_table').innerHTML;
+    document.getElementById('revenue_by_type_table').innerHTML = doc.getElementById('revenue_by_type_table').innerHTML;
+    document.getElementById('summary_stats').innerHTML = doc.getElementById('summary_stats').innerHTML;
 
-        const row = `<tr>
-            <td data-label="Registration Number">${v.registration_number}</td>
-            <td data-label="Vehicle Type">${v.vehicle_type}</td>
-            <td data-label="Driver Name">${v.driver_name}</td>
-            <td data-label="Phone Number">${v.phone_number}</td>
-            <td data-label="Entry Time">${entryDateStr}</td>
-            <td data-label="Action"><button class="exit-btn" data-reg="${v.registration_number}">Exit</button></td>
-        </tr>`;
-        parkedTableBody.insertAdjacentHTML('beforeend', row);
-    });
-
-    // Populate exited vehicles table
-    const exitedTableBody = document.getElementById('exited_tbody');
-    exitedTableBody.innerHTML = '';
-    data.exited.forEach(v => {
-        // Convert entry_time and exit_time strings to Date objects in UTC
-        const entryDateUTC = new Date(v.entry_time + 'Z');
-        const exitDateUTC = new Date(v.exit_time + 'Z');
-        // Add 3 hours to convert to East Africa Time (UTC+3)
-        const entryDateEAT = new Date(entryDateUTC.getTime() + 3 * 60 * 60 * 1000);
-        const exitDateEAT = new Date(exitDateUTC.getTime() + 3 * 60 * 60 * 1000);
-        const entryDateStr = entryDateEAT.toLocaleString('en-GB', { hour12: false });
-        const exitDateStr = exitDateEAT.toLocaleString('en-GB', { hour12: false });
-
-        const row = `<tr>
-            <td data-label="Registration Number">${v.registration_number}</td>
-            <td data-label="Vehicle Type">${v.vehicle_type}</td>
-            <td data-label="Driver Name">${v.driver_name}</td>
-            <td data-label="Phone Number">${v.phone_number}</td>
-            <td data-label="Entry Time">${entryDateStr}</td>
-            <td data-label="Exit Time">${exitDateStr}</td>
-        </tr>`;
-        exitedTableBody.insertAdjacentHTML('beforeend', row);
-    });
+    updateChart(doc.getElementById('chart_data').textContent);
+    updatePeakDaysChart(doc.getElementById('peak_days_chart_data').textContent);
 }
 
 function updateChart(chartDataJson) {
@@ -625,7 +495,6 @@ function updateChart(chartDataJson) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
             scales: {
                 x: {
                     display: true,
@@ -710,8 +579,7 @@ function updatePeakDaysChart(chartDataJson) {
     <p>Total Revenue: <strong id="total_revenue">TZS <?php echo number_format($total_revenue, 2); ?></strong></p>
 
     <h3>Daily Revenue Breakdown</h3>
-    <canvas id="revenueChart"></canvas>
-    <div style="overflow-x:auto;">
+    <canvas id="revenueChart" width="800" height="400"></canvas>
     <table id="daily_revenue_table" class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
@@ -756,7 +624,7 @@ function updatePeakDaysChart(chartDataJson) {
     </div>
 
     <h3>Peak Days of the Week (Vehicle Count)</h3>
-    <canvas id="peakDaysChart"></canvas>
+    <canvas id="peakDaysChart" width="800" height="400"></canvas>
     <div id="chart_data" style="display:none;">
         <?php echo json_encode(['labels' => $chart_labels, 'data' => $chart_data]); ?>
     </div>
@@ -765,14 +633,14 @@ function updatePeakDaysChart(chartDataJson) {
     </div>
 
     <h3>First-Time Parked Vehicles</h3>
-    <canvas id="firstTimeVehiclesChart"></canvas>
+    <canvas id="firstTimeVehiclesChart" width="800" height="400"></canvas>
     <div id="first_time_chart_data" style="display:none;">
         <?php echo json_encode(['labels' => $first_time_labels, 'data' => $first_time_counts]); ?>
     </div>
 
     <!-- Weekly Revenue Report Section -->
     <h3>Weekly Revenue Report (Last 12 Weeks)</h3>
-    <canvas id="weeklyRevenueChart"></canvas>
+    <canvas id="weeklyRevenueChart" width="800" height="400"></canvas>
     <table id="weekly_revenue_table" class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
@@ -794,7 +662,7 @@ function updatePeakDaysChart(chartDataJson) {
 
     <!-- Monthly Revenue Report Section -->
     <h3>Monthly Revenue Report (Year <?= htmlspecialchars($report_year) ?>)</h3>
-    <canvas id="monthlyRevenueChart"></canvas>
+    <canvas id="monthlyRevenueChart" width="800" height="400"></canvas>
     <table id="monthly_revenue_table" class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
@@ -922,6 +790,25 @@ function updateMonthlyRevenueChart(chartDataJson) {
     });
 }
 
+const originalFetchRevenueReport = fetchRevenueReport;
+fetchRevenueReport = async function() {
+    await originalFetchRevenueReport();
+
+    const firstTimeChartData = document.getElementById('first_time_chart_data').textContent;
+    updateFirstTimeVehiclesChart(firstTimeChartData);
+
+    const weeklyChartData = JSON.stringify({
+        labels: <?php echo json_encode($weekly_labels); ?>,
+        data: <?php echo json_encode($weekly_revenue); ?>
+    });
+    updateWeeklyRevenueChart(weeklyChartData);
+
+    const monthlyChartData = JSON.stringify({
+        labels: <?php echo json_encode($monthly_labels); ?>,
+        data: <?php echo json_encode($monthly_revenue); ?>
+    });
+    updateMonthlyRevenueChart(monthlyChartData);
+};
 </script>
 </body>
 </html>
