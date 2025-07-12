@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="vehicle_entry.php">Chino Parking System</a>
+    <a class="navbar-brand fw-bold" href="vehicle-entry.php">Chino Parking System</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,16 +20,16 @@
       <?php if (isset($_SESSION['user_id'])): ?>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="vehicle_entry.php">Vehicle Entry</a>
+          <a class="nav-link" href="vehicle-entry.php">Vehicle Entry</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="parked-vehicles.php">Parked Vehicles</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="revenue_report.php">Revenue Report</a>
+          <a class="nav-link" href="revenue-report.php">Revenue Report</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="sms_send.php">Send SMS</a>
+          <a class="nav-link" href="sms-send.php">Send SMS</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Logout</a>
