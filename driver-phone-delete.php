@@ -234,7 +234,16 @@ button:hover {
     <?php if ($error): ?>
         <div class="error"><?= htmlspecialchars($error) ?></div>
     <?php elseif ($success): ?>
-        <div class="success"><?= htmlspecialchars($success) ?></div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+        <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <?= htmlspecialchars($success) ?>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
     <?php endif; ?>
 
     <?php if (!$otp_verified): ?>
@@ -338,6 +347,16 @@ document.addEventListener('DOMContentLoaded', function() {
     otpForm.style.display = 'block';
     deleteForm.style.display = 'none';
     <?php endif; ?>
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var toastEl = document.getElementById('successToast');
+    if (toastEl) {
+        var toast = new bootstrap.Toast(toastEl);
+        toast.show();
+    }
 });
 </script>
 </body>
