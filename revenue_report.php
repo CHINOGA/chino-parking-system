@@ -1,4 +1,4 @@
-<?php
+pushp
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -362,21 +362,72 @@ th {
 
 /* Responsive styles */
 @media (max-width: 600px) {
+  body, html {
+    overflow-x: hidden;
+  }
   .container {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    padding: 1rem;
+    max-width: 100% !important;
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+    padding: 0.5rem !important;
   }
   input[type="text"],
   input[type="date"],
   button,
   select {
     width: 100%;
+    max-width: 100%;
     margin-bottom: 1rem;
+    box-sizing: border-box;
   }
   label {
     display: block;
     margin-bottom: 0.25rem;
+  }
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* Remove horizontal scroll on tables for small screens */
+@media (max-width: 600px) {
+  table {
+    width: 100%;
+    border: 0;
+  }
+  thead {
+    display: none;
+  }
+  tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+  td {
+    display: block;
+    text-align: right;
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    white-space: normal;
+  }
+  td:last-child {
+    border-bottom: 0;
+  }
+  td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    top: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #6b7280;
+    white-space: nowrap;
   }
 }
 </style>
@@ -579,43 +630,47 @@ function updatePeakDaysChart(chartDataJson) {
     <p>Total Revenue: <strong id="total_revenue">TZS <?php echo number_format($total_revenue, 2); ?></strong></p>
 
     <h3>Daily Revenue Breakdown</h3>
-    <canvas id="revenueChart" width="800" height="400"></canvas>
-    <table id="daily_revenue_table" class="table table-striped table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>Date</th>
-                <th>Revenue (TZS)</th>
-                <th>Transactions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div style="overflow-x:auto;">
+      <canvas id="revenueChart"></canvas>
+      <table id="daily_revenue_table" class="table table-striped table-bordered">
+          <thead class="table-dark">
+              <tr>
+                  <th>Date</th>
+                  <th>Revenue (TZS)</th>
+                  <th>Transactions</th>
+              </tr>
+          </thead>
+          <tbody>
             <?php foreach ($daily_revenue_data as $day): ?>
             <tr>
-                <td><?= htmlspecialchars($day['date']) ?></td>
-                <td><?= number_format($day['daily_revenue'], 2) ?></td>
-                <td><?= htmlspecialchars($day['transactions']) ?></td>
+                <td data-label="Date"><?= htmlspecialchars($day['date']) ?></td>
+                <td data-label="Revenue (TZS)"><?= number_format($day['daily_revenue'], 2) ?></td>
+                <td data-label="Transactions"><?= htmlspecialchars($day['transactions']) ?></td>
             </tr>
             <?php endforeach; ?>
-        </tbody>
-    </table>
+          </tbody>
+      </table>
+    </div>
 
     <h3>Revenue by Vehicle Type</h3>
-    <table id="revenue_by_type_table" class="table table-striped table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>Vehicle Type</th>
-                <th>Revenue (TZS)</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div style="overflow-x:auto;">
+      <table id="revenue_by_type_table" class="table table-striped table-bordered">
+          <thead class="table-dark">
+              <tr>
+                  <th>Vehicle Type</th>
+                  <th>Revenue (TZS)</th>
+              </tr>
+          </thead>
+          <tbody>
             <?php foreach ($revenue_by_type as $type): ?>
             <tr>
-                <td><?= htmlspecialchars($type['vehicle_type']) ?></td>
-                <td><?= number_format($type['revenue'], 2) ?></td>
+                <td data-label="Vehicle Type"><?= htmlspecialchars($type['vehicle_type']) ?></td>
+                <td data-label="Revenue (TZS)"><?= number_format($type['revenue'], 2) ?></td>
             </tr>
             <?php endforeach; ?>
-        </tbody>
-    </table>
+          </tbody>
+      </table>
+    </div>
 
     <div id="summary_stats" class="summary">
         <p>Average Daily Revenue: TZS <?= number_format($average_daily_revenue, 2) ?></p>
