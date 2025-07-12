@@ -130,6 +130,17 @@ foreach ($daily_revenue_data as $day) {
 }
 $total_transactions = array_sum(array_column($daily_revenue_data, 'transactions'));
 
+// Calculate total revenue for the selected filters
+$totalRevenueStmt = $pdo->prepare("
+    SELECT SUM(r.amount) AS total_revenue
+    FROM revenue r
+    JOIN parking_entries pe ON r.parking_entry_id = pe.id
+    JOIN vehicles v ON pe.vehicle_id = v.id
+    $whereClause
+");
+$totalRevenueStmt->execute($params);
+$total_revenue = (float)$totalRevenueStmt->fetchColumn();
+
 $week_start = date('Y-m-d', strtotime('monday this week'));
 $week_end = date('Y-m-d', strtotime('sunday this week'));
 
