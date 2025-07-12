@@ -379,6 +379,32 @@ th {
     margin-bottom: 0.25rem;
   }
 }
+
+/* Remove horizontal scroll on tables for small screens */
+@media (max-width: 600px) {
+  table {
+    width: 100%;
+  }
+  thead, tbody, th, td, tr {
+    display: table-row-group;
+  }
+  thead tr {
+    position: static;
+    top: auto;
+    left: auto;
+  }
+  tr {
+    margin-bottom: 0;
+  }
+  td {
+    border: 1px solid #d1d5db;
+    position: static;
+    padding-left: 1rem;
+  }
+  td:before {
+    display: none;
+  }
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
