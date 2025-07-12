@@ -32,6 +32,9 @@
           <a class="nav-link" href="sms-send.php">Send SMS</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="driver-phone-delete.php">Delete Driver Phone</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="logout.php">Logout</a>
         </li>
       </ul>
