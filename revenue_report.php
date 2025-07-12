@@ -527,6 +527,28 @@ async function fetchRevenueReport() {
     updatePeakDaysChart(doc.getElementById('peak_days_chart_data').textContent);
 }
 
+async function fetchRevenueReport() {
+    const startDate = document.getElementById('start_date').value;
+    const endDate = document.getElementById('end_date').value;
+    const vehicleType = document.getElementById('vehicle_type').value;
+
+    const url = `revenue_report.php?start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}&vehicle_type=${encodeURIComponent(vehicleType)}`;
+
+    const response = await fetch(url);
+    const text = await response.text();
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+
+    document.getElementById('total_revenue').textContent = doc.getElementById('total_revenue').textContent;
+    document.getElementById('daily_revenue_table').innerHTML = doc.getElementById('daily_revenue_table').innerHTML;
+    document.getElementById('revenue_by_type_table').innerHTML = doc.getElementById('revenue_by_type_table').innerHTML;
+    document.getElementById('summary_stats').innerHTML = doc.getElementById('summary_stats').innerHTML;
+
+    updateChart(doc.getElementById('chart_data').textContent);
+    updatePeakDaysChart(doc.getElementById('peak_days_chart_data').textContent);
+}
+
 function updateChart(chartDataJson) {
     const chartData = JSON.parse(chartDataJson);
     const ctx = document.getElementById('revenueChart').getContext('2d');
