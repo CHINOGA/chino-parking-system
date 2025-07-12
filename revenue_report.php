@@ -382,6 +382,51 @@ th {
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+/* Responsive canvas styles */
+canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Make tables horizontally scrollable on small screens */
+@media (max-width: 600px) {
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  thead, tbody, th, td, tr {
+    display: block;
+  }
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  tr {
+    margin-bottom: 1rem;
+  }
+  td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+  }
+  td:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45%;
+    padding-left: 0.5rem;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+  /* Add labels for each cell */
+  td:nth-of-type(1):before { content: "Date"; }
+  td:nth-of-type(2):before { content: "Revenue (TZS)"; }
+  td:nth-of-type(3):before { content: "Transactions"; }
+  /* Add labels for other tables similarly if needed */
+}
 function validateForm() {
     const startDateInput = document.getElementById('start_date');
     const endDateInput = document.getElementById('end_date');
@@ -579,7 +624,8 @@ function updatePeakDaysChart(chartDataJson) {
     <p>Total Revenue: <strong id="total_revenue">TZS <?php echo number_format($total_revenue, 2); ?></strong></p>
 
     <h3>Daily Revenue Breakdown</h3>
-    <canvas id="revenueChart" width="800" height="400"></canvas>
+    <canvas id="revenueChart"></canvas>
+    <div style="overflow-x:auto;">
     <table id="daily_revenue_table" class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
@@ -624,7 +670,7 @@ function updatePeakDaysChart(chartDataJson) {
     </div>
 
     <h3>Peak Days of the Week (Vehicle Count)</h3>
-    <canvas id="peakDaysChart" width="800" height="400"></canvas>
+    <canvas id="peakDaysChart"></canvas>
     <div id="chart_data" style="display:none;">
         <?php echo json_encode(['labels' => $chart_labels, 'data' => $chart_data]); ?>
     </div>
@@ -633,14 +679,14 @@ function updatePeakDaysChart(chartDataJson) {
     </div>
 
     <h3>First-Time Parked Vehicles</h3>
-    <canvas id="firstTimeVehiclesChart" width="800" height="400"></canvas>
+    <canvas id="firstTimeVehiclesChart"></canvas>
     <div id="first_time_chart_data" style="display:none;">
         <?php echo json_encode(['labels' => $first_time_labels, 'data' => $first_time_counts]); ?>
     </div>
 
     <!-- Weekly Revenue Report Section -->
     <h3>Weekly Revenue Report (Last 12 Weeks)</h3>
-    <canvas id="weeklyRevenueChart" width="800" height="400"></canvas>
+    <canvas id="weeklyRevenueChart"></canvas>
     <table id="weekly_revenue_table" class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
@@ -662,7 +708,7 @@ function updatePeakDaysChart(chartDataJson) {
 
     <!-- Monthly Revenue Report Section -->
     <h3>Monthly Revenue Report (Year <?= htmlspecialchars($report_year) ?>)</h3>
-    <canvas id="monthlyRevenueChart" width="800" height="400"></canvas>
+    <canvas id="monthlyRevenueChart"></canvas>
     <table id="monthly_revenue_table" class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
