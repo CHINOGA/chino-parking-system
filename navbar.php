@@ -23,7 +23,7 @@
           <a class="nav-link" href="vehicle_entry.php">Vehicle Entry</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="reporting.php">Reporting</a>
+          <a class="nav-link" href="parked-vehicles.php">Parked Vehicles</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="revenue_report.php">Revenue Report</a>
