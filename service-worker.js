@@ -1,6 +1,6 @@
 const CACHE_NAME = 'chino-parking-cache-v1';
 const urlsToCache = [
-  './index.php',
+  './parked-vehicles.php',
   './custom.css',
   './manifest.json',
   './icons/favicon-192.png'
