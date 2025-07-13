@@ -13,18 +13,6 @@ if (!isset($_SESSION['user_id'])) {
 <title>Chino Parking System - PWA UI</title>
 <link rel="manifest" href="manifest.json" />
 <link href="custom.css" rel="stylesheet" />
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('service-worker.js')
-      .then(function(registration) {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      })
-      .catch(function(error) {
-        console.error('ServiceWorker registration failed:', error);
-      });
-    });
-  }
 </script>
 <style>
 body {
