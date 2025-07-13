@@ -1,7 +1,7 @@
 {
   "name": "Chino Parking System",
   "short_name": "ChinoParking",
-  "start_url": "./parked-vehicles.php",
+  "start_url": "./pwa-ui.php",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#007bff",
