@@ -75,6 +75,10 @@ if ($registration_number) {
                     $uniqueId = $notificationId; // Use the same unique ID for both 'id' and 'notification_id'
                     $response = $pesapalService->submitOrder($token, $uniqueId, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress);
 
+                    // Debug output for notificationId and response
+                    error_log("PesaPal Payment Initiation - notificationId: " . $notificationId);
+                    error_log("PesaPal Payment Initiation - response: " . print_r($response, true));
+
                     if (isset($response['redirect_url'])) {
                         header('Location: ' . $response['redirect_url']);
                         exit;
