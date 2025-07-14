@@ -61,15 +61,15 @@ if ($registration_number) {
                     $description = "Parking fee for " . $registration_number;
                     $callbackUrl = 'https://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['PHP_SELF']), '/\\') . '/pesapal_callback.php';
 
-                    // CRITICAL: Use the IPN ID from your configuration. This was the source of the "invalid IPN ID" error.
-                    $notificationId = PESAPAL_IPN_ID;
+                    // Use the callback URL as the notification ID to fix the invalid IPN ID error
+                    $notificationId = $callbackUrl;
 
                     $billingAddress = [
                         'phone_number' => $entry['phone_number'],
                         'first_name' => $entry['driver_name'],
                     ];
 
-                    // Store notification_id with the parking entry
+                    // Store notification_id (callback URL) with the parking entry
                     $stmt = $pdo->prepare('UPDATE parking_entries SET notification_id = ? WHERE id = ?');
                     $stmt->execute([$notificationId, $entry['entry_id']]);
 
