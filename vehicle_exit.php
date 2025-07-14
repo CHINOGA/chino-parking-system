@@ -84,7 +84,14 @@ if ($registration_number) {
                             $error = 'Error initiating payment: ' . ($response['error']['message'] ?? 'Unknown error');
                         }
                     } else {
-                        $error = 'Failed to register IPN URL: ' . ($registerResponse['error']['message'] ?? 'Unknown error');
+                        $errorMessage = 'Failed to register IPN URL: Unknown error';
+                        if (is_array($registerResponse) && isset($registerResponse['error']['message'])) {
+                            $errorMessage = 'Failed to register IPN URL: ' . $registerResponse['error']['message'];
+                        } elseif (is_string($registerResponse)) {
+                            $errorMessage = 'Failed to register IPN URL: ' . $registerResponse;
+                        }
+                        error_log($errorMessage);
+                        $error = $errorMessage;
                     }
                 } else {
                     $error = 'Could not authenticate with PesaPal.';
