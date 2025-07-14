@@ -40,7 +40,7 @@ class PesapalService {
         return null;
     }
 
-    public function submitOrder($token, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress) {
+    public function submitOrder($token, $id, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress) {
         $url = $this->apiUrl . '/api/Transactions/SubmitOrderRequest';
         $headers = [
             'Content-Type: application/json',
@@ -48,7 +48,7 @@ class PesapalService {
             'Authorization: Bearer ' . $token
         ];
         $data = [
-            'id' => uniqid(),
+            'id' => $id,
             'currency' => $currency,
             'amount' => $amount,
             'description' => $description,

@@ -72,7 +72,8 @@ if ($registration_number) {
                     $stmt = $pdo->prepare('UPDATE parking_entries SET notification_id = ? WHERE id = ?');
                     $stmt->execute([$notificationId, $entry['entry_id']]);
 
-                    $response = $pesapalService->submitOrder($token, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress);
+                    $uniqueId = $notificationId; // Use the same unique ID for both 'id' and 'notification_id'
+                    $response = $pesapalService->submitOrder($token, $uniqueId, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress);
 
                     if (isset($response['redirect_url'])) {
                         header('Location: ' . $response['redirect_url']);
