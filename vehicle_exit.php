@@ -82,8 +82,8 @@ if ($registration_number) {
                     $stmt = $pdo->prepare('UPDATE parking_entries SET notification_id = ? WHERE id = ?');
                     $stmt->execute([$notificationId, $entry['entry_id']]);
 
-                    $uniqueId = $notificationId; // Use the same unique ID for both 'id' and 'notification_id'
-                    $response = $pesapalService->submitOrder($token, $uniqueId, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress);
+                    $orderId = $entry['entry_id']; // Use parking entry ID as order ID
+                    $response = $pesapalService->submitOrder($token, $orderId, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress);
 
                     // Debug output for notificationId and response
                     error_log("PesaPal Payment Initiation - notificationId: " . $notificationId);
