@@ -40,6 +40,45 @@ class PesapalService {
         return null;
     }
 
+    public function registerIPNUrl($token, $ipnUrl) {
+        $url = $this->apiUrl . '/api/IPN/RegisterIPNUrl';
+        $headers = [
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'Authorization: Bearer ' . $token
+        ];
+        $data = [
+            'ipn_url' => $ipnUrl
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($response, true);
+    }
+
+    public function getRegisteredIPN($token) {
+        $url = $this->apiUrl . '/api/IPN/GetRegisteredIPN';
+        $headers = [
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'Authorization: Bearer ' . $token
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($response, true);
+    }
+
     public function submitOrder($token, $id, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress) {
         $url = $this->apiUrl . '/api/Transactions/SubmitOrderRequest';
         $headers = [

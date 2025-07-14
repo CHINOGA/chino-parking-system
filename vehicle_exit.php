@@ -61,30 +61,30 @@ if ($registration_number) {
                     $description = "Parking fee for " . $registration_number;
                     $callbackUrl = 'https://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['PHP_SELF']), '/\\') . '/pesapal_callback.php';
 
-                    // Use the callback URL as the notification ID to fix the invalid IPN ID error
-                    $notificationId = $callbackUrl;
+                    // Register IPN URL and get IPN ID
+                    $registerResponse = $pesapalService->registerIPNUrl($token, $callbackUrl);
+                    if (isset($registerResponse['ipn_id'])) {
+                        $notificationId = $registerResponse['ipn_id'];
 
-                    $billingAddress = [
-                        'phone_number' => $entry['phone_number'],
-                        'first_name' => $entry['driver_name'],
-                    ];
+                        // Store notification_id with the parking entry
+                        $stmt = $pdo->prepare('UPDATE parking_entries SET notification_id = ? WHERE id = ?');
+                        $stmt->execute([$notificationId, $entry['entry_id']]);
 
-                    // Store notification_id (callback URL) with the parking entry
-                    $stmt = $pdo->prepare('UPDATE parking_entries SET notification_id = ? WHERE id = ?');
-                    $stmt->execute([$notificationId, $entry['entry_id']]);
+                        $orderId = $entry['entry_id']; // Use parking entry ID as order ID
+                        $response = $pesapalService->submitOrder($token, $orderId, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress);
 
-                    $orderId = $entry['entry_id']; // Use parking entry ID as order ID
-                    $response = $pesapalService->submitOrder($token, $orderId, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress);
+                        // Debug output for notificationId and response
+                        error_log("PesaPal Payment Initiation - notificationId: " . $notificationId);
+                        error_log("PesaPal Payment Initiation - response: " . print_r($response, true));
 
-                    // Debug output for notificationId and response
-                    error_log("PesaPal Payment Initiation - notificationId: " . $notificationId);
-                    error_log("PesaPal Payment Initiation - response: " . print_r($response, true));
-
-                    if (isset($response['redirect_url'])) {
-                        header('Location: ' . $response['redirect_url']);
-                        exit;
+                        if (isset($response['redirect_url'])) {
+                            header('Location: ' . $response['redirect_url']);
+                            exit;
+                        } else {
+                            $error = 'Error initiating payment: ' . ($response['error']['message'] ?? 'Unknown error');
+                        }
                     } else {
-                        $error = 'Error initiating payment: ' . ($response['error']['message'] ?? 'Unknown error');
+                        $error = 'Failed to register IPN URL: ' . ($registerResponse['error']['message'] ?? 'Unknown error');
                     }
                 } else {
                     $error = 'Could not authenticate with PesaPal.';
