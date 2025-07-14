@@ -7,12 +7,15 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/error_handling.php';
-require './backend/SmsService.php';
+require_once __DIR__ . '/SmsService.php';
+require_once __DIR__ . '/PesapalService.php';
 
 $error = '';
 $success = '';
 
 $smsService = new SmsService();
+$pesapalService = new PesapalService();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $registration_number = preg_replace('/\s+/', '', $_POST['registration_number'] ?? '');
@@ -44,44 +47,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $fee_per_day = 1000;
                 $total_fee = $days * $fee_per_day;
 
-                // Update exit_time to current timestamp
-                $stmt = $pdo->prepare('UPDATE parking_entries SET exit_time = NOW() WHERE id = ?');
-                $stmt->execute([$entry['entry_id']]);
+                // PesaPal Integration
+                $token = $pesapalService->getAuthToken();
+                if ($token) {
+                    $amount = (float) $total_fee;
+                    $currency = 'TZS';
+                    $description = "Parking fee for " . $registration_number;
+                    $callbackUrl = 'https://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['PHP_SELF']), '/\\') . '/pesapal_callback.php';
+                    $notificationId = uniqid(); // This should be stored and checked later
 
-                // Insert revenue record
-                $stmt = $pdo->prepare('INSERT INTO revenue (parking_entry_id, amount) VALUES (?, ?)');
-                $stmt->execute([$entry['entry_id'], $total_fee]);
+                    
+                    $billingAddress = [
+                        'phone_number' => $entry['phone_number'],
+                        'first_name' => $entry['driver_name'],
+                    ];
 
-                // Format phone number to international format 2557XXXXXXX
-                $phone_number = $entry['phone_number'];
+                    // Store notification_id with the parking entry
+                    $stmt = $pdo->prepare('UPDATE parking_entries SET notification_id = ? WHERE id = ?');
+                    $stmt->execute([$notificationId, $entry['entry_id']]);
 
-                // Prepare detailed exit SMS message
-                $vehicle_type_stmt = $pdo->prepare('SELECT vehicle_type, driver_name FROM vehicles WHERE registration_number = ?');
-                $vehicle_type_stmt->execute([$registration_number]);
-                $vehicle_info = $vehicle_type_stmt->fetch(PDO::FETCH_ASSOC);
+                    $response = $pesapalService->submitOrder($token, $amount, $currency, $description, $callbackUrl, $notificationId, $billingAddress);
 
-                $entry_time = new DateTime($entry['entry_time']);
-                $formatted_entry_time = $entry_time->format('Y-m-d H:i:s');
-
-                $message = "Vehicle Exit Notification\n" .
-                           "Registration: $registration_number\n" .
-                           "Vehicle Type: " . ($vehicle_info['vehicle_type'] ?? 'N/A') . "\n" .
-                           "Driver Name: " . ($vehicle_info['driver_name'] ?? 'N/A') . "\n" .
-                           "Driver Phone: $phone_number\n" .
-                           "Entry Time: $formatted_entry_time\n" .
-                           "Exit Time: " . (new DateTime())->format('Y-m-d H:i:s') . "\n" .
-                           "Parking Fee: TZS $total_fee\n" .
-                           "Thank you for parking at Chino Park.";
-
-                $sms_sent = $smsService->sendSms($phone_number, $message);
-
-                if (!$sms_sent) {
-                    $error = 'Failed to send exit SMS notification. Please check SMS service or try again later.';
-                    error_log("SMS sending failed for vehicle exit: $registration_number to phone $phone_number");
+                    if (isset($response['redirect_url'])) {
+                        header('Location: ' . $response['redirect_url']);
+                        exit;
+                    } else {
+                        $error = 'Error initiating payment: ' . ($response['error']['message'] ?? 'Unknown error');
+                    }
                 } else {
-                    $success = "Vehicle exit recorded successfully. Parking fee: TZS $total_fee. SMS notification sent.";
+                    $error = 'Could not authenticate with PesaPal.';
                 }
             }
+
         } catch (PDOException $e) {
             $error = 'Database error: ' . $e->getMessage();
         }
@@ -146,7 +143,8 @@ button:hover { background: #0056b3; }
     <form method="post" action="vehicle_exit.php" novalidate>
         <label for="registration_number">Vehicle Registration Number</label>
         <input type="text" id="registration_number" name="registration_number" required autofocus />
-        <button type="submit">Record Exit</button>
+<button type="submit">Pay and Exit</button>
+
     </form>
 </div>
 </body>

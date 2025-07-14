@@ -19,7 +19,14 @@ define('NEXTSMS_USERNAME', 'abelchinoga');
 define('NEXTSMS_PASSWORD', 'Abelyohana@8');
 define('NEXTSMS_SENDER_ID', 'CHINOTRACK');
 
+// PesaPal API credentials
+define('PESAPAL_CONSUMER_KEY', 'H8BRbCyD0ima8h0FVs0vVU1nV9ymorPi');
+define('PESAPAL_CONSUMER_SECRET', 't20fUM2sdIl1cn1W4Yi2jvAg/Pk=');
+define('PESAPAL_API_URL', 'https://pay.pesapal.com/v3'); // Live URL
+
+
 try {
+
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $password);
     // Set error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -1,7 +1,7 @@
 -- Chino Parking System Database Schema
 
-CREATE DATABASE IF NOT EXISTS chino_parking;
 USE chino_parking;
+
 
 -- Users table for login
 CREATE TABLE users (
@@ -27,8 +27,11 @@ CREATE TABLE parking_entries (
     vehicle_id INT NOT NULL,
     entry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     exit_time TIMESTAMP NULL,
+    notification_id VARCHAR(255) NULL,
+    payment_status VARCHAR(50) DEFAULT 'PENDING',
     FOREIGN KEY (vehicle_id) REFERENCES vehicles(id)
 );
+
 
 -- Revenue table to track payments (optional)
 CREATE TABLE revenue (
