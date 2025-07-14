@@ -60,7 +60,17 @@ if ($registration_number) {
                     $currency = 'TZS';
                     $description = "Parking fee for " . $registration_number;
                     $callbackUrl = 'https://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['PHP_SELF']), '/\\') . '/pesapal_callback.php';
-                    $notificationId = uniqid(); // This should be stored and checked later
+                    // Generate UUID v4 for notificationId
+                    function generate_uuid_v4() {
+                        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+                            mt_rand(0, 0xffff),
+                            mt_rand(0, 0x0fff) | 0x4000,
+                            mt_rand(0, 0x3fff) | 0x8000,
+                            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+                        );
+                    }
+                    $notificationId = generate_uuid_v4();
 
                     
                     $billingAddress = [
