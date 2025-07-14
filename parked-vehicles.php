@@ -326,7 +326,8 @@ async function fetchReport() {
                 <td data-label="Driver Name">${v.driver_name}</td>
                 <td data-label="Phone Number">${v.phone_number}</td>
                 <td data-label="Entry Time">${entryDateStr}</td>
-                <td data-label="Action"><button class="exit-btn" data-reg="${v.registration_number}">Exit</button></td>
+                <td data-label="Action"><a href="vehicle_exit.php?registration_number=${v.registration_number}" class="exit-btn" style="text-decoration: none; color: white;">Exit</a></td>
+
             </tr>`;
             parkedTableBody.insertAdjacentHTML('beforeend', row);
         });
@@ -421,27 +422,15 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     // Delegate click event for exit buttons
-    document.getElementById('parked_tbody').addEventListener('click', async (e) => {
+    document.getElementById('parked_tbody').addEventListener('click', (e) => {
         if (e.target && e.target.classList.contains('exit-btn')) {
-            const regNum = e.target.getAttribute('data-reg');
-            if (confirm(`Confirm exit for vehicle ${regNum}?`)) {
-                try {
-                    const response = await fetch('vehicle_exit_ajax.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        credentials: 'same-origin',
-                        body: JSON.stringify({ registration_number: regNum })
-                    });
-                    const result = await response.json();
-                    showNotification(result.message);
-                    exitedOffset = 10; // Reset offset after exit
-                    fetchReport();
-                } catch (error) {
-                    showNotification('Error processing exit: ' + error.message);
-                }
+            const regNum = new URL(e.target.href).searchParams.get("registration_number");
+            if (!confirm(`Confirm exit for vehicle ${regNum}? This will start the payment process.`)) {
+                e.preventDefault(); // Prevent navigation
             }
         }
     });
+
 
     // Add event listener for Exit All button
     document.getElementById('exit_all_btn').addEventListener('click', async () => {

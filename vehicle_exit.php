@@ -16,14 +16,20 @@ $success = '';
 $smsService = new SmsService();
 $pesapalService = new PesapalService();
 
-
+$registration_number = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $registration_number = preg_replace('/\s+/', '', $_POST['registration_number'] ?? '');
+} elseif (isset($_GET['registration_number'])) {
+    $registration_number = preg_replace('/\s+/', '', $_GET['registration_number']);
+}
 
+if ($registration_number) {
     if (!preg_match('/^[a-zA-Z0-9]+$/', $registration_number)) {
-        $error = 'Invalid vehicle registration number.';
+
+            $error = 'Invalid vehicle registration number.';
     } else {
         try {
+
             // Find vehicle and active parking entry (exit_time IS NULL)
             $stmt = $pdo->prepare('
                 SELECT pe.id AS entry_id, pe.entry_time, v.phone_number, v.vehicle_type, v.driver_name
@@ -142,7 +148,7 @@ button:hover { background: #0056b3; }
     <?php endif; ?>
     <form method="post" action="vehicle_exit.php" novalidate>
         <label for="registration_number">Vehicle Registration Number</label>
-        <input type="text" id="registration_number" name="registration_number" required autofocus />
+        <input type="text" id="registration_number" name="registration_number" value="<?= htmlspecialchars($registration_number ?? '') ?>" required autofocus />
 <button type="submit">Pay and Exit</button>
 
     </form>
