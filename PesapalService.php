@@ -57,7 +57,11 @@ class PesapalService {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $response = curl_exec($ch);
+        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+
+        error_log("Register IPN URL response status: " . $http_status);
+        error_log("Register IPN URL response body: " . $response);
 
         return json_decode($response, true);
     }
