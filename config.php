@@ -14,7 +14,7 @@ error_reporting(E_ALL);
 
 $host = 'box5405.bluehost.com';
 $dbname = 'chinotra_chino_parking'; // replace with your actual database name
-$user = 'chinotra_francis';
+$user = 'francis';
 $password = 'Francis@8891';
 
 // NextSMS API credentials and settings
