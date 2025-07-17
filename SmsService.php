@@ -69,6 +69,12 @@ class SmsService {
         ]);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
+        // Bypass SSL verification for local development
+        if (getenv('APP_ENV') === 'local' || getenv('APP_ENV') === 'development') {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        }
+
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curlError = curl_error($ch);

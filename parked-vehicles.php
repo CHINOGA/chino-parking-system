@@ -106,35 +106,10 @@ if (isset($_GET['action']) && ($_GET['action'] === 'filter' || $_GET['action'] =
     $stmt->execute($params);
     $parked = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Exited vehicles with pagination support and stay duration calculation
-    $limit = 10;
-    $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
-
-    $sqlExited = "
-        SELECT v.registration_number, v.vehicle_type, v.driver_name, v.phone_number, 
-        CONVERT_TZ(pe.entry_time, '+00:00', '+03:00') AS entry_time, 
-        CONVERT_TZ(pe.exit_time, '+00:00', '+03:00') AS exit_time,
-        TIMESTAMPDIFF(MINUTE, pe.entry_time, pe.exit_time) AS stay_duration_minutes
-        FROM parking_entries pe
-        JOIN vehicles v ON pe.vehicle_id = v.id
-        WHERE pe.exit_time IS NOT NULL
-    ";
-
-    if ($where) {
-        $sqlExited .= " AND $where ";
-    }
-
-    $sqlExited .= " ORDER BY pe.exit_time DESC LIMIT $limit OFFSET $offset";
-
-    $stmt = $pdo->prepare($sqlExited);
-    $stmt->execute($params);
-    $exited = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     header('Content-Type: application/json');
     echo json_encode([
         'parked' => $parked,
         'parked_count' => count($parked),
-        'exited' => $exited,
     ]);
     exit;
 }
@@ -332,75 +307,6 @@ async function fetchReport() {
             parkedTableBody.insertAdjacentHTML('beforeend', row);
         });
 
-        // Populate exited vehicles table
-        const exitedTableBody = document.getElementById('exited_tbody');
-        exitedTableBody.innerHTML = '';
-        data.exited.forEach(v => {
-            // Convert entry_time and exit_time strings to Date objects in UTC
-            const entryDateUTC = new Date(v.entry_time + 'Z');
-            const exitDateUTC = new Date(v.exit_time + 'Z');
-            // Add 3 hours to convert to East Africa Time (UTC+3)
-            const entryDateEAT = new Date(entryDateUTC.getTime() + 3 * 60 * 60 * 1000);
-            const exitDateEAT = new Date(exitDateUTC.getTime() + 3 * 60 * 60 * 1000);
-            const entryDateStr = entryDateEAT.toLocaleString('en-GB', { hour12: false });
-            const exitDateStr = exitDateEAT.toLocaleString('en-GB', { hour12: false });
-
-            const row = `<tr>
-                <td data-label="Registration Number">${v.registration_number}</td>
-                <td data-label="Vehicle Type">${v.vehicle_type}</td>
-                <td data-label="Driver Name">${v.driver_name}</td>
-                <td data-label="Phone Number">${v.phone_number}</td>
-                <td data-label="Entry Time">${entryDateStr}</td>
-                <td data-label="Exit Time">${exitDateStr}</td>
-            </tr>`;
-            exitedTableBody.insertAdjacentHTML('beforeend', row);
-        });
-}
-
-// Infinite scroll for exited vehicles
-let exitedOffset = 10;
-let loadingExited = false;
-
-async function loadMoreExited() {
-    if (loadingExited) return;
-    loadingExited = true;
-
-    const startDate = document.getElementById('start_date').value;
-    const endDate = document.getElementById('end_date').value;
-
-    const url = `reporting.php?action=filter&start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}&offset=${exitedOffset}`;
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    const exitedTableBody = document.getElementById('exited_tbody');
-
-    if (data.exited.length === 0) {
-        // No more data
-        window.removeEventListener('scroll', onScroll);
-        return;
-    }
-
-    data.exited.forEach(v => {
-        const row = `<tr>
-            <td data-label="Registration Number">${v.registration_number}</td>
-            <td data-label="Vehicle Type">${v.vehicle_type}</td>
-            <td data-label="Driver Name">${v.driver_name}</td>
-            <td data-label="Phone Number">${v.phone_number}</td>
-            <td data-label="Entry Time">${v.entry_time}</td>
-            <td data-label="Exit Time">${v.exit_time}</td>
-        </tr>`;
-        exitedTableBody.insertAdjacentHTML('beforeend', row);
-    });
-
-    exitedOffset += data.exited.length;
-    loadingExited = false;
-}
-
-function onScroll() {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
-        loadMoreExited();
-    }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -477,9 +383,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
 
-    // Add scroll event listener for infinite scroll
-    window.addEventListener('scroll', onScroll);
-
     // Real-time search for parked vehicles
     document.getElementById('search_parked').addEventListener('input', function() {
         const filter = this.value.toLowerCase();
@@ -497,22 +400,6 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Real-time search for exited vehicles
-    document.getElementById('search_exited').addEventListener('input', function() {
-        const filter = this.value.toLowerCase();
-        const rows = document.getElementById('exited_tbody').getElementsByTagName('tr');
-        Array.from(rows).forEach(row => {
-            const cells = row.getElementsByTagName('td');
-            let match = false;
-            for (let i = 0; i < cells.length; i++) {
-                if (cells[i].textContent.toLowerCase().includes(filter)) {
-                    match = true;
-                    break;
-                }
-            }
-            row.style.display = match ? '' : 'none';
-        });
-    });
 });
 </script>
 </head>
@@ -559,24 +446,6 @@ window.addEventListener('DOMContentLoaded', () => {
             </tr>
         </thead>
         <tbody id="parked_tbody"></tbody>
-    </table>
-    </div>
-
-    <h3>Exited Vehicles</h3>
-    <input type="text" id="search_exited" placeholder="Search exited vehicles..." class="form-control mb-3" style="max-width: 400px;" />
-    <div class="table-responsive">
-    <table class="table table-striped table-bordered fixed-header">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Registration Number</th>
-                <th scope="col">Vehicle Type</th>
-                <th scope="col">Driver Name</th>
-                <th scope="col">Phone Number</th>
-                <th scope="col">Entry Time</th>
-                <th scope="col">Exit Time</th>
-            </tr>
-        </thead>
-        <tbody id="exited_tbody"></tbody>
     </table>
     </div>
 </div>

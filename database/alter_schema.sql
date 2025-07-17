@@ -1,3 +1,3 @@
+-- Add the order_tracking_id column to the parking_entries table
 ALTER TABLE parking_entries
-ADD COLUMN notification_id VARCHAR(255) NULL,
-ADD COLUMN payment_status VARCHAR(50) DEFAULT 'PENDING';
+ADD COLUMN order_tracking_id VARCHAR(255) NULL AFTER notification_id;

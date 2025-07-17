@@ -1,0 +1,194 @@
+[17-Jul-2025 03:20:38 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 03:20:38 Africa/Nairobi] Attempt 1 failed for 255785111722
+[17-Jul-2025 03:20:40 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 03:20:40 Africa/Nairobi] Attempt 2 failed for 255785111722
+[17-Jul-2025 03:20:43 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 03:20:43 Africa/Nairobi] Attempt 3 failed for 255785111722
+[17-Jul-2025 03:20:43 Africa/Nairobi] All SMS send attempts failed for 255785111722
+[17-Jul-2025 03:20:43 Africa/Nairobi] SMS sending failed for vehicle entry: MC521EEH to phone 0785111722
+[17-Jul-2025 03:33:37 Africa/Nairobi] Uncaught exception: Class "OAuthSignatureMethod_HMAC_SHA1" not found in C:\xampp\htdocs\chino-parking-system-1\pesapal_integration.php on line 45
+[17-Jul-2025 03:35:19 Africa/Nairobi] PHP Fatal error:  Class declarations may not be nested in C:\xampp\htdocs\chino-parking-system-1\pesapal_integration.php on line 31
+[17-Jul-2025 03:38:43 Africa/Nairobi] PHP Fatal error:  Class declarations may not be nested in C:\xampp\htdocs\chino-parking-system-1\pesapal_integration.php on line 33
+[17-Jul-2025 03:38:57 Africa/Nairobi] PHP Fatal error:  Class declarations may not be nested in C:\xampp\htdocs\chino-parking-system-1\pesapal_integration.php on line 33
+[17-Jul-2025 03:39:16 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 03:39:16 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 03:39:16 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 622
+[17-Jul-2025 03:39:16 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 03:39:16 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 03:39:16 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 622
+[17-Jul-2025 10:37:51 Africa/Nairobi] PHP Fatal error:  Class declarations may not be nested in C:\xampp\htdocs\chino-parking-system-1\pesapal_integration.php on line 33
+[17-Jul-2025 11:02:57 Africa/Nairobi] PHP Fatal error:  Class declarations may not be nested in C:\xampp\htdocs\chino-parking-system-1\pesapal_integration.php on line 33
+[17-Jul-2025 11:03:22 Africa/Nairobi] PHP Fatal error:  Class declarations may not be nested in C:\xampp\htdocs\chino-parking-system-1\pesapal_integration.php on line 33
+[17-Jul-2025 13:11:54 Africa/Nairobi] Error [8192] in C:\xampp\htdocs\chino-parking-system-1\pesapal_integration.php at line 9: Creation of dynamic property OAuthRequest::$base_string is deprecated
+[17-Jul-2025 14:12:27 Africa/Nairobi] No existing IPN URL found for http://localhost:8000/pesapal_callback.php. Registering...
+[17-Jul-2025 14:12:28 Africa/Nairobi] Register IPN URL response status: 404
+[17-Jul-2025 14:12:28 Africa/Nairobi] Register IPN URL response body: {"message":"No HTTP resource was found that matches the request URI 'https://pay.pesapal.com/v3/api/IPN/RegisterIPNUrl'."}
+[17-Jul-2025 14:12:28 Africa/Nairobi] Failed to get or register IPN URL ID.
+[17-Jul-2025 14:14:44 Africa/Nairobi] No existing IPN URL found for http://localhost:8000/pesapal_callback.php. Registering...
+[17-Jul-2025 14:14:45 Africa/Nairobi] Register IPN URL response status: 200
+[17-Jul-2025 14:14:45 Africa/Nairobi] Register IPN URL response body: {"url":"http://localhost:8000/pesapal_callback.php","created_date":"2025-07-17T11:14:46.131087Z","ipn_id":"2723f935-52c5-42ff-9580-db8f05490e6f","notification_type":0,"ipn_notification_type_description":"GET","ipn_status":1,"ipn_status_decription":"Active","status":"200","message":"Request processed successfully"}
+[17-Jul-2025 14:14:45 Africa/Nairobi] Successfully registered new IPN URL. ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 14:15:56 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 14:15:56 Africa/Nairobi] Submit Order response body: [{"url":"https://invoicing.pesapal.com/PaymentProcessed/payment","created_date":"2025-04-29T08:46:06.707","ipn_id":"e2b013ae-3d82-497e-a9ea-dbde3a8f6194","notification_type":0,"ipn_notification_type_description":"GET","ipn_status":1,"ipn_status_decription":"Active","status":"1","message":null},{"url":"http://localhost:8000/pesapal_callback.php","created_date":"2025-07-17T11:14:46.13","ipn_id":"2723f935-52c5-42ff-9580-db8f05490e6f","notification_type":0,"ipn_notification_type_description":"GET","ipn_status":1,"ipn_status_decription":"Active","status":"1","message":null}]
+[17-Jul-2025 14:15:56 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 14:16:04 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 14:16:04 Africa/Nairobi] Submit Order response body: [{"url":"https://invoicing.pesapal.com/PaymentProcessed/payment","created_date":"2025-04-29T08:46:06.707","ipn_id":"e2b013ae-3d82-497e-a9ea-dbde3a8f6194","notification_type":0,"ipn_notification_type_description":"GET","ipn_status":1,"ipn_status_decription":"Active","status":"1","message":null},{"url":"http://localhost:8000/pesapal_callback.php","created_date":"2025-07-17T11:14:46.13","ipn_id":"2723f935-52c5-42ff-9580-db8f05490e6f","notification_type":0,"ipn_notification_type_description":"GET","ipn_status":1,"ipn_status_decription":"Active","status":"1","message":null}]
+[17-Jul-2025 14:16:04 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 14:16:18 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 14:16:18 Africa/Nairobi] Submit Order response body: [{"url":"https://invoicing.pesapal.com/PaymentProcessed/payment","created_date":"2025-04-29T08:46:06.707","ipn_id":"e2b013ae-3d82-497e-a9ea-dbde3a8f6194","notification_type":0,"ipn_notification_type_description":"GET","ipn_status":1,"ipn_status_decription":"Active","status":"1","message":null},{"url":"http://localhost:8000/pesapal_callback.php","created_date":"2025-07-17T11:14:46.13","ipn_id":"2723f935-52c5-42ff-9580-db8f05490e6f","notification_type":0,"ipn_notification_type_description":"GET","ipn_status":1,"ipn_status_decription":"Active","status":"1","message":null}]
+[17-Jul-2025 14:16:18 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 15:02:25 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 15:02:25 Africa/Nairobi] Submitting order to PesaPal...
+[17-Jul-2025 15:02:28 Africa/Nairobi] Submit Order request data: {"id":1,"currency":"TZS","amount":1000,"description":"Parking fee for MC521EEH","callback_url":"http:\/\/localhost:8000\/pesapal_callback.php","notification_id":"2723f935-52c5-42ff-9580-db8f05490e6f","billing_address":{"phone_number":"0785111722","first_name":"ABEL TESTING"}}
+[17-Jul-2025 15:02:28 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 15:02:28 Africa/Nairobi] Submit Order response body: {"error":{"error_type":"duplicate_order_reference","code":"missing_unique_id","message":"You have not provided a unique request ID. Please check ID value in your POST data."},"status":"500"}
+[17-Jul-2025 15:02:28 Africa/Nairobi] PesaPal order response: Array
+(
+    [error] => Array
+        (
+            [error_type] => duplicate_order_reference
+            [code] => missing_unique_id
+            [message] => You have not provided a unique request ID. Please check ID value in your POST data.
+        )
+
+    [status] => 500
+)
+
+[17-Jul-2025 15:08:14 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 15:08:14 Africa/Nairobi] Submitting order to PesaPal...
+[17-Jul-2025 15:08:19 Africa/Nairobi] Submit Order request data: {"id":"1_1752754094","currency":"TZS","amount":1000,"description":"Parking fee for MC521EEH","callback_url":"http:\/\/localhost:8000\/pesapal_callback.php","notification_id":"2723f935-52c5-42ff-9580-db8f05490e6f","billing_address":{"phone_number":"0785111722","first_name":"ABEL TESTING"}}
+[17-Jul-2025 15:08:19 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 15:08:19 Africa/Nairobi] Submit Order response body: {"order_tracking_id":"68c17d5c-6250-4ad8-b688-db8f08ed5009","merchant_reference":"1_1752754094","redirect_url":"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=68c17d5c-6250-4ad8-b688-db8f08ed5009","error":null,"status":"200"}
+[17-Jul-2025 15:08:19 Africa/Nairobi] PesaPal order response: Array
+(
+    [order_tracking_id] => 68c17d5c-6250-4ad8-b688-db8f08ed5009
+    [merchant_reference] => 1_1752754094
+    [redirect_url] => https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=68c17d5c-6250-4ad8-b688-db8f08ed5009
+    [error] => 
+    [status] => 200
+)
+
+[17-Jul-2025 15:08:25 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 15:08:25 Africa/Nairobi] Submitting order to PesaPal...
+[17-Jul-2025 15:08:30 Africa/Nairobi] Submit Order request data: {"id":"1_1752754105","currency":"TZS","amount":1000,"description":"Parking fee for MC521EEH","callback_url":"http:\/\/localhost:8000\/pesapal_callback.php","notification_id":"2723f935-52c5-42ff-9580-db8f05490e6f","billing_address":{"phone_number":"0785111722","first_name":"ABEL TESTING"}}
+[17-Jul-2025 15:08:30 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 15:08:30 Africa/Nairobi] Submit Order response body: {"order_tracking_id":"fd7a42ec-6dc4-4677-9de5-db8fbf565f1c","merchant_reference":"1_1752754105","redirect_url":"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=fd7a42ec-6dc4-4677-9de5-db8fbf565f1c","error":null,"status":"200"}
+[17-Jul-2025 15:08:30 Africa/Nairobi] PesaPal order response: Array
+(
+    [order_tracking_id] => fd7a42ec-6dc4-4677-9de5-db8fbf565f1c
+    [merchant_reference] => 1_1752754105
+    [redirect_url] => https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=fd7a42ec-6dc4-4677-9de5-db8fbf565f1c
+    [error] => 
+    [status] => 200
+)
+
+[17-Jul-2025 15:09:00 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 15:09:00 Africa/Nairobi] Submitting order to PesaPal...
+[17-Jul-2025 15:09:05 Africa/Nairobi] Submit Order request data: {"id":"1_1752754140","currency":"TZS","amount":1000,"description":"Parking fee for mc521eeh","callback_url":"http:\/\/localhost:8000\/pesapal_callback.php","notification_id":"2723f935-52c5-42ff-9580-db8f05490e6f","billing_address":{"phone_number":"0785111722","first_name":"ABEL TESTING"}}
+[17-Jul-2025 15:09:05 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 15:09:05 Africa/Nairobi] Submit Order response body: {"order_tracking_id":"17fa19fe-66c2-422e-9326-db8f4c2bb894","merchant_reference":"1_1752754140","redirect_url":"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=17fa19fe-66c2-422e-9326-db8f4c2bb894","error":null,"status":"200"}
+[17-Jul-2025 15:09:05 Africa/Nairobi] PesaPal order response: Array
+(
+    [order_tracking_id] => 17fa19fe-66c2-422e-9326-db8f4c2bb894
+    [merchant_reference] => 1_1752754140
+    [redirect_url] => https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=17fa19fe-66c2-422e-9326-db8f4c2bb894
+    [error] => 
+    [status] => 200
+)
+
+[17-Jul-2025 15:13:27 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 15:13:27 Africa/Nairobi] Submitting order to PesaPal...
+[17-Jul-2025 15:13:32 Africa/Nairobi] Submit Order request data: {"id":"1_1752754407","currency":"TZS","amount":1000,"description":"Parking fee for mc521eeh","callback_url":"http:\/\/localhost:8000\/pesapal_callback.php","notification_id":"2723f935-52c5-42ff-9580-db8f05490e6f","billing_address":{"phone_number":"0785111722","first_name":"ABEL TESTING"}}
+[17-Jul-2025 15:13:32 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 15:13:32 Africa/Nairobi] Submit Order response body: {"order_tracking_id":"55b19c77-581d-4394-b9e8-db8f0606e6ae","merchant_reference":"1_1752754407","redirect_url":"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=55b19c77-581d-4394-b9e8-db8f0606e6ae","error":null,"status":"200"}
+[17-Jul-2025 15:13:32 Africa/Nairobi] PesaPal order response: Array
+(
+    [order_tracking_id] => 55b19c77-581d-4394-b9e8-db8f0606e6ae
+    [merchant_reference] => 1_1752754407
+    [redirect_url] => https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=55b19c77-581d-4394-b9e8-db8f0606e6ae
+    [error] => 
+    [status] => 200
+)
+
+[17-Jul-2025 15:14:02 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 15:14:02 Africa/Nairobi] Submitting order to PesaPal...
+[17-Jul-2025 15:14:08 Africa/Nairobi] Submit Order request data: {"id":"1_1752754443","currency":"TZS","amount":1000,"description":"Parking fee for MC521EEH","callback_url":"http:\/\/localhost:8000\/pesapal_callback.php","notification_id":"2723f935-52c5-42ff-9580-db8f05490e6f","billing_address":{"phone_number":"0785111722","first_name":"ABEL TESTING"}}
+[17-Jul-2025 15:14:08 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 15:14:08 Africa/Nairobi] Submit Order response body: {"order_tracking_id":"cfab4495-b42e-4c62-929e-db8f0942f989","merchant_reference":"1_1752754443","redirect_url":"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=cfab4495-b42e-4c62-929e-db8f0942f989","error":null,"status":"200"}
+[17-Jul-2025 15:14:08 Africa/Nairobi] PesaPal order response: Array
+(
+    [order_tracking_id] => cfab4495-b42e-4c62-929e-db8f0942f989
+    [merchant_reference] => 1_1752754443
+    [redirect_url] => https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=cfab4495-b42e-4c62-929e-db8f0942f989
+    [error] => 
+    [status] => 200
+)
+
+[17-Jul-2025 15:15:00 Africa/Nairobi] PesaPal Callback Request: Array
+(
+    [OrderTrackingId] => cfab4495-b42e-4c62-929e-db8f0942f989
+    [OrderMerchantReference] => 1_1752754443
+)
+
+[17-Jul-2025 15:15:04 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:15:04 Africa/Nairobi] Attempt 1 failed for 255785111722
+[17-Jul-2025 15:15:07 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:15:07 Africa/Nairobi] Attempt 2 failed for 255785111722
+[17-Jul-2025 15:15:09 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:15:09 Africa/Nairobi] Attempt 3 failed for 255785111722
+[17-Jul-2025 15:15:09 Africa/Nairobi] All SMS send attempts failed for 255785111722
+[17-Jul-2025 15:16:34 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 15:16:34 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 15:16:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 622
+[17-Jul-2025 15:16:34 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 15:16:34 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 15:16:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 622
+[17-Jul-2025 15:17:48 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:17:48 Africa/Nairobi] Attempt 1 failed for 255785111722
+[17-Jul-2025 15:17:50 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:17:50 Africa/Nairobi] Attempt 2 failed for 255785111722
+[17-Jul-2025 15:17:53 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:17:53 Africa/Nairobi] Attempt 3 failed for 255785111722
+[17-Jul-2025 15:17:53 Africa/Nairobi] All SMS send attempts failed for 255785111722
+[17-Jul-2025 15:17:53 Africa/Nairobi] SMS sending failed for vehicle entry: MC521EEH to phone 0785111722
+[17-Jul-2025 15:18:16 Africa/Nairobi] Found existing IPN URL ID: 2723f935-52c5-42ff-9580-db8f05490e6f
+[17-Jul-2025 15:18:16 Africa/Nairobi] Submitting order to PesaPal...
+[17-Jul-2025 15:18:21 Africa/Nairobi] Submit Order request data: {"id":"2_1752754696","currency":"TZS","amount":1000,"description":"Parking fee for MC521EEH","callback_url":"http:\/\/localhost:8000\/pesapal_callback.php","notification_id":"2723f935-52c5-42ff-9580-db8f05490e6f","billing_address":{"phone_number":"0785111722","first_name":"CHINO"}}
+[17-Jul-2025 15:18:21 Africa/Nairobi] Submit Order response status: 200
+[17-Jul-2025 15:18:21 Africa/Nairobi] Submit Order response body: {"order_tracking_id":"968c53bc-9e91-4a1c-b168-db8fefe79159","merchant_reference":"2_1752754696","redirect_url":"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=968c53bc-9e91-4a1c-b168-db8fefe79159","error":null,"status":"200"}
+[17-Jul-2025 15:18:21 Africa/Nairobi] PesaPal order response: Array
+(
+    [order_tracking_id] => 968c53bc-9e91-4a1c-b168-db8fefe79159
+    [merchant_reference] => 2_1752754696
+    [redirect_url] => https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=968c53bc-9e91-4a1c-b168-db8fefe79159
+    [error] => 
+    [status] => 200
+)
+
+[17-Jul-2025 15:20:11 Africa/Nairobi] PesaPal Callback Request: Array
+(
+    [OrderTrackingId] => 968c53bc-9e91-4a1c-b168-db8fefe79159
+    [OrderMerchantReference] => 2_1752754696
+)
+
+[17-Jul-2025 15:20:14 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:20:14 Africa/Nairobi] Attempt 1 failed for 255785111722
+[17-Jul-2025 15:20:17 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:20:17 Africa/Nairobi] Attempt 2 failed for 255785111722
+[17-Jul-2025 15:20:19 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:20:19 Africa/Nairobi] Attempt 3 failed for 255785111722
+[17-Jul-2025 15:20:19 Africa/Nairobi] All SMS send attempts failed for 255785111722
+[17-Jul-2025 15:24:26 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:24:26 Africa/Nairobi] Attempt 1 failed for 255785111722
+[17-Jul-2025 15:24:29 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:24:29 Africa/Nairobi] Attempt 2 failed for 255785111722
+[17-Jul-2025 15:24:31 Africa/Nairobi] SMS cURL error: SSL certificate problem: unable to get local issuer certificate
+[17-Jul-2025 15:24:31 Africa/Nairobi] Attempt 3 failed for 255785111722
+[17-Jul-2025 15:24:31 Africa/Nairobi] All SMS send attempts failed for 255785111722
+[17-Jul-2025 15:24:31 Africa/Nairobi] SMS sending failed for vehicle entry: MC339DFS to phone 0785111722
+[17-Jul-2025 15:46:18 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 15:46:18 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 15:46:18 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 622
+[17-Jul-2025 15:46:18 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 15:46:18 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
+[17-Jul-2025 15:46:18 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 622

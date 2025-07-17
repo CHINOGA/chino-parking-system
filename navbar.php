@@ -26,6 +26,9 @@
           <a class="nav-link" href="parked-vehicles.php">Parked Vehicles</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="exited-vehicles.php">Exited Vehicles</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="revenue-report.php">Revenue Report</a>
         </li>
         <li class="nav-item">

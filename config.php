@@ -1,4 +1,7 @@
 <?php
+// Set the application environment to 'local' for development-specific settings
+putenv('APP_ENV=local');
+
 date_default_timezone_set('Africa/Nairobi');
 // Enable error reporting and logging for debugging
 ini_set('display_errors', '1');
@@ -7,12 +10,12 @@ ini_set('log_errors', '1');
 ini_set('error_log', __DIR__ . '/error.log');
 error_reporting(E_ALL);
 
-// Database connection configuration for Bluehost
+// Database connection configuration for XAMPP
 
 $host = 'localhost';
-$dbname = 'chinotra_chino_parking';
-$user = 'chinotra_francis';
-$password = 'Francis@8891';
+$dbname = 'chino_parking_system'; // replace with your actual database name
+$user = 'root';
+$password = '';
 
 // NextSMS API credentials and settings
 define('NEXTSMS_USERNAME', 'abelchinoga');
@@ -28,12 +31,12 @@ define('PESAPAL_API_URL', 'https://pay.pesapal.com/v3'); // Live URL
 define('PESAPAL_IPN_ID', 'your_actual_ipn_url_id_here');
 
 try {
-
-
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $password);
     // Set error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+    // Re-throw the exception to be caught by a global error handler (from error_handling.php).
+    // This prevents an abrupt script termination which causes the generic HTTP 500 error.
+    throw $e;
 }
 ?>

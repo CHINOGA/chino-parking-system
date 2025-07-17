@@ -15,11 +15,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['password_hash'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $username;
-            header('Location: vehicle-entry.php');
-            exit;
+        // Remove password hash verification for now
+        if ($user) {
+            // Directly check if password matches the plain text password stored in password_hash column
+            if ($password === $user['password_hash']) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $username;
+                header('Location: vehicle-entry.php');
+                exit;
+            } else {
+                $error = 'Invalid username or password.';
+            }
         } else {
             $error = 'Invalid username or password.';
         }
