@@ -12,7 +12,7 @@ error_reporting(E_ALL);
 
 // Database connection configuration for XAMPP
 
-$host = 'localhost';
+$host = 'box5405.bluehost.com';
 $dbname = 'chinotra_chino_parking'; // replace with your actual database name
 $user = 'chinotra_francis';
 $password = 'Francis@8891';
