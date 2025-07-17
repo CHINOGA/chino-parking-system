@@ -65,29 +65,29 @@ cd chino-parking-system-1
 
 You need to create the database and tables required for the application.
 
-1.  **Start XAMPP:** Open the XAMPP Control Panel and start the **Apache** and **MySQL** services.
-2.  **Create the Database:**
-    -   Navigate to `http://localhost/phpmyadmin/`.
-    -   Create a new database named `chino_parking_system`.
-3.  **Import the Base Schema:**
-    -   Select the `chino_parking_system` database.
-    -   Go to the **Import** tab.
-    -   Click **Choose File** and select `database/schema.sql` from the project directory.
-    -   Click **Go** to create the initial tables.
-4.  **Apply Schema Alterations:**
-    -   The base schema has been updated. You must apply the alteration script.
-    -   Go back to the **Import** tab.
-    -   Click **Choose File** and select `database/alter_schema.sql`.
-    -   Click **Go** to add the `order_tracking_id` column to the `parking_entries` table.
+1. **Start XAMPP:** Open the XAMPP Control Panel and start the **Apache** and **MySQL** services.
+2. **Create the Database:**
+    - Navigate to `http://localhost/phpmyadmin/`.
+    - Create a new database named `chino_parking_system`.
+3. **Import the Base Schema:**
+    - Select the `chino_parking_system` database.
+    - Go to the **Import** tab.
+    - Click **Choose File** and select `database/schema.sql` from the project directory.
+    - Click **Go** to create the initial tables.
+4. **Apply Schema Alterations:**
+    - The base schema has been updated. You must apply the alteration script.
+    - Go back to the **Import** tab.
+    - Click **Choose File** and select `database/alter_schema.sql`.
+    - Click **Go** to add the `order_tracking_id` column to the `parking_entries` table.
 
 ### 3. Configuration
 
 All configuration is handled in the `config.php` file.
 
-1.  **Open `config.php`:** Open the `config.php` file in your code editor.
-2.  **Database Credentials:** The default settings are configured for a standard XAMPP installation (user `root` with no password). Adjust if your setup is different.
-3.  **API Credentials:** The file is pre-populated with API keys for **NextSMS** and **PesaPal**.
-4.  **Environment Variable:** The `APP_ENV` is set to `local` by default to enable development-specific features, such as bypassing SSL verification for API calls. **Do not change this for local development.**
+1. **Open `config.php`:** Open the `config.php` file in your code editor.
+2. **Database Credentials:** The default settings are configured for a standard XAMPP installation (user `root` with no password). Adjust if your setup is different.
+3. **API Credentials:** The file is pre-populated with API keys for **NextSMS** and **PesaPal**.
+4. **Environment Variable:** The `APP_ENV` is set to `local` by default to enable development-specific features, such as bypassing SSL verification for API calls. **Do not change this for local development.**
 
 ```php
 // config.php
@@ -102,20 +102,20 @@ putenv('APP_ENV=local');
 
 You can run the application using the built-in PHP development server.
 
-1.  **Open a terminal** in the project's root directory (`C:/xampp/htdocs/chino-parking-system-1`).
-2.  **Run the server** with the following command:
+1. **Open a terminal** in the project's root directory (`C:/xampp/htdocs/chino-parking-system-1`).
+2. **Run the server** with the following command:
 
     ```bash
     php -S localhost:8000
     ```
 
-3.  **Access the application** by navigating to `http://localhost:8000` in your web browser.
+3. **Access the application** by navigating to `http://localhost:8000` in your web browser.
 
 ## Project Structure
 
 Here is an overview of the key files in the project:
 
-```
+```text
 .
 ├── database/
 │   ├── schema.sql          # Main database schema
@@ -135,21 +135,21 @@ Here is an overview of the key files in the project:
 
 ## Usage
 
--   **Login:** Access the system using your administrator credentials.
--   **Vehicle Entry:** Navigate to the "Vehicle Entry" page to register a new vehicle. An SMS is sent to the driver upon successful entry.
--   **Vehicle Exit:** From the "Parked Vehicles" dashboard, find the vehicle and initiate the exit process. This will redirect to PesaPal for payment.
--   **Payment:** After a successful payment on PesaPal, the user is redirected to a success page, and an exit SMS is sent to the driver.
--   **Reporting:** Use the "Exited Vehicles" and "Revenue Report" pages to view historical data.
+- **Login:** Access the system using your administrator credentials.
+- **Vehicle Entry:** Navigate to the "Vehicle Entry" page to register a new vehicle. An SMS is sent to the driver upon successful entry.
+- **Vehicle Exit:** From the "Parked Vehicles" dashboard, find the vehicle and initiate the exit process. This will redirect to PesaPal for payment.
+- **Payment:** After a successful payment on PesaPal, the user is redirected to a success page, and an exit SMS is sent to the driver.
+- **Reporting:** Use the "Exited Vehicles" and "Revenue Report" pages to view historical data.
 
 ## Contributing
 
 Contributions are welcome. Please follow these steps:
 
-1.  **Fork** the repository.
-2.  Create a new branch (`git checkout -b feature/YourFeature`).
-3.  Commit your changes (`git commit -m 'Add some feature'`).
-4.  Push to the branch (`git push origin feature/YourFeature`).
-5.  Open a **Pull Request**.
+1. **Fork** the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a **Pull Request**.
 
 ## License
 
