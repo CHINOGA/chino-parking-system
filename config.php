@@ -13,9 +13,9 @@ error_reporting(E_ALL);
 // Database connection configuration for XAMPP
 
 $host = 'localhost';
-$dbname = 'chino_parking_system'; // replace with your actual database name
-$user = 'root';
-$password = '';
+$dbname = 'chinotra_chino_parking'; // replace with your actual database name
+$user = 'chinotra_francis';
+$password = 'Francis@8891';
 
 // NextSMS API credentials and settings
 define('NEXTSMS_USERNAME', 'abelchinoga');

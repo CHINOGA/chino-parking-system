@@ -68,9 +68,9 @@ You need to create the database and tables required for the application.
 1. **Start XAMPP:** Open the XAMPP Control Panel and start the **Apache** and **MySQL** services.
 2. **Create the Database:**
     - Navigate to `http://localhost/phpmyadmin/`.
-    - Create a new database named `chino_parking_system`.
+    - Create a new database named `chinotra_chino_parking`.
 3. **Import the Base Schema:**
-    - Select the `chino_parking_system` database.
+    - Select the `chinotra_chino_parking` database.
     - Go to the **Import** tab.
     - Click **Choose File** and select `database/schema.sql` from the project directory.
     - Click **Go** to create the initial tables.

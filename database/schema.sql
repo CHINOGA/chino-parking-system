@@ -1,7 +1,6 @@
 -- Chino Parking System Database Schema
 
-CREATE DATABASE IF NOT EXISTS chino_parking_system;
-USE chino_parking_system;
+USE chinotra_chino_parking;
 
 -- Users table for login
 CREATE TABLE IF NOT EXISTS users (
