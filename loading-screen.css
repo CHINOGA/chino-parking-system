@@ -6,13 +6,18 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 9999;
   opacity: 1;
   transition: opacity 0.5s ease;
+}
+
+/* Show overlay when loading-visible class is present */
+#loading-overlay.loading-visible {
+  display: flex;
 }
 
 /* Spinner animation */
@@ -43,4 +48,9 @@
 #loading-overlay.fade-out {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Hide main content when main-hidden class is present */
+#main-content.main-hidden {
+  display: none;
 }

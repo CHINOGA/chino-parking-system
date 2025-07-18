@@ -7,12 +7,12 @@
 <link rel="stylesheet" href="loading-screen.css" />
 </head>
 <body>
-  <div id="loading-overlay">
-    <div class="spinner"></div>
+  <div id="loading-overlay" aria-live="polite" aria-busy="true" role="alert" class="loading-visible">
+    <div class="spinner" aria-hidden="true"></div>
     <div id="loading-text">Loading…</div>
   </div>
 
-  <div id="main-content" style="display:none;">
+  <div id="main-content" class="main-hidden">
     <!-- Your main content goes here -->
     <h1>Welcome to the Web App</h1>
     <p>This is the main content of the app.</p>
@@ -28,8 +28,9 @@
 
       // After transition ends, hide overlay and show main content
       overlay.addEventListener('transitionend', () => {
-        overlay.style.display = 'none';
-        mainContent.style.display = 'block';
+        overlay.classList.remove('loading-visible');
+        mainContent.classList.remove('main-hidden');
+        overlay.setAttribute('aria-busy', 'false');
       });
     });
   </script>
