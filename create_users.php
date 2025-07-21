@@ -5,6 +5,7 @@ $users = [
     ['username' => 'adminuser', 'password' => 'AdminPass123', 'role' => 'admin'],
     ['username' => 'cashieruser', 'password' => 'CashierPass123', 'role' => 'cashier'],
     ['username' => 'securityuser', 'password' => 'SecurityPass123', 'role' => 'security'],
+    ['username' => 'obed', 'password' => 'Obed@8891', 'role' => 'cashier'],
 ];
 
 foreach ($users as $user) {

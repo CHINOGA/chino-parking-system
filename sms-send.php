@@ -276,7 +276,7 @@ button:hover {
             <button type="submit" name="verify_otp">Verify OTP</button>
         </form>
     <?php else: ?>
-        <form method="post" action="sms_send.php">
+        <form method="post" action="sms-send.php">
         <label for="driver_search">Search Drivers:</label>
         <input type="text" id="driver_search" placeholder="Type to search driver names..." onkeyup="filterDrivers()" autocomplete="off" />
         <label for="selected_numbers">Select Driver Phone Numbers (multiple selection allowed):</label>

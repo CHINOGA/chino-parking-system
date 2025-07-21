@@ -10,7 +10,7 @@
 <link href="custom.css" rel="stylesheet" />
 </head>
 <body>
-<nav class="navbar navbar-expand navbar-dark bg-dark sticky-top shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="vehicle-entry.php">Chino Parking System</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
