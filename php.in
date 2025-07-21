@@ -1,0 +1,9 @@
+; PHP.ini configuration snippet to enable sendmail for XAMPP
+
+[mail function]
+; For Win32 only.
+SMTP=localhost
+smtp_port=25
+
+; For Unix only.  You may supply arguments as well (default: "sendmail -t -i").
+sendmail_path = "C:\xampp\sendmail\sendmail.exe -t -i"

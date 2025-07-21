@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-}
+require_once 'auth.php';
+require_role([1, 2]); // Allow admin(1), cashier(2)
 
 require_once 'config.php';
 

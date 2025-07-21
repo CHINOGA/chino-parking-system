@@ -1,13 +1,10 @@
 <?php
+require_once 'auth.php';
+require_role([1, 2, 3]); // Allow admin(1), cashier(2), security(3)
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-}
 
 require_once 'config.php';
 

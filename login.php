@@ -15,19 +15,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Remove password hash verification for now
-        if ($user) {
-            // Directly check if password matches the plain text password stored in password_hash column
-            if ($password === $user['password_hash']) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $username;
-                header('Location: vehicle-entry.php');
-                exit;
+        // Fetch role_id for the user
+        $stmtRole = $pdo->prepare('SELECT role_id FROM users WHERE username = ?');
+        $stmtRole->execute([$username]);
+        $roleData = $stmtRole->fetch(PDO::FETCH_ASSOC);
+
+        if ($user === false) {
+            $error = 'Invalid username or password.';
+        } else {
+            if ($roleData) {
+                $user['role_id'] = $roleData['role_id'];
+            } else {
+                $user['role_id'] = null;
+            }
+
+            if (isset($user['password_hash']) && $user['password_hash'] !== null) {
+                // Verify password using password_verify
+                if (password_verify($password, $user['password_hash'])) {
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['username'] = $username;
+                    $_SESSION['role_id'] = $user['role_id']; // Store role_id in session
+                    header('Location: vehicle-entry.php');
+                    exit;
+                } else {
+                    $error = 'Invalid username or password.';
+                }
             } else {
                 $error = 'Invalid username or password.';
             }
-        } else {
-            $error = 'Invalid username or password.';
         }
     }
 }
@@ -196,6 +211,7 @@ button:hover {
         <input type="password" id="password" name="password" required />
         <button type="submit">Login</button>
     </form>
+    <p class="mt-3"><a href="forgot-password.php" class="text-white">Forgot Password?</a></p>
 </div>
 </body>
 </html>

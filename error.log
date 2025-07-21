@@ -192,3 +192,338 @@
 [17-Jul-2025 15:46:18 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
 [17-Jul-2025 15:46:18 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 579
 [17-Jul-2025 15:46:18 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system-1\revenue-report.php on line 622
+[21-Jul-2025 00:11:50 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 579
+[21-Jul-2025 00:11:50 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 579
+[21-Jul-2025 00:11:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 622
+[21-Jul-2025 00:11:51 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 579
+[21-Jul-2025 00:11:51 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 579
+[21-Jul-2025 00:11:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 622
+[21-Jul-2025 00:43:09 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 00:43:09 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 00:43:09 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 00:43:09 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 00:43:09 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 00:43:09 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 00:55:34 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 00:55:34 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 00:55:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 00:55:34 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 00:55:34 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 00:55:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:03:30 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:03:30 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:03:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:03:30 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:03:30 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:03:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:06:57 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:06:57 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:06:57 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:06:58 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:06:58 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:06:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:07:15 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:07:16 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:07:16 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:07:16 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:07:16 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:07:16 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:10:49 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:03 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:11:09 Africa/Nairobi] PHP Deprecated:  Automatic conversion of false to array is deprecated in C:\xampp\htdocs\chino-parking-system\login.php on line 25
+[21-Jul-2025 01:11:09 Africa/Nairobi] PHP Warning:  Undefined array key "password_hash" in C:\xampp\htdocs\chino-parking-system\login.php on line 30
+[21-Jul-2025 01:11:09 Africa/Nairobi] PHP Deprecated:  password_verify(): Passing null to parameter #2 ($hash) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\login.php on line 30
+[21-Jul-2025 01:11:31 Africa/Nairobi] PHP Deprecated:  Automatic conversion of false to array is deprecated in C:\xampp\htdocs\chino-parking-system\login.php on line 25
+[21-Jul-2025 01:11:31 Africa/Nairobi] PHP Warning:  Undefined array key "password_hash" in C:\xampp\htdocs\chino-parking-system\login.php on line 30
+[21-Jul-2025 01:11:31 Africa/Nairobi] PHP Deprecated:  password_verify(): Passing null to parameter #2 ($hash) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\login.php on line 30
+[21-Jul-2025 01:13:53 Africa/Nairobi] PHP Deprecated:  Automatic conversion of false to array is deprecated in C:\xampp\htdocs\chino-parking-system\login.php on line 25
+[21-Jul-2025 01:13:53 Africa/Nairobi] PHP Warning:  Undefined array key "password_hash" in C:\xampp\htdocs\chino-parking-system\login.php on line 30
+[21-Jul-2025 01:14:01 Africa/Nairobi] PHP Deprecated:  Automatic conversion of false to array is deprecated in C:\xampp\htdocs\chino-parking-system\login.php on line 25
+[21-Jul-2025 01:14:01 Africa/Nairobi] PHP Warning:  Undefined array key "password_hash" in C:\xampp\htdocs\chino-parking-system\login.php on line 30
+[21-Jul-2025 01:18:09 Africa/Nairobi] PHP Deprecated:  Automatic conversion of false to array is deprecated in C:\xampp\htdocs\chino-parking-system\login.php on line 25
+[21-Jul-2025 01:18:17 Africa/Nairobi] PHP Deprecated:  Automatic conversion of false to array is deprecated in C:\xampp\htdocs\chino-parking-system\login.php on line 25
+[21-Jul-2025 01:18:53 Africa/Nairobi] PHP Deprecated:  Automatic conversion of false to array is deprecated in C:\xampp\htdocs\chino-parking-system\login.php on line 25
+[21-Jul-2025 01:20:54 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:20:54 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:20:54 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:20:54 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:20:54 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:20:54 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:30:23 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:30:23 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:30:23 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:30:23 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:30:23 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 01:30:23 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:30:27 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:31:02 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:37:50 Africa/Nairobi] PHP Warning:  Undefined array key "role_id" in C:\xampp\htdocs\chino-parking-system\user-management.php on line 152
+[21-Jul-2025 01:57:33 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'phone_number' in 'field list' in C:\xampp\htdocs\chino-parking-system\password-reset-request.php:24
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\password-reset-request.php(24): PDOStatement->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 24
+[21-Jul-2025 01:59:53 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'field list' in C:\xampp\htdocs\chino-parking-system\password-reset-request.php:24
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\password-reset-request.php(24): PDOStatement->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 24
+[21-Jul-2025 02:04:55 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.email' in 'field list' in C:\xampp\htdocs\chino-parking-system\user-management.php:82
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\user-management.php(82): PDO->query()
+#1 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\user-management.php on line 82
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:34 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:19:51 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:46 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:50 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:24:58 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 161
+[21-Jul-2025 02:25:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 164
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:27 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:30 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 163
+[21-Jul-2025 02:29:44 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\user-management.php on line 166
+[21-Jul-2025 02:35:54 Africa/Nairobi] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 44
+[21-Jul-2025 02:47:48 Africa/Nairobi] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 44
+[21-Jul-2025 02:50:33 Africa/Nairobi] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 44
+[21-Jul-2025 03:09:25 Africa/Nairobi] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 44
+[21-Jul-2025 03:11:26 Africa/Nairobi] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 44
+[21-Jul-2025 03:22:34 Africa/Nairobi] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 44
+[21-Jul-2025 03:27:05 Africa/Nairobi] PHP Warning:  mail(): SMTP server response: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+530-5.7.0  https://support.google.com/a/answer/3221692 and review RFC 3207
+530 5.7.0 specifications. ffacd0b85a97d-3b61ca5c241sm8880511f8f.77 - gsmtp in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 50
+[21-Jul-2025 03:35:48 Africa/Nairobi] PHP Warning:  require_once(vendor/PHPMailer/PHPMailer.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 47
+[21-Jul-2025 03:35:48 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Failed opening required 'vendor/PHPMailer/PHPMailer.php' (include_path='.;C:\php\pear') in C:\xampp\htdocs\chino-parking-system\password-reset-request.php:47
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 47
+[21-Jul-2025 03:45:06 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in C:\xampp\htdocs\chino-parking-system\password-reset-request.php:49
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 49
+[21-Jul-2025 03:51:43 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in C:\xampp\htdocs\chino-parking-system\password-reset-request.php:49
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 49
+[21-Jul-2025 03:51:45 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in C:\xampp\htdocs\chino-parking-system\password-reset-request.php:49
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 49
+[21-Jul-2025 04:02:23 Africa/Nairobi] PHP Warning:  require_once(vendor/PHPMailer/PHPMailer.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 47
+[21-Jul-2025 04:02:23 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Failed opening required 'vendor/PHPMailer/PHPMailer.php' (include_path='.;C:\php\pear') in C:\xampp\htdocs\chino-parking-system\password-reset-request.php:47
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\password-reset-request.php on line 47
+[21-Jul-2025 11:26:44 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1044] Access denied for user 'chinopark'@'localhost' to database 'chinotra_chino_parking' in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\login.php(3): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 11:39:45 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1044] Access denied for user 'chinopark'@'localhost' to database 'chinotra_chino_parking' in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\login.php(3): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 11:44:40 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'admin'@'localhost' (using password: YES) in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\login.php(3): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 11:44:42 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'admin'@'localhost' (using password: YES) in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\login.php(3): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 11:44:42 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'admin'@'localhost' (using password: YES) in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\login.php(3): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 11:44:45 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'admin'@'localhost' (using password: YES) in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\login.php(3): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 11:44:55 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'admin'@'localhost' (using password: YES) in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\login.php(3): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 11:47:36 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 11:47:36 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 11:47:36 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 11:47:36 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 11:47:36 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 11:47:36 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 11:55:54 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\password-reset-request.php(15): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 11:59:20 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\password-reset-request.php(15): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 11:59:24 Africa/Nairobi] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in C:\xampp\htdocs\chino-parking-system\config.php:34
+Stack trace:
+#0 C:\xampp\htdocs\chino-parking-system\config.php(34): PDO->__construct()
+#1 C:\xampp\htdocs\chino-parking-system\password-reset-request.php(15): require_once('...')
+#2 {main}
+  thrown in C:\xampp\htdocs\chino-parking-system\config.php on line 34
+[21-Jul-2025 12:30:21 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 12:30:21 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 12:30:21 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619
+[21-Jul-2025 12:30:21 Africa/Nairobi] PHP Warning:  Undefined variable $total_revenue in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 12:30:21 Africa/Nairobi] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 576
+[21-Jul-2025 12:30:21 Africa/Nairobi] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\chino-parking-system\revenue-report.php on line 619

@@ -10,15 +10,19 @@
 <link href="custom.css" rel="stylesheet" />
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+<nav class="navbar navbar-expand navbar-dark bg-dark sticky-top shadow">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="vehicle-entry.php">Chino Parking System</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <?php if (isset($_SESSION['user_id'])): ?>
+      <?php
+        $role_id = $_SESSION['role_id'] ?? 0;
+      ?>
       <ul class="navbar-nav ms-auto">
+        <?php if (in_array($role_id, [1, 2, 3])): // admin, cashier, security ?>
         <li class="nav-item">
           <a class="nav-link" href="vehicle-entry.php">Vehicle Entry</a>
         </li>
@@ -28,15 +32,26 @@
         <li class="nav-item">
           <a class="nav-link" href="exited-vehicles.php">Exited Vehicles</a>
         </li>
+        <?php endif; ?>
+        <?php if (in_array($role_id, [1, 2])): // admin, cashier ?>
         <li class="nav-item">
           <a class="nav-link" href="revenue-report.php">Revenue Report</a>
         </li>
+        <?php endif; ?>
+        <?php if ($role_id === 1): // admin only ?>
         <li class="nav-item">
           <a class="nav-link" href="sms-send.php">Send SMS</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="driver-phone-delete.php">Delete Driver Phone</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="user-management.php">User Management</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="admin-password-reset.php">Reset Password</a>
+        </li>
+        <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Logout</a>
         </li>
