@@ -1,9 +1,12 @@
 -- Chino Parking System Database Schema
 
 -- Create MySQL user for application login
-CREATE USER IF NOT EXISTS 'chinopark'@'localhost' IDENTIFIED BY 'Chinopark@8891';
-GRANT ALL PRIVILEGES ON chinotra_chino_parking.* TO 'chinopark'@'localhost';
-FLUSH PRIVILEGES;
+-- Note: User creation and privileges should be done via Bluehost cPanel UI, not via SQL on shared hosting.
+-- The following statements are commented out to avoid permission errors.
+
+-- CREATE USER IF NOT EXISTS 'chinotra_francis'@'localhost' IDENTIFIED BY 'Francis@8891';
+-- GRANT ALL PRIVILEGES ON chinotra_chino_parking.* TO 'chinotra_francis'@'localhost';
+-- FLUSH PRIVILEGES;
 
 -- Users table for login
 CREATE TABLE IF NOT EXISTS chinotra_chino_parking.users (

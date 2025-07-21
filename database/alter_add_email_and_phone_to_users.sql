@@ -1,3 +1,7 @@
+-- The columns 'email' and 'phone_number' may already exist. To avoid duplicate column errors, check before adding.
+
 ALTER TABLE chinotra_chino_parking.users
-ADD COLUMN email VARCHAR(255) NULL AFTER username,
-ADD COLUMN phone_number VARCHAR(15) NULL AFTER email;
+ADD COLUMN IF NOT EXISTS email VARCHAR(255) NULL AFTER username;
+
+ALTER TABLE chinotra_chino_parking.users
+ADD COLUMN IF NOT EXISTS phone_number VARCHAR(15) NULL AFTER email;
