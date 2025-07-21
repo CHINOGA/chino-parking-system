@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute([$user['id'], $token, $otp, $expires_at]);
 
                 // Generate reset link
-                $resetLink = "http://localhost:8000/password-reset.php?token=$token";
+                $resetLink = APP_BASE_URL . "/password-reset.php?token=$token";
 
                 // Send email
                 $mail = new PHPMailer(true);

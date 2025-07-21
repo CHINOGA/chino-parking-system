@@ -27,6 +27,10 @@ define('PESAPAL_CONSUMER_KEY', 'H8BRbCyD0ima8h0FVs0vVU1nV9ymorPi');
 define('PESAPAL_CONSUMER_SECRET', 't20fUM2sdIl1cn1W4Yi2jvAg/Pk=');
 define('PESAPAL_API_URL', 'https://pay.pesapal.com/v3'); // Live URL
 
+// Base URL of the deployed app (update this to your actual domain)
+define('APP_BASE_URL', 'https://park.chinotrack.com');
+
+
 // Add the PesaPal IPN URL ID constant (replace with your actual IPN ID)
 define('PESAPAL_IPN_ID', 'your_actual_ipn_url_id_here');
 
