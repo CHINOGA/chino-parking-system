@@ -198,13 +198,159 @@ button:hover {
 </style>
 </head>
 <body>
+<link href="custom.css" rel="stylesheet" />
+<link href="loading-screen.css" rel="stylesheet" />
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('service-worker.js')
+      .then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      })
+      .catch(function(error) {
+        console.error('ServiceWorker registration failed:', error);
+      });
+    });
+  }
+
+  // PWA install prompt handling
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const installBtn = document.getElementById('installBtn');
+    if (installBtn) {
+      installBtn.style.display = 'block';
+    }
+  });
+
+  function installPWA() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+          alert('App installed successfully!');
+        } else {
+          console.log('User dismissed the install prompt');
+          alert('App installation dismissed.');
+        }
+        deferredPrompt = null;
+        const installBtn = document.getElementById('installBtn');
+        if (installBtn) {
+          installBtn.style.display = 'none';
+        }
+      });
+    }
+  }
+
+  // Listen for appinstalled event
+  window.addEventListener('appinstalled', (evt) => {
+    console.log('PWA was installed');
+    alert('Thank you for installing the app!');
+    const installBtn = document.getElementById('installBtn');
+    if (installBtn) {
+      installBtn.style.display = 'none';
+    }
+  });
+</script>
+<style>
+/* Custom styles for login page */
+body {
+  background: linear-gradient(to right, #2563eb, #4f46e5);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  background-color: #1e40af;
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+}
+.container {
+  max-width: 400px;
+  margin: 4rem auto 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+h2 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+.error {
+  color: #f87171;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+form label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #111827;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+button {
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 1.125rem;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #1e40af;
+}
+</style>
+</head>
+<body>
+<div id="loading-overlay">
+  <div class="spinner"></div>
+  <div id="loading-text">Loading...</div>
+</div>
 <div class="topbar">Chino Parking System</div>
 <div class="container">
     <h2>Login</h2>
     <?php if ($error): ?>
         <div class="error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
-    <form method="post" action="login.php" novalidate>
+    <form id="login-form" method="post" action="login.php" novalidate>
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required autofocus />
         <label for="password">Password</label>
@@ -213,5 +359,15 @@ button:hover {
     </form>
     <p class="mt-3"><a href="forgot-password.php" class="text-white">Forgot Password?</a></p>
 </div>
+<script>
+  const loginForm = document.getElementById('login-form');
+  const loadingOverlay = document.getElementById('loading-overlay');
+  const mainContent = document.querySelector('.container');
+
+  loginForm.addEventListener('submit', function() {
+    loadingOverlay.classList.add('loading-visible');
+    mainContent.classList.add('main-hidden');
+  });
+</script>
 </body>
 </html>

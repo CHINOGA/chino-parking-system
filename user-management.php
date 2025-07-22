@@ -138,6 +138,7 @@ $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </form>
 
     <h4>Existing Users</h4>
+    <div class="table-responsive">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -153,7 +154,7 @@ $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tbody>
             <?php foreach ($users as $user): ?>
             <tr>
-                <form method="post" class="d-flex align-items-center" style="gap: 0.5rem;">
+                <form method="post" class="d-flex align-items-center flex-wrap gap-2">
                     <input type="hidden" name="user_id" value="<?= $user['id'] ?>" />
                     <input type="hidden" name="action" value="edit" />
             <td>
@@ -191,6 +192,7 @@ $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
 </div>
 </body>
 </html>
