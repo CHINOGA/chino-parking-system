@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Backend validation
     if (!preg_match('/^[A-Z0-9]+$/', $registration_number)) {
         $error = 'Vehicle Registration Number must be alphanumeric with no spaces.';
-    } elseif (in_array($vehicle_type, ['Bajaj', 'Motorcycle', 'Car', 'Truck', 'Other']) && strlen($registration_number) !== 8) {
-        $error = 'Vehicle Registration Number must be exactly 8 characters for the selected vehicle type.';
+    } elseif (in_array($vehicle_type, ['Bajaj', 'Motorcycle', 'Car', 'Truck', 'Other']) && strlen($registration_number) < 7) {
+        $error = 'Vehicle Registration Number must be at least 7 characters for the selected vehicle type.';
     } elseif (!preg_match('/^[a-zA-Z\s]+$/', $driver_name) || $driver_name === '') {
         $error = 'Driver Name must contain alphabetic characters only.';
     } elseif (!preg_match('/^0\d{9}$/', $phone_number)) {
@@ -268,10 +268,10 @@ function validateForm() {
         return false;
     }
 
-    // Enforce 8 characters for Bajaj, Motorcycle, Car, Truck, Other
+    // Enforce minimum 7 characters for Bajaj, Motorcycle, Car, Truck, Other
     if (['Bajaj', 'Motorcycle', 'Car', 'Truck', 'Other'].includes(vehicleType)) {
-        if (regNum.length !== 8) {
-            errorDiv.textContent = 'Vehicle Registration Number must be exactly 8 characters for the selected vehicle type.';
+        if (regNum.length < 7) {
+            errorDiv.textContent = 'Vehicle Registration Number must be at least 7 characters for the selected vehicle type.';
             return false;
         }
     }
