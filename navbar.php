@@ -49,6 +49,9 @@
           <a class="nav-link" href="user-management.php">User Management</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="settings.php">Settings</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="admin-password-reset.php">Reset Password</a>
         </li>
         <?php endif; ?>

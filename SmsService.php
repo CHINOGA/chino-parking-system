@@ -1,18 +1,41 @@
 <?php
 class SmsService {
-    private $username;
-    private $password;
-    private $senderId;
+    private $pdo;
+    private $activeProvider;
+    private $configs;
     private $useMock;
-    private $apiUrl = 'https://messaging-service.co.tz/api/sms/v1/text/single';
     private $maxRetries = 3;
     private $retryDelayMs = 2000; // 2 seconds
 
-    public function __construct() {
-        $this->username = defined('NEXTSMS_USERNAME') ? NEXTSMS_USERNAME : '';
-        $this->password = defined('NEXTSMS_PASSWORD') ? NEXTSMS_PASSWORD : '';
-        $this->senderId = defined('NEXTSMS_SENDER_ID') ? NEXTSMS_SENDER_ID : '';
-        $this->useMock = getenv('USE_MOCK_SMS') === 'true' || empty($this->username) || empty($this->password) || empty($this->senderId);
+    public function __construct($pdo = null) {
+        if ($pdo === null) {
+            global $pdo;
+            $this->pdo = $pdo;
+        } else {
+            $this->pdo = $pdo;
+        }
+
+        // Get active provider
+        $stmt = $this->pdo->query('SELECT provider FROM active_sms_provider LIMIT 1');
+        $this->activeProvider = $stmt->fetch(PDO::FETCH_ASSOC)['provider'] ?? 'nextsms';
+
+        // Load configs for active provider
+        $stmt = $this->pdo->prepare('SELECT config_key, config_value FROM api_configs WHERE provider = ?');
+        $stmt->execute([$this->activeProvider]);
+        $this->configs = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+
+        // Fallback to constants if not in DB
+        if ($this->activeProvider === 'nextsms') {
+            $this->configs['username'] = $this->configs['username'] ?? (defined('NEXTSMS_USERNAME') ? NEXTSMS_USERNAME : '');
+            $this->configs['password'] = $this->configs['password'] ?? (defined('NEXTSMS_PASSWORD') ? NEXTSMS_PASSWORD : '');
+            $this->configs['sender_id'] = $this->configs['sender_id'] ?? (defined('NEXTSMS_SENDER_ID') ? NEXTSMS_SENDER_ID : '');
+            $this->configs['api_url'] = $this->configs['api_url'] ?? 'https://messaging-service.co.tz/api/sms/v1/text/single';
+        }
+
+        $this->useMock = getenv('USE_MOCK_SMS') === 'true' ||
+                         empty($this->configs['username'] ?? '') ||
+                         empty($this->configs['password'] ?? '') ||
+                         (empty($this->configs['sender_id'] ?? '') && empty($this->configs['senderid'] ?? ''));
     }
 
     private function formatPhoneNumber(string $phoneNumber): string {
@@ -51,15 +74,24 @@ class SmsService {
     }
 
     private function sendRealSms(string $phoneNumber, string $message): bool {
+        if ($this->activeProvider === 'nextsms') {
+            return $this->sendNextSms($phoneNumber, $message);
+        } elseif ($this->activeProvider === 'mobishastra') {
+            return $this->sendMobishastraSms($phoneNumber, $message);
+        }
+        return false;
+    }
+
+    private function sendNextSms(string $phoneNumber, string $message): bool {
         $payload = [
-            'from' => $this->senderId,
+            'from' => $this->configs['sender_id'] ?? '',
             'to' => $phoneNumber,
             'text' => $message
         ];
 
-        $auth = base64_encode($this->username . ':' . $this->password);
+        $auth = base64_encode(($this->configs['username'] ?? '') . ':' . ($this->configs['password'] ?? ''));
 
-        $ch = curl_init($this->apiUrl);
+        $ch = curl_init($this->configs['api_url'] ?? 'https://messaging-service.co.tz/api/sms/v1/text/single');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
@@ -81,7 +113,7 @@ class SmsService {
         curl_close($ch);
 
         if ($response === false) {
-            error_log("SMS cURL error: $curlError");
+            error_log("NextSMS cURL error: $curlError");
             return false;
         }
 
@@ -96,6 +128,50 @@ class SmsService {
             return false;
         }
 
+        return true;
+    }
+
+    private function sendMobishastraSms(string $phoneNumber, string $message): bool {
+        $jsonData = array(
+            array(
+                "user" => $this->configs['user'] ?? '',
+                "pwd" => $this->configs['pwd'] ?? '',
+                "number" => $phoneNumber,
+                "msg" => $message,
+                "sender" => $this->configs['senderid'] ?? '',
+                "language" => "English"
+            )
+        );
+
+        $ch = curl_init($this->configs['api_url'] ?? 'http://mshastra.com/sendsms_api_json.aspx');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($jsonData));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+        // Bypass SSL verification for local development
+        if (getenv('APP_ENV') === 'local' || getenv('APP_ENV') === 'development') {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        }
+
+        $result = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
+        curl_close($ch);
+
+        if ($result === false) {
+            error_log("Mobishastra cURL error: $curlError");
+            return false;
+        }
+
+        if ($httpCode < 200 || $httpCode >= 300) {
+            error_log("Mobishastra HTTP error code: $httpCode, Response: $result");
+            return false;
+        }
+
+        // Assuming success if no error in response, you may need to parse the response for specific success indicators
         return true;
     }
 
