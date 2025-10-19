@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Vehicle Registration Number must be at least 7 characters for the selected vehicle type.';
     } elseif (!preg_match('/^[a-zA-Z\s]+$/', $driver_name) || $driver_name === '') {
         $error = 'Driver Name must contain alphabetic characters only.';
-    } elseif (!preg_match('/^0\d{9}$/', $phone_number)) {
-        $error = 'Phone Number must be exactly 10 digits and start with 0.';
+    } elseif (!preg_match('/^\d{9}$/', $phone_number)) {
+        $error = 'Phone Number must be exactly 9 digits (without country code).';
     } else {
         try {
             // Check if vehicle exists
@@ -283,10 +283,10 @@ function validateForm() {
         return false;
     }
 
-    // Phone Number: exactly 10 digits, starts with 0
+    // Phone Number: exactly 9 digits (Tanzania format after +255)
     const phone = phoneInput.value.trim();
-    if (!/^0\d{9}$/.test(phone)) {
-        errorDiv.textContent = 'Phone Number must be exactly 10 digits and start with 0.';
+    if (!/^\d{9}$/.test(phone)) {
+        errorDiv.textContent = 'Phone Number must be exactly 9 digits (without country code).';
         return false;
     }
 
@@ -364,7 +364,10 @@ window.addEventListener('DOMContentLoaded', () => {
         <input type="text" id="driver_name" name="driver_name" oninput="this.value = this.value.toUpperCase();" required />
 
         <label for="phone_number">Phone Number</label>
-        <input type="text" id="phone_number" name="phone_number" maxlength="10" required />
+        <div style="display: flex; align-items: center;">
+            <span style="background: rgba(255, 255, 255, 0.9); color: #111; padding: 0.75rem; border-radius: 0.375rem 0 0 0.375rem; border: 1px solid #ccc; border-right: none;">+255</span>
+            <input type="text" id="phone_number" name="phone_number" maxlength="9" pattern="\d{9}" placeholder="712345678" style="border-radius: 0 0.375rem 0.375rem 0; border-left: none; flex: 1;" required />
+        </div>
 
         <button type="submit">Submit Entry</button>
     </form>
